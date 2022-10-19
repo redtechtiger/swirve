@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Rectangle HorizontalAlignment="Left" Height="419" Stroke="#FF47DEFF" VerticalAlignment="Top" Width="177" Fill="#FF47DEFF">
+            <Rectangle.Effect>
+                <DropShadowEffect Color="#FF47DEFF"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="155" Height="30"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="155" Height="30"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="155" Height="30"/>
+
     </Grid>
 </Window>
