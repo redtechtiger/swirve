@@ -1,0 +1,15 @@
+C:\Users\Jacob\Desktop\srvclient_dev\bin\Debug\net6.0\srvclient_dev.exe
+C:\Users\Jacob\Desktop\srvclient_dev\bin\Debug\net6.0\srvclient_dev.deps.json
+C:\Users\Jacob\Desktop\srvclient_dev\bin\Debug\net6.0\srvclient_dev.runtimeconfig.json
+C:\Users\Jacob\Desktop\srvclient_dev\bin\Debug\net6.0\srvclient_dev.dll
+C:\Users\Jacob\Desktop\srvclient_dev\bin\Debug\net6.0\srvclient_dev.pdb
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.csproj.AssemblyReference.cache
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.AssemblyInfoInputs.cache
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.AssemblyInfo.cs
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.csproj.CoreCompileInputs.cache
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.dll
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\refint\srvclient_dev.dll
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.pdb
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\srvclient_dev.genruntimeconfig.cache
+C:\Users\Jacob\Desktop\srvclient_dev\obj\Debug\net6.0\ref\srvclient_dev.dll
