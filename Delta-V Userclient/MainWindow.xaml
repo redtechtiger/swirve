@@ -6,15 +6,38 @@
         xmlns:local="clr-namespace:Delta_V_Userclient"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Rectangle HorizontalAlignment="Left" Height="419" Stroke="#FF47DEFF" VerticalAlignment="Top" Width="177" Fill="#FF47DEFF">
+    <Grid Background="#FF111111">
+        <Rectangle HorizontalAlignment="Left" Stroke="#FFFB2576" Width="177" Fill="#FFFB2576">
             <Rectangle.Effect>
-                <DropShadowEffect Color="#FF47DEFF"/>
+                <DropShadowEffect/>
             </Rectangle.Effect>
         </Rectangle>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="155" Height="30"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Width="155" Height="30"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="155" Height="30"/>
+        <Button Content="Server 1" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Width="155" Height="30">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Content="Server 2" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="155" Height="30">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button Content="Settings" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" Width="155" Height="30">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Rectangle Height="53" Stroke="#FF3F0071" VerticalAlignment="Top" Fill="#FF3F0071" Margin="201,0,32,0">
+            <Rectangle.Effect>
+                <DropShadowEffect/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Label Content="Delta-V&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="43" Width="141" FontSize="24"/>
+        <Label Content="DEVBUILD a001&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
+        <Button Content="Overview" HorizontalAlignment="Left" Margin="219,20,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Players" HorizontalAlignment="Left" Margin="316,20,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Console" HorizontalAlignment="Left" Margin="413,20,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Configuration" HorizontalAlignment="Left" Margin="510,20,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
