@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:Delta_V_Userclient"
         mc:Ignorable="d"
         Title="initScreen" Height="226" Width="447" ResizeMode="NoResize" Loaded="Window_Loaded" FontFamily="OCR A Extended">
-    <Grid Background="#FF111111">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="splash.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="33*"/>
             <ColumnDefinition Width="16*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Delta-V" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="399" Height="87" FontSize="60" FontFamily="Eras ITC" Grid.ColumnSpan="2" FontStyle="Italic" Foreground="White"/>
-        <Label x:Name="workDescriptor" Content="Loading..." HorizontalAlignment="Left" Margin="40,101,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" Foreground="White"/>
+        <Label x:Name="workDescriptor" Content="Loading..." HorizontalAlignment="Left" Margin="25,98,0,0" VerticalAlignment="Top" FontFamily="Segoe UI Black" Foreground="White"/>
         <Label Content="DEVBUILD a001" HorizontalAlignment="Left" Margin="10,159,0,0" VerticalAlignment="Top" Foreground="White"/>
 
     </Grid>
