@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend serverclient\\main\\main.csproj": {}
+    "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend Serverclient\\main\\main.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend serverclient\\main\\main.csproj": {
+    "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend Serverclient\\main\\main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend serverclient\\main\\main.csproj",
+        "projectUniqueName": "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend Serverclient\\main\\main.csproj",
         "projectName": "main",
-        "projectPath": "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend serverclient\\main\\main.csproj",
+        "projectPath": "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend Serverclient\\main\\main.csproj",
         "packagesPath": "C:\\Users\\Jacob\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend serverclient\\main\\obj\\",
+        "outputPath": "C:\\Users\\Jacob\\Desktop\\Github\\Delta-V Userclient\\Backend Serverclient\\main\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

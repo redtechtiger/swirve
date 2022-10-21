@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -11,9 +12,13 @@ namespace McClientHandler {
 
         public string Name { get; private set; }
         public string Tps { get; private set; }
+        public string[] PlayersOnline { get; private set; }
+        public string[] PlayersWhitelisted { get; private set; }
         public int RamUsing { get; private set; }
         public int RamAllocated { get; private set; }
         public int Status { get; private set; }
+
+        public bool Online { get; private set; }
 
         public string ConsoleOutput { get; private set; }
         public string ErrorOutput { get; private set; }
@@ -24,12 +29,15 @@ namespace McClientHandler {
         private string jarPath { get; set; }
         private string workingDirectory { get; set; }
 
+        private StringBuilder outputBuffer = new StringBuilder();
+
         private Process client = new Process();
+
 
         public void Init(string _name = "{Default}", int _ram = 2, string _javapath = "java", string _jarfile="") {
 
             // <summary>
-            // Load all initialized variables into the class
+            // Assign all variables
             // </summary>
 
             if(String.IsNullOrEmpty(_jarfile)) return; //Return if no client file is provided
@@ -45,7 +53,6 @@ namespace McClientHandler {
             _buffer = _buffer.SkipLast(1).ToArray(); //Get rid of filename
             this.workingDirectory = String.Join(@"\", _buffer);
             Console.WriteLine($"[DEBUG] Working directory ->{this.workingDirectory}");
-
         }
 
         public void Start() {
@@ -65,7 +72,6 @@ namespace McClientHandler {
 
             // Start the Minecraft server
             this.client.Start();
-
         }
 
         public void Stop() {
@@ -75,21 +81,29 @@ namespace McClientHandler {
         public void StartListener() {
             // Starts asynchronous listening
             this.client.BeginOutputReadLine();
-        }
 
-        public string FetchOutput() {
-            this.client.OutputDataReceived += (sender, args) => {
-                this.ConsoleOutput = args.Data;
+            //Add functions to the EventHandler
+            this.client.OutputDataReceived += (sender, args) => { //args.data is all new text read from buffer since last event
+                if(sender == null || args == null) return;
+                string _buffer = args.Data.Replace($"{(char)27}[32m","\n"); //Fix first warning newline formatting
+                _buffer = args.Data.Replace($"{(char)27}[m{(char)27}[32m","\n"); //Fix all newline formatting
+                this.ConsoleOutput += _buffer; //Append new lines to the console output
             };
-            //_index = 
-            return this.ConsoleOutput;
-        }
 
-        public string FetchError() {
             this.client.ErrorDataReceived += (sender, args) => {
-                this.ErrorOutput = args.Data;
+                if(sender == null || args == null) return;
+                string _buffer = args.Data.Replace($"{(char)27}[32m","\n");
+                _buffer = args.Data.Replace($"{(char)27}[m{(char)27}[32m","\n");
+                this.ErrorOutput += _buffer;
             };
-            return this.ConsoleOutput;
         }
+
+        //public string FetchOutput() {
+        //    return this.ConsoleOutput;
+        //}
+
+        //public string FetchError() {
+        //    return this.ErrorOutput;
+        //}
     }
 }
