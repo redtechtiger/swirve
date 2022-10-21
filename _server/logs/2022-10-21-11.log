@@ -1,0 +1,49 @@
+[21Oct2022 20:04:03.282] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--gameDir, ., --launchTarget, fmlserver, --fml.forgeVersion, 32.0.108, --fml.mcpVersion, 20200625.160719, --fml.mcVersion, 1.16.1, --fml.forgeGroup, net.minecraftforge]
+[21Oct2022 20:04:03.284] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 6.1.1+74+master.966c698 starting: java version 1.8.0_351 by Oracle Corporation
+[21Oct2022 20:04:03.836] [main/INFO] [net.minecraftforge.fml.loading.FixSSL/CORE]: Added Lets Encrypt root certificates as additional trust
+[21Oct2022 20:04:03.860] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8 Source=file:/C:/Users/Jacob/Desktop/Github/Delta-V%20Userclient/_server/libraries/org/spongepowered/mixin/0.8/mixin-0.8.jar Service=ModLauncher Env=SERVER
+[21Oct2022 20:04:04.303] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'fmlserver' with arguments [--gameDir, .]
+[21Oct2022 20:04:08.594] [modloading-worker-25/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 32.0.108, for MC 1.16.1 with MCP 20200625.160719
+[21Oct2022 20:04:08.594] [modloading-worker-25/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v32.0.108 Initialized
+[21Oct2022 20:04:08.966] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[21Oct2022 20:04:09.473] [main/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', name='PROD'
+[21Oct2022 20:04:09.869] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[21Oct2022 20:04:09.870] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[21Oct2022 20:04:09.871] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[21Oct2022 20:04:09.871] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[21Oct2022 20:04:09.872] [main/WARN] [net.minecraft.command.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[21Oct2022 20:04:09.876] [main/INFO] [net.minecraft.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, forge-1.16.1-32.0.108-universal.jar
+[21Oct2022 20:04:09.903] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: BETA Current: 32.0.108 Target: 32.0.108
+[21Oct2022 20:04:10.166] [Worker-Main-10/INFO] [net.minecraft.item.crafting.RecipeManager/]: Loaded 7 recipes
+[21Oct2022 20:04:10.486] [Worker-Main-10/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 927 advancements
+[21Oct2022 20:04:11.214] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting minecraft server version 1.16.1
+[21Oct2022 20:04:11.216] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Loading properties
+[21Oct2022 20:04:11.217] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Default game type: SURVIVAL
+[21Oct2022 20:04:11.218] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Generating keypair
+[21Oct2022 20:04:11.286] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Starting Minecraft server on *:25565
+[21Oct2022 20:04:11.292] [Server thread/INFO] [net.minecraft.network.NetworkSystem/]: Using default channel type
+[21Oct2022 20:04:11.933] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Preparing level "world"
+[21Oct2022 20:04:12.056] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[21Oct2022 20:04:12.518] [Server thread/INFO] [net.minecraft.world.chunk.listener.LoggingChunkStatusListener/]: Preparing spawn area: 0%
+[21Oct2022 20:04:12.557] [Server thread/INFO] [net.minecraft.world.chunk.listener.LoggingChunkStatusListener/]: Preparing spawn area: 0%
+[21Oct2022 20:04:13.994] [Worker-Main-11/INFO] [net.minecraft.world.chunk.listener.LoggingChunkStatusListener/]: Preparing spawn area: 83%
+[21Oct2022 20:04:13.994] [Worker-Main-11/INFO] [net.minecraft.world.chunk.listener.LoggingChunkStatusListener/]: Preparing spawn area: 83%
+[21Oct2022 20:04:14.057] [Worker-Main-8/INFO] [net.minecraft.world.chunk.listener.LoggingChunkStatusListener/]: Preparing spawn area: 83%
+[21Oct2022 20:04:14.560] [Worker-Main-9/INFO] [net.minecraft.world.chunk.listener.LoggingChunkStatusListener/]: Preparing spawn area: 83%
+[21Oct2022 20:04:15.056] [Server thread/INFO] [net.minecraft.world.chunk.listener.LoggingChunkStatusListener/]: Time elapsed: 2999 ms
+[21Oct2022 20:04:15.057] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Done (3.146s)! For help, type "help"
+[21Oct2022 20:05:18.412] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Unknown or incomplete command, see below for error
+[21Oct2022 20:05:18.412] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: stoip<--[HERE]
+[21Oct2022 20:05:19.411] [Server thread/INFO] [net.minecraft.server.dedicated.DedicatedServer/]: Stopping the server
+[21Oct2022 20:05:19.460] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[21Oct2022 20:05:19.460] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[21Oct2022 20:05:19.460] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[21Oct2022 20:05:19.461] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[21Oct2022 20:05:19.918] [Server thread/INFO] [net.minecraft.world.server.ChunkManager/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[21Oct2022 20:05:19.919] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[21Oct2022 20:05:19.920] [Server thread/INFO] [net.minecraft.world.server.ChunkManager/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[21Oct2022 20:05:19.920] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[21Oct2022 20:05:19.921] [Server thread/INFO] [net.minecraft.world.server.ChunkManager/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[21Oct2022 20:05:19.936] [Server thread/INFO] [net.minecraft.world.server.ChunkManager/]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[21Oct2022 20:05:19.940] [Server thread/INFO] [net.minecraft.world.server.ChunkManager/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[21Oct2022 20:05:19.940] [Server thread/INFO] [net.minecraft.world.server.ChunkManager/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
