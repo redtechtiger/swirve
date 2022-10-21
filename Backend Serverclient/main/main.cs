@@ -17,17 +17,11 @@ using McClientHandler;
         Console.WriteLine("Starting server...");
         mcClient.Start();
 
-        Console.WriteLine("Listening for output...");
-        mcClient.StartListener();
-
-        for (int _i=0; _i!=-1; _i++) { //Infinite loop to test if program captures DefaultOutput from jar
         
-            string _buffer = mcClient.ConsoleOutput;
-            Console.WriteLine($"{_buffer}");
-
-            System.Threading.Thread.Sleep(1000);
-        }
         mcClient.Stop();
+
+
+        
         return;
     }
 }
