@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FF111111">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="119*"/>
+            <ColumnDefinition Width="145*"/>
+        </Grid.ColumnDefinitions>
         <Rectangle HorizontalAlignment="Left" Stroke="#FFFB2576" Width="177" Fill="#FFFB2576">
             <Rectangle.Effect>
                 <DropShadowEffect/>
@@ -27,7 +31,7 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <Rectangle Height="53" Stroke="#FF3F0071" VerticalAlignment="Top" Fill="#FF3F0071" Margin="201,0,32,0">
+        <Rectangle Height="53" Stroke="#FF3F0071" VerticalAlignment="Top" Fill="#FF3F0071" Margin="201,0,32,0" Grid.ColumnSpan="2">
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>
@@ -35,9 +39,9 @@
         <Label Content="Delta-V&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="43" Width="141" FontSize="24"/>
         <Label Content="DEVBUILD a001&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top"/>
         <Button Content="Overview" HorizontalAlignment="Left" Margin="219,20,0,0" VerticalAlignment="Top" Width="75" Background="#FFDDDDDD"/>
-        <Button Content="Players" HorizontalAlignment="Left" Margin="316,20,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Console" HorizontalAlignment="Left" Margin="413,20,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Configuration" HorizontalAlignment="Left" Margin="510,20,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Players" HorizontalAlignment="Left" Margin="316,20,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2"/>
+        <Button Content="Console" HorizontalAlignment="Left" Margin="56,20,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+        <Button Content="Configuration" HorizontalAlignment="Left" Margin="153,20,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
         <Button Content="Exit" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" Width="155" Height="30">
             <Button.Effect>
                 <DropShadowEffect/>
