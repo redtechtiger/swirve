@@ -4,14 +4,16 @@ using System.Linq;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace McClientHandler {
     public class mcClientHandler {
 
         // Declares all the variables 
         public string Name { get; private set; }
-        public string Tps { get; private set; }
-        public string[] PlayersOnline { get; private set; }
+        public int Tps { get; private set; }
+        public int PlayersOnline { get; private set; }
+        public string[] Players { get; private set; }
         public string[] PlayersWhitelisted { get; private set; }
         public int RamUsing { get; private set; }
         public int RamAllocated { get; private set; }
@@ -28,6 +30,7 @@ namespace McClientHandler {
         private string workingDirectory { get; set; }
         private int terminatingClient { get; set; }
         private int internalError { get; set; }
+        private int pollingRate { get; set; }
 
         private StringBuilder outputBuffer = new StringBuilder();
 
@@ -64,7 +67,7 @@ namespace McClientHandler {
             // Assign the rest of the variables     
             this.Tps = 0;
             this.PlayersOnline = 0;
-            this.PlayersWhitelisted = 0;
+            //this.PlayersWhitelisted = []; // Read config file
             this.RamUsing = 0;
             this.Online = false;
             this.Crashed = false;
@@ -91,14 +94,14 @@ namespace McClientHandler {
             //Starts process that asynchronously reads Minecaft server output to set client status, players online, etc.
             statusClient.Start();
 
-            
+            this.Status = 2;
 
         }
 
         public void Stop() {
 
             // Request polling task termination
-            self.terminatingClient = 1;
+            this.terminatingClient = 1;
 
             System.Threading.Thread.Sleep(5000);
 
@@ -111,6 +114,10 @@ namespace McClientHandler {
             this.client.CancelOutputRead();
             this.client.CancelErrorRead();
             this.client.Kill();
+        }
+
+        public void Send(string _input) {
+
         }
 
         private void startListener() {
@@ -134,8 +141,27 @@ namespace McClientHandler {
         }
 
         private void pollClient() {
-            while(!terminatingClient) {
-                
+            while(terminatingClient!=1) {
+                switch(this.Status) {
+
+                    case 0: // Not even initiated (Shouldn't be possible)
+                        break;
+
+                    case 1: // Initiated, but not started (Shouldn't be possible)
+                        break;
+
+                    case 2: // Starting (listen for startup finished)
+                        if(this.ConsoleOutput.Contains("Done!")) {
+                            this.Online = true;
+                            this.Status = 3;
+                        }
+                        break;
+
+                    case 3: // Running (poll for all relevant stats)
+                        this.PlayersOnline = Regex.Matches(this.ConsoleOutput, "joined the game").Count - Regex.Matches(this.ConsoleOutput, "left the game").Count; // No. of joins - No. of leaves
+                        break;
+
+                }
             }
         }
     }

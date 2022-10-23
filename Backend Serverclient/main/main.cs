@@ -12,11 +12,17 @@ using McClientHandler;
         mcClientHandler mcClient = new mcClientHandler();
 
         Console.WriteLine("Preparing server for start...");
-        mcClient.Init("Test", 4, "java", @"C:\Users\Jacob\Desktop\Github\Delta-V Userclient\_server\forge-1.16.1-32.0.108.jar");
+        mcClient.Init(
+            "Test",
+            4,
+            "java",
+            @"C:\Users\Jacob\Desktop\Github\Delta-V Userclient\_server\forge-1.16.1-32.0.108.jar"
+            );
 
         Console.WriteLine("Starting server...");
         mcClient.Start();
-
+        
+        Console.ReadKey();
         
         mcClient.Stop();
 
