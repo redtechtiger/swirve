@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("wallpaper.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("splash.jpg")]
 
 

@@ -50,8 +50,7 @@ namespace Delta_V_Userclient
             await Task.Delay(1000);
 
 
-            Hide();
-            mainWindow.Show();
+            Close();
         }
     }
 }

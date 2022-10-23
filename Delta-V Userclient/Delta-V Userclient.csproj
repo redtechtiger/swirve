@@ -132,10 +132,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="splash.png" />
+    <Resource Include="Wallpaper.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Wallpaper.jpg" />
+    <Resource Include="userpic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="splash.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

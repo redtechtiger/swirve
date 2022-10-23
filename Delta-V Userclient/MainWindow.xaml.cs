@@ -24,5 +24,42 @@ namespace Delta_V_Userclient
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private async void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            Hide();
+            initScreen _splash = new initScreen();
+            _splash.ShowDialog();
+            Show();
+            pageView.SelectedIndex = 0;
+            await Task.Run(() => System.Threading.Thread.Sleep(5000));
+        }
+
+        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ChangedButton == MouseButton.Left) {
+                DragMove();
+            }
+        }
+
+        private void minimiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
