@@ -1,6 +1,8 @@
 using System;
+using System.IO;
 using System.Text;
 using System.Linq;
+using System.Reflection;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -24,25 +26,27 @@ namespace McClientHandler {
         public string ErrorOutput { get; private set; }
 
 
-        private string startArgs { get; set; }
-        private string shellPath { get; set; }
-        private string jarPath { get; set; }
-        private string workingDirectory { get; set; }
-        private int terminatingClient { get; set; }
-        private int internalError { get; set; }
-        private int pollingRate { get; set; }
+        private string startArgs;
+        private string shellPath;
+        private string jarPath;
+        private string workingDirectory;
+        private int terminatingClient;
+        private int internalError;
+        private int pollingRate;
 
-        private StringBuilder outputBuffer = new StringBuilder();
+        private StreamWriter standardInput;
 
         // Processes that will be running asynchronously
         private Process client = new Process();
-        private Task statusClient;
+        private Task statusTask;
 
         public void Init(string _name = "{Default}", int _ram = 2, string _javapath = "java", string _jarfile="") {
 
             // Assign all variables
+            this.terminatingClient = 0;
             this.internalError = 0;
             this.Status = 0;
+            this.pollingRate = 60;
 
             if(String.IsNullOrEmpty(_jarfile)) {
                 internalError = 1;
@@ -62,7 +66,7 @@ namespace McClientHandler {
             this.workingDirectory = String.Join(@"\", _buffer);
 
             // Assign task lambda
-            statusClient = new Task(() => pollClient());
+            statusTask = new Task(() => statusFetcher());
 
             // Assign the rest of the variables     
             this.Tps = 0;
@@ -83,6 +87,7 @@ namespace McClientHandler {
             this.client.StartInfo.WorkingDirectory = this.workingDirectory;
             this.client.StartInfo.FileName = this.shellPath;
             this.client.StartInfo.Arguments = this.startArgs;
+            this.client.StartInfo.RedirectStandardInput = true;
             this.client.StartInfo.RedirectStandardOutput = true;
             this.client.StartInfo.RedirectStandardError = true;
             this.client.StartInfo.UseShellExecute = false;
@@ -90,9 +95,11 @@ namespace McClientHandler {
             // Start the Minecraft server along with starting asynchronous output reading
             this.client.Start();
             startListener();
+            startStreamWriter();
 
             //Starts process that asynchronously reads Minecaft server output to set client status, players online, etc.
-            statusClient.Start();
+            System.Threading.Thread.Sleep(1000);
+            statusTask.Start();
 
             this.Status = 2;
 
@@ -102,27 +109,35 @@ namespace McClientHandler {
 
             // Request polling task termination
             this.terminatingClient = 1;
-
             System.Threading.Thread.Sleep(5000);
-
-            if(statusClient.IsCompleted.Equals(false)) {
+            if(statusTask.Status.Equals(TaskStatus.Running)) {
                 this.internalError = 1;
                 return;
             }
 
-            // Kill minecraft java client
+            // Stop everything, make sure world is saved prior to quitting
             this.client.CancelOutputRead();
             this.client.CancelErrorRead();
+            this.Send("stop");
+
+            System.Threading.Thread.Sleep(5000);
+
+            // Kill minecraft java client
             this.client.Kill();
         }
 
         public void Send(string _input) {
+            this.standardInput.WriteLine(_input);
+        }
 
+        public void SetPollingRate(int _input) {
+            this.pollingRate = _input;
         }
 
         private void startListener() {
             // Starts asynchronous listening
             this.client.BeginOutputReadLine();
+            this.client.BeginErrorReadLine();
 
             // Add functions to the EventHandler
             this.client.OutputDataReceived += (sender, args) => { // args.data is all new text read from buffer since last event
@@ -140,18 +155,16 @@ namespace McClientHandler {
             };
         }
 
-        private void pollClient() {
-            while(terminatingClient!=1) {
+        private void startStreamWriter() {
+            this.standardInput = this.client.StandardInput;
+        }
+
+        async private void statusFetcher() {
+            int _sleepMs;
+            while(this.terminatingClient!=1) {
                 switch(this.Status) {
-
-                    case 0: // Not even initiated (Shouldn't be possible)
-                        break;
-
-                    case 1: // Initiated, but not started (Shouldn't be possible)
-                        break;
-
                     case 2: // Starting (listen for startup finished)
-                        if(this.ConsoleOutput.Contains("Done!")) {
+                        if(this.ConsoleOutput.Contains("Done")) {
                             this.Online = true;
                             this.Status = 3;
                         }
@@ -161,7 +174,12 @@ namespace McClientHandler {
                         this.PlayersOnline = Regex.Matches(this.ConsoleOutput, "joined the game").Count - Regex.Matches(this.ConsoleOutput, "left the game").Count; // No. of joins - No. of leaves
                         break;
 
+                    default: // Shouldn't be possible, but to avoid unhandled exceptions
+                        break;
+
                 }
+                _sleepMs = 60/this.pollingRate * 1000;
+                await Task.Run(() => System.Threading.Thread.Sleep(_sleepMs));
             }
         }
     }
