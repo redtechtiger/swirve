@@ -14,16 +14,19 @@ namespace Swirve_Userclient.Acrylic
         [DllImport("user32.dll")]
         internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
 
-        public void EnableBlur(Window window)
+        internal void EnableBlur(Window window)
         {
-            var windowHelper = new WindowInteropHelper(window);
-            var accent = new AccentPolicy();
+            Console.WriteLine("Called");
 
+            var windowHelper = new WindowInteropHelper(window);
+
+            var accent = new AccentPolicy();
             accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
 
             var accentStructSize = Marshal.SizeOf(accent);
+
             var accentPtr = Marshal.AllocHGlobal(accentStructSize);
-            Marshal.StructureToPtr(accentPtr, accentPtr, false);
+            Marshal.StructureToPtr(accent, accentPtr, false);
 
             var data = new WindowCompositionAttributeData();
             data.Attribute = WindowCompositionAttribute.WCA_ACCENT_POLICY;
@@ -36,9 +39,9 @@ namespace Swirve_Userclient.Acrylic
 
         }
 
-        //internal BlurEffect(Window window)
-        //{
-        //    EnableBlur(window);
-        //}
+        internal BlurEffect(Window window)
+        {
+            EnableBlur(window);
+        }
     }
 }

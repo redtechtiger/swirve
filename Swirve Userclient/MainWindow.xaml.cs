@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 
 namespace Swirve_Userclient
 {
@@ -60,6 +62,73 @@ namespace Swirve_Userclient
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("Loaded!");
+        }
+
+        private void set50_Click(object sender, RoutedEventArgs e)
+        {
+            testbar.Value = 50;
+        }
+
+        private void set100_Click(object sender, RoutedEventArgs e)
+        {
+            testbar.Value = 100;
+        }
+
+        private void ListViewScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta / 2);
+            e.Handled = true;
+        }
+
+        private void overviewButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageView.SelectedIndex = 0;
+            movePageSelectedMarker(overviewButton);
+        }
+
+        private void performanceButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageView.SelectedIndex = 1;
+            movePageSelectedMarker(performanceButton);
+        }
+
+        private void playersButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageView.SelectedIndex = 2;
+            movePageSelectedMarker(playersButton);
+        }
+
+        private void configurationButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageView.SelectedIndex = 3;
+            movePageSelectedMarker(configurationButton);
+        }
+
+        private void consoleButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageView.SelectedIndex = 4;
+            movePageSelectedMarker(consoleButton);
+        }
+
+        private void ftpButton_Click(object sender, RoutedEventArgs e)
+        {
+            pageView.SelectedIndex = 5;
+            movePageSelectedMarker(ftpButton);
+        }
+
+        private void movePageSelectedMarker(Button button)
+        {
+            var transform = button.TransformToVisual(mainGrid as FrameworkElement);
+            Point absolutePosition = transform.Transform(new Point(0, 0));
+            double avgX = ((absolutePosition.X + button.ActualWidth) + (absolutePosition.X - pageSelectedMarker.ActualWidth)) / 2;
+
+            pageSelectedMarker.Margin = new Thickness((int)avgX, absolutePosition.Y, 0, 0);
         }
     }
 }
