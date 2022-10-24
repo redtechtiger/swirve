@@ -1,0 +1,27 @@
+﻿<Window x:Class="Swirve_Userclient.initScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Swirve_Userclient"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        Title="initScreen" Height="226" Width="447" ResizeMode="NoResize" Loaded="Window_Loaded" FontFamily="OCR A Extended" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <!--<Window.Effect>
+        <BlurEffect/>
+    </Window.Effect> -->
+    <Window.Background>
+        <SolidColorBrush Opacity="0.5" Color="LightCyan"/>
+    </Window.Background>
+    
+    <Grid Background="#FF4B4B4B">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="439*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Devbuild 0.0.0 (0000)" HorizontalAlignment="Left" Margin="0,194,0,0" VerticalAlignment="Top" Foreground="White" Height="32" Width="186" FontFamily="Segoe UI"/>
+        <Label Content="S  w  i  r  v  e" Margin="93,89" FontFamily="Fonts/DoFuturistic-JRwaB.ttf #DO Futuristic" FontSize="42" Foreground="White"/>
+        <Label x:Name="workDescriptor" Content="Loading..." Margin="93,126,215,0" VerticalAlignment="Top" FontFamily="Segoe UI" Foreground="White" Background="{x:Null}" Height="26"/>
+    </Grid>
+</Window>
