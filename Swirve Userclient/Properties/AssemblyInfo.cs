@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Swirve Userclient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A GUI for managing your remote Minecraft servers.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("RedTechTiger Media")]
 [assembly: AssemblyProduct("Swirve Userclient")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]

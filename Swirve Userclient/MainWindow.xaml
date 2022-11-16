@@ -8,7 +8,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         UseLayoutRounding="True"
-        Title="Delta-V Server Manager" Height="600" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip" MinWidth="1000" MinHeight="600">
+        Title="Delta-V Server Manager" Height="600" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="CanResizeWithGrip" MinWidth="1000" MinHeight="600" LayoutUpdated="Window_LayoutUpdated" ContentRendered="Window_ContentRendered" Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ControlTemplate x:Key="RoundedProgressBar" TargetType="{x:Type ProgressBar}">
@@ -61,29 +61,50 @@
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
+            <ControlTemplate x:Key="pageSelectorButtonStyle" TargetType="{x:Type ButtonBase}">
+                <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="10" OpacityMask="#FF828282">
+                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="Button.IsDefaulted" Value="True">
+                        <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" TargetName="border" Value="#FFB9B9B9"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="#FFB9B9B9"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <!-- <Setter Property="Background" TargetName="border" Value="#FF828282"/> -->
+                        <!-- <Setter Property="BorderBrush" TargetName="border" Value="#FF828282"/> -->
+                    </Trigger>
+                    <Trigger Property="ToggleButton.IsChecked" Value="True">
+                        <Setter Property="Background" TargetName="border" Value="#00828282"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="#FF828282"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" TargetName="border" Value="{x:Null}"/>
+                        <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                        <!-- <Setter Property="Foreground" Value="#FF838383"/> -->
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
         </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="mainGrid" Background="White" Loaded="Grid_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="#FFF3F3F3" Margin="0,40,798,0">
+        <Rectangle Fill="#FFF3F3F3" Margin="0,40,0,0" HorizontalAlignment="Left" Width="202">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.2"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Button x:Name="button" Content="LPQ Survival" Margin="16,145,814,0" VerticalAlignment="Top" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="45" FontSize="16"></Button>
-        <Button x:Name="button_Copy" Content="LPQ Modded" Margin="16,95,814,0" VerticalAlignment="Top" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="45" FontSize="16"/>
-        <TabControl x:Name="pageView" Margin="202,40,0,0" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button x:Name="button" Content="LPQ Survival" Margin="16,145,0,0" VerticalAlignment="Top" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="45" FontSize="16" HorizontalAlignment="Left" Width="170"/>
+        <Button x:Name="button_Copy" Content="LPQ Modded" Margin="16,95,0,0" VerticalAlignment="Top" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" Height="45" FontSize="16" HorizontalAlignment="Left" Width="170"/>
+        <TabControl x:Name="pageView" Margin="202,40,0,0" BorderBrush="{x:Null}">
             <TabItem Header="TabItem" Visibility="Visible">
                 <ScrollViewer PreviewMouseWheel="ListViewScrollViewer_PreviewMouseWheel">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                    <Grid Height="Auto" Width="Auto" UseLayoutRounding="False">
                         <Rectangle Fill="#FFE2E2E2" HorizontalAlignment="Left" Height="65" Margin="35,241,0,0" RadiusY="15" RadiusX="15" VerticalAlignment="Top" Width="627"/>
                         <Label Content="Server name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,246,0,0" Height="26" Width="76"/>
                         <TextBox Height="23" Margin="248,249,0,0" TextWrapping="Wrap" Text="LPQ Modded" VerticalAlignment="Top" Background="#FFE2E2E2" HorizontalAlignment="Left" Width="395"/>
@@ -134,26 +155,26 @@
                 <DropShadowEffect BlurRadius="10" Opacity="0.2"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Rectangle x:Name="pageSelectedMarker" Fill="#FF00C5FF" Height="25" Margin="315,58,0,0" RadiusY="10" RadiusX="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90"/>
+        <Rectangle x:Name="pageSelectedMarker" Fill="#FF00C5FF" Height="25" Margin="308,58,0,0" RadiusY="10" RadiusX="10" VerticalAlignment="Top" HorizontalAlignment="Left" Width="90"/>
         <StackPanel x:Name="pageSelectorStackPanel" Margin="303,58,90,0" Orientation="Horizontal" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Width="607">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Margin" Value="18,0,18,0"/>
                 </Style>
             </StackPanel.Resources>
-            <Button x:Name="overviewButton" Content="Overview" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Margin="18,0" Click="overviewButton_Click"/>
-            <Button x:Name="performanceButton" Content="Performance" HorizontalAlignment="Left" VerticalAlignment="Top" Width="83" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="performanceButton_Click"/>
-            <Button x:Name="playersButton" Content="Players" HorizontalAlignment="Left" VerticalAlignment="Top" Width="48" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="playersButton_Click"/>
-            <Button x:Name="configurationButton" Content="Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="configurationButton_Click"/>
-            <Button x:Name="consoleButton" Content="Console" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="consoleButton_Click"/>
-            <Button x:Name="ftpButton" Content="FTP" HorizontalAlignment="Left" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="ftpButton_Click"/>
+            <Button x:Name="overviewButton" Content="Overview" Template="{DynamicResource pageSelectorButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="63" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Margin="18,0" Click="overviewButton_Click"/>
+            <Button x:Name="performanceButton" Content="Performance" Template="{DynamicResource pageSelectorButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="83" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="performanceButton_Click"/>
+            <Button x:Name="playersButton" Content="Players" Template="{DynamicResource pageSelectorButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="48" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="playersButton_Click"/>
+            <Button x:Name="configurationButton" Content="Configuration" Template="{DynamicResource pageSelectorButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="configurationButton_Click"/>
+            <Button x:Name="consoleButton" Content="Console" Template="{DynamicResource pageSelectorButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="56" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="consoleButton_Click"/>
+            <Button x:Name="ftpButton" Content="FTP" Template="{DynamicResource pageSelectorButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="26" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Click="ftpButton_Click"/>
         </StackPanel>
         <Rectangle Height="40" VerticalAlignment="Top" Fill="#FFF3F3F3" MouseDown="Rectangle_MouseDown" Margin="202,0,0,0">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.2"/>
             </Rectangle.Effect>
         </Rectangle>
-        <Rectangle Fill="#FFF3F3F3" Height="40" VerticalAlignment="Top" Margin="0,0,798,0">
+        <Rectangle Fill="#FFF3F3F3" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Width="202">
             <Rectangle.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.2"/>
             </Rectangle.Effect>
@@ -161,9 +182,10 @@
         <Button x:Name="exitButton" Content="X" HorizontalAlignment="Right" Margin="0,10,13,0" VerticalAlignment="Top" Width="20" Background="{x:Null}" BorderBrush="{x:Null}" Click="exitButton_Click"/>
         <Button x:Name="minimiseButton" Content="_" HorizontalAlignment="Right" Margin="0,10,38,0" VerticalAlignment="Top" Width="20" Background="{x:Null}" BorderBrush="{x:Null}" Click="minimiseButton_Click"/>
         <Label Content="Swirve Server Manager" Margin="505,5,304,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
-        <Label x:Name="userName" Content="RedTechTiger" HorizontalAlignment="Left" Margin="40,7,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <Image Margin="8,6,0,0" RenderOptions.BitmapScalingMode="HighQuality" Source="userpic.png" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="32"/>
-        <Button x:Name="button_Copy1" Content="Exit" Margin="16,0,814,10" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Height="45" VerticalAlignment="Bottom"/>
-        <Button x:Name="button_Copy2" Content="Settings" Margin="16,0,814,55" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Height="45" VerticalAlignment="Bottom"/>
+        <Button Content="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="202" Height="40" Foreground="{x:Null}" Background="#FFF3F3F3" BorderBrush="{x:Null}"/>
+        <Label x:Name="userName" IsHitTestVisible="False" Content="RedTechTiger" HorizontalAlignment="Left" Margin="40,6,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
+        <Image Margin="8,6,0,0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality" Source="userpic.png" Height="27" VerticalAlignment="Top" HorizontalAlignment="Left" Width="32"/>
+        <Button x:Name="button_Copy1" Content="Exit" Margin="16,0,0,10" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="170"/>
+        <Button x:Name="button_Copy2" Content="Settings" Margin="16,0,0,55" Click="Button_Click" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" Height="45" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="170"/>
     </Grid>
 </Window>

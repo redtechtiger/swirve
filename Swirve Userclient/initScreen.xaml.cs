@@ -27,7 +27,7 @@ namespace Swirve_Userclient
             InitializeComponent();
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
             //BlurEffect
@@ -40,42 +40,13 @@ namespace Swirve_Userclient
             DateTime _buildDate = new DateTime(2000, 1, 1).AddDays(_version.Build).AddSeconds(_version.Revision * 2);
             versionNumber.Content = $"Devbuild {_version}, Build date: {_buildDate}";
 
-
-
-            await Task.Delay(500);
-
-
-            //Connect (somehow) to backend
-            workDescriptor.Content = "Waiting for backend...";
-            await Task.Delay(100);
-
-
-            //Fetch MySQL Data
-            workDescriptor.Content = "Connecting to database...";
-            await Task.Delay(100);
-
-
-            //Connect to server client
-            workDescriptor.Content = "Connecting to server...";
-            await Task.Delay(100);
-
-
-            //Initialize actual application
-            workDescriptor.Content = "Initializing application...";
-            await Task.Delay(100);
-
-
-
-            workDescriptor.Content = "";
-            await Task.Delay(2000);
-            Close();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                this.DragMove();
+                DragMove();
             }
         }
     }

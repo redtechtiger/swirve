@@ -22,6 +22,7 @@ namespace Swirve_Userclient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Button selectedButton;
         public MainWindow()
         {
             InitializeComponent();
@@ -37,14 +38,8 @@ namespace Swirve_Userclient
             Application.Current.Shutdown();
         }
 
-        private async void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            Hide();
-            initScreen _splash = new initScreen();
-            _splash.ShowDialog();
-            Show();
-            pageView.SelectedIndex = 0;
-            await Task.Run(() => System.Threading.Thread.Sleep(5000));
         }
 
         private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
@@ -61,13 +56,12 @@ namespace Swirve_Userclient
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("Loaded!");
-        }
+        //private void Window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //}
 
         private void set50_Click(object sender, RoutedEventArgs e)
         {
@@ -89,46 +83,86 @@ namespace Swirve_Userclient
         private void overviewButton_Click(object sender, RoutedEventArgs e)
         {
             pageView.SelectedIndex = 0;
-            movePageSelectedMarker(overviewButton);
+            selectedButton.IsEnabled = true;
+            selectedButton = overviewButton;
+            updatePageSelectedMarker();
         }
 
         private void performanceButton_Click(object sender, RoutedEventArgs e)
         {
             pageView.SelectedIndex = 1;
-            movePageSelectedMarker(performanceButton);
+            selectedButton.IsEnabled = true;
+            selectedButton = performanceButton;
+            updatePageSelectedMarker();
         }
 
         private void playersButton_Click(object sender, RoutedEventArgs e)
         {
             pageView.SelectedIndex = 2;
-            movePageSelectedMarker(playersButton);
+            selectedButton.IsEnabled = true;
+            selectedButton = playersButton;
+            updatePageSelectedMarker();
         }
 
         private void configurationButton_Click(object sender, RoutedEventArgs e)
         {
             pageView.SelectedIndex = 3;
-            movePageSelectedMarker(configurationButton);
+            selectedButton.IsEnabled = true;
+            selectedButton = configurationButton;
+            updatePageSelectedMarker();
         }
 
         private void consoleButton_Click(object sender, RoutedEventArgs e)
         {
             pageView.SelectedIndex = 4;
-            movePageSelectedMarker(consoleButton);
+            selectedButton.IsEnabled = true;
+            selectedButton = consoleButton;
+            updatePageSelectedMarker();
         }
 
         private void ftpButton_Click(object sender, RoutedEventArgs e)
         {
             pageView.SelectedIndex = 5;
-            movePageSelectedMarker(ftpButton);
+            selectedButton.IsEnabled = true;
+            selectedButton = ftpButton;
+            updatePageSelectedMarker();
         }
 
-        private void movePageSelectedMarker(Button button)
+        private void updatePageSelectedMarker()
         {
-            var transform = button.TransformToVisual(mainGrid as FrameworkElement);
+            if (selectedButton == null) return;
+            var transform = selectedButton.TransformToVisual(mainGrid as FrameworkElement);
             Point absolutePosition = transform.Transform(new Point(0, 0));
-            double avgX = ((absolutePosition.X + button.ActualWidth) + (absolutePosition.X - pageSelectedMarker.ActualWidth)) / 2;
+            double avgX = ((absolutePosition.X + selectedButton.ActualWidth) + (absolutePosition.X - pageSelectedMarker.ActualWidth)) / 2;
+            pageSelectedMarker.Margin = new Thickness((int)avgX, absolutePosition.Y-1, 0, 0);
 
-            pageSelectedMarker.Margin = new Thickness((int)avgX, absolutePosition.Y, 0, 0);
+            selectedButton.IsEnabled = false;
+            
+
+        }
+
+        private void Window_LayoutUpdated(object sender, EventArgs e)
+        {
+            updatePageSelectedMarker();
+        }
+
+        private async void Window_ContentRendered(object sender, EventArgs e)
+        {
+            Hide();
+            initScreen _splash = new initScreen();
+            _splash.Show();
+            _splash.workDescriptor.Content = "Please wait...";
+            await Task.Delay(5000);
+            _splash.Close();
+
+            pageView.SelectedIndex = 0;
+
+            Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            selectedButton = overviewButton;
         }
     }
 }
