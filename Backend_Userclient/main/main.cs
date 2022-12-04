@@ -17,12 +17,13 @@ namespace Swirve_Backend {
         static void Main(string[] args) {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("[WARN] Running from main isn't supported - Entering dev mode");
-            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.White;
 
             Console.WriteLine("[DEBUG] Establishing connection with MySQL Database...");
-            var database = new Database;
-            
+            var database = new Database();
+            database.Init("192.168.0.213","3306", "test","testpass","dev");
+            database.Connect();
+            Console.ReadLine();
         }
-
     }
 }

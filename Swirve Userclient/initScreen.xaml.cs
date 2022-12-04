@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
-using Swirve_Userclient.Acrylic;
-
 namespace Swirve_Userclient
 {
     /// <summary>
@@ -29,12 +27,6 @@ namespace Swirve_Userclient
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            //BlurEffect
-            BlurEffect blurEffect = new BlurEffect(this);
-            blurEffect.EnableBlur(this);
-
-            MainWindow mainWindow = new MainWindow();
 
             Version _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             DateTime _buildDate = new DateTime(2000, 1, 1).AddDays(_version.Build).AddSeconds(_version.Revision * 2);
@@ -48,6 +40,11 @@ namespace Swirve_Userclient
             {
                 DragMove();
             }
+        }
+
+        private void Swirve_Splash_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            workDescriptor.Visibility = Visibility.Visible;
         }
     }
 }

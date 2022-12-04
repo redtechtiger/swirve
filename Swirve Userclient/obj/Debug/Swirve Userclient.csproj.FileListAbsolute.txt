@@ -32,3 +32,5 @@ C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\obj\Debug\Swir
 C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\obj\Debug\Swirve Userclient.csproj.CoreCompileInputs.cache
 C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\obj\Debug\Swirve Userclient.exe
 C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\obj\Debug\Swirve Userclient.pdb
+C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\obj\Debug\Swirve Userclient_Content.g.cs
+C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\bin\Debug\Swirve_Splash.mp4

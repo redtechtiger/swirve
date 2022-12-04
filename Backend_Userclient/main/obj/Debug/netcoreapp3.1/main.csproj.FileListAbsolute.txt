@@ -12,3 +12,37 @@ C:\Users\Jacob\Desktop\Github\Swirve Userclient\Backend Userclient\main\obj\Debu
 C:\Users\Jacob\Desktop\Github\Swirve Userclient\Backend Userclient\main\obj\Debug\netcoreapp3.1\main.dll
 C:\Users\Jacob\Desktop\Github\Swirve Userclient\Backend Userclient\main\obj\Debug\netcoreapp3.1\main.pdb
 C:\Users\Jacob\Desktop\Github\Swirve Userclient\Backend Userclient\main\obj\Debug\netcoreapp3.1\main.genruntimeconfig.cache
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\main.exe
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\main.deps.json
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\main.runtimeconfig.json
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\main.runtimeconfig.dev.json
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\main.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\main.pdb
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\K4os.Compression.LZ4.Streams.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\K4os.Hash.xxHash.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\MySql.Data.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\ZstdNet.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\System.Security.Permissions.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.csproj.AssemblyReference.cache
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.AssemblyInfoInputs.cache
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.AssemblyInfo.cs
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.csproj.CoreCompileInputs.cache
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.csproj.CopyComplete
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.dll
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.pdb
+C:\Users\Jacob\Desktop\GitHub\Swirve_Userclient\backend_userclient\main\obj\Debug\netcoreapp3.1\main.genruntimeconfig.cache

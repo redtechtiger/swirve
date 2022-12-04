@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "X9Q5H9XBWnpX/BUzO/ilezZJEFNlodrNq/tF1ifWHdOpG4VWkdhtnH0BBiqJKNgqloMVPEUd8mR9R03ZSNZeYQ==",
+  "dgSpecHash": "ZOE53yvpC/ZgIxx9qe1DlJJYQAEJ4HLdW3qQuPm97shK19h1rLhF8WmRsBr2QbmMJyj0Cjgl9A6peUmwMCnWrA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jacob\\Desktop\\Github\\Swirve_Userclient\\Backend_Userclient\\main\\main.csproj",
+  "projectFilePath": "C:\\Users\\Jacob\\Desktop\\GitHub\\Swirve_Userclient\\backend_userclient\\main\\main.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jacob\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\Jacob\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",
@@ -22,7 +22,8 @@
     "C:\\Users\\Jacob\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\Jacob\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\Jacob\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512",
-    "C:\\Users\\Jacob\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+    "C:\\Users\\Jacob\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
+    "C:\\Users\\Jacob\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.31\\microsoft.netcore.app.host.win-x64.3.1.31.nupkg.sha512"
   ],
   "logs": []
 }

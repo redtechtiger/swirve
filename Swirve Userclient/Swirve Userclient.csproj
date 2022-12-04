@@ -81,12 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Acrylic\BlurEffect.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Acrylic\Acrylic.cs" />
     <Compile Include="initScreen.xaml.cs">
       <DependentUpon>initScreen.xaml</DependentUpon>
     </Compile>
@@ -138,16 +136,18 @@
     <Resource Include="Wallpaper.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="userpic.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="splash.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="loading.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="loading.gif" />
+    <Resource Include="Resources\server.png" />
+    <Resource Include="Resources\database_settings.png" />
+    <Resource Include="Resources\exit.png" />
+    <Resource Include="Resources\speed.png" />
+    <Resource Include="Resources\settings.png" />
+    <Resource Include="Resources\network.png" />
+    <Resource Include="Resources\menu.png" />
+    <Resource Include="Resources\terminal.png" />
+    <None Include="Resources\Swirve_Splash.mp4" />
+    <Content Include="Swirve_Splash.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
