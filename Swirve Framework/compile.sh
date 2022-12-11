@@ -1,0 +1,1 @@
+g++ ./core/*.cpp ./handler/*.cpp ./loader/*.cpp ./logger/*.cpp -o ./binary/main
