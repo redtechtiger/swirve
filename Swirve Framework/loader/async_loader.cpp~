@@ -8,7 +8,7 @@
 #include <sys/ioctl.h>
 #include "../logger/log.h"
 
-#define READ_BUFFER_SIZE 512
+#define READ_BUFFER_SIZE 128
 
 std::string AsynchronousApplicationLoader::getOutput() {
     std::string _output;
