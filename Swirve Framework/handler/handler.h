@@ -1,17 +1,27 @@
 #ifndef HANDLER_H
 #define HANDLER_H
 
+#include <string>
 #include "../loader/async_loader.h"
 
 class MinecraftHandler {
     private:
         AsynchronousApplicationLoader instance;
-        enum {PRESETUP,STOPPED,STARTING,RESTARTING,KILLING,FAULT};
-        void changePowerState();
+        enum POWERACTION {START, STOP, KILL, RESTART};
+        enum POWERSTATE {OFFLINE,STARTING,ONLINE,STOPPING,RESTARTING,KILLING,FAULT};
+        POWERSTATE state;
+        std::string serverLog;
+        int changePowerState(POWERACTION action);
+        int stopserver();
+        int startserver();
+        int restartserver();
+        int killserver();
     public:
-        void Start();
-        void Stop();
-        void GetLog();
+        int Start();
+        int Stop();
+        int Restart();
+        int Kill();
+        int GetLog(std::string _buffer);
 };
 
 #endif
