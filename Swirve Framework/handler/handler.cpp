@@ -15,7 +15,7 @@ int MinecraftHandler::restartserver() {
         return startserver();
     } else return -1;
     
-}
+} 
 
 int MinecraftHandler::killserver() {
     instance.killFork();
