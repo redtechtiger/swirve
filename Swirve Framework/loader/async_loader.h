@@ -20,7 +20,6 @@ class AsynchronousApplicationLoader {
         void setInput(const char* _writeBuffer, unsigned long _len);
         int executeJarAsync(char* _binary);
         int executeJarAsync(char* _binary, char* _env);
-        void waitForExit();
 };
 
 #endif

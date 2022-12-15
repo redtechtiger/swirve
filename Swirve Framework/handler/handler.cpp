@@ -3,7 +3,7 @@
 #include "../loader/async_loader.h"
 
 int MinecraftHandler::startserver() {
-    return instance.executeJarAsync("java");
+    return instance.executeJarAsync("java","/mnt/c/Users/Jacob/Desktop/Github/Swirve_Userclient/Swirve Framework/env/");
 }
 
 int MinecraftHandler::stopserver() {

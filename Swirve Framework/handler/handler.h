@@ -9,7 +9,7 @@ class MinecraftHandler {
         AsynchronousApplicationLoader instance;
         enum POWERACTION {START, STOP, KILL, RESTART};
         enum POWERSTATE {OFFLINE,STARTING,ONLINE,STOPPING,RESTARTING,KILLING,FAULT};
-        POWERSTATE state;
+        POWERSTATE state = OFFLINE;
         std::string serverLog;
         int changePowerState(POWERACTION action);
         int stopserver();
