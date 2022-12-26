@@ -1,4 +1,4 @@
-# Delta-V-Userclient
+# Swirve-Userclient
  
 An open-source (for now) client to manage your Minceraft servers.
 Swirve aims to run natively on Windows machines, and communicates
