@@ -14,11 +14,14 @@ class AsynchronousApplicationLoader {
         int pipe2[2];
         int forkId;
     public:
-        std::string getOutput();
         int killFork();
         int tryStop();
-        void setInput(const char* _writeBuffer, unsigned long _len);
-        int executeJarAsync(char* _binary);
+	int isAlive();
+
+	void setInput(const char* _writeBuffer, unsigned long _len);
+        std::string getOutput();
+
+	int executeJarAsync(char* _binary);
         int executeJarAsync(char* _binary, char* _env);
 };
 

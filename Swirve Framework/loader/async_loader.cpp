@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <sstream>
 #include <vector>
+#include <sys/wait.h>
+#include <sys/types.h>
 #include <signal.h>
 #include <sys/ioctl.h>
 #include "../logger/log.h"
@@ -23,7 +25,14 @@ int AsynchronousApplicationLoader::killFork() {
     return kill(forkId,SIGKILL);
 }
 
+int AsynchronousApplicationLoader::isAlive() {
+    int status;
+    return waitpid(forkId,&status,WNOHANG);
+}
+
 int AsynchronousApplicationLoader::tryStop() {
+    setInput("stop",sizeof("stop"));
+    sleep(10);
     return -1;
 }
 
@@ -46,7 +55,7 @@ void AsynchronousApplicationLoader::setInput(const char *_writeBuffer, unsigned 
     int _in = write(pipe1[1],_writeBuffer,_len);
 }
 
-int AsynchronousApplicationLoader::executeJarAsync(char*  _binary) {
+int AsynchronousApplicationLoader::executeJarAsync(char* _binary) {
     pipe(pipe1);
     pipe(pipe2);
 
