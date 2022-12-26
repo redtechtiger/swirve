@@ -14,6 +14,7 @@
 #include "../logger/log.h"
 
 #define READ_BUFFER_SIZE 4096
+#define STOP_TIMEOUT 10
 
 void clearArray(auto& _buffer, int _len) {
     for(int i=0;i<_len-1;i++) {
@@ -27,13 +28,18 @@ int AsynchronousApplicationLoader::killFork() {
 
 int AsynchronousApplicationLoader::isAlive() {
     int status;
-    return waitpid(forkId,&status,WNOHANG);
+    return waitpid(-1,&status,WNOHANG);
 }
 
 int AsynchronousApplicationLoader::tryStop() {
-    setInput("stop",sizeof("stop"));
+    setInput("stop\n",5);
     sleep(10);
-    return -1;
+    int _isAlive = isAlive();
+    if(_isAlive==0||_isAlive==-1) {
+	return -1;
+    } else {
+	return 0;
+    }
 }
 
 std::string AsynchronousApplicationLoader::getOutput() {
@@ -52,7 +58,7 @@ std::string AsynchronousApplicationLoader::getOutput() {
 }
 
 void AsynchronousApplicationLoader::setInput(const char *_writeBuffer, unsigned long _len) {
-    int _in = write(pipe1[1],_writeBuffer,_len);
+    write(pipe1[1],_writeBuffer,_len);
 }
 
 int AsynchronousApplicationLoader::executeJarAsync(char* _binary) {
@@ -68,7 +74,6 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary) {
     argv.shrink_to_fit();
 
     int _forkid = fork();
-    forkId = _forkid;
     if(_forkid<0) {
         throw std::runtime_error("[FATAL] Forking failed");
     } else if(_forkid==0) { // Child
@@ -83,8 +88,9 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary) {
         close(pipe1[0]); // Close unused pipe ends
         close(pipe2[1]);
         int flags = 1;
-        ioctl(pipe2[0],FIONBIO,&flags); // Enable non-blocking IO calls
-        return 0;
+        //ioctl(pipe2[0],FIONBIO,&flags); // Enable non-blocking IO calls
+        forkId = _forkid;
+	return 0;
     }
 }
 
@@ -106,7 +112,8 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary, char* _env) {
     } else if(_forkid==0) { // Child
         dup2(pipe1[0],STDIN_FILENO); // Assign (duplicate) new pipes
         dup2(pipe2[1],STDOUT_FILENO);
-        close(pipe1[1]); // Close pipe ends as no longer needed
+        dup2(pipe2[1],STDERR_FILENO);
+	close(pipe1[1]); // Close pipe ends as no longer needed
         close(pipe2[0]);
         std::cerr << chdir(_env);
         std::cerr << execvp(_binary,const_cast<char* const*>(argv.data())); // Let binary take control
@@ -117,6 +124,7 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary, char* _env) {
         close(pipe2[1]);
         int flags = 1;
         ioctl(pipe2[0],FIONBIO,&flags); // Enable non-blocking IO calls
-        return 0;
+        forkId = _forkid;
+	return 0;
     }
 }

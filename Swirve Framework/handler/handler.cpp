@@ -1,4 +1,4 @@
-#include <iostream>/mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swir
+#include <iostream>
 #include "handler.h"
 #include "../loader/async_loader.h"
 
@@ -14,19 +14,19 @@ POWERSTATE MinecraftHandler::State() {
 	    if(log.find(ONLINE_STR)!=std::string::npos) {
 		state = ONLINE;
 	    }
-	    if(1==0) {
+	    if(instance.isAlive()!=0) {
 		state = FAULT;
 	    }
 	    break;
 	
 	case ONLINE:
-	    if(1==0) {
+	    if(instance.isAlive()!=0) {
 		state = FAULT;
 	    }
 	    break;
 	
 	case STOPPING:
-	    if(1==0) {
+	    if(instance.isAlive()!=0) {
 		state = OFFLINE;
 	    }
 	    break;
@@ -38,7 +38,7 @@ POWERSTATE MinecraftHandler::State() {
 	    break;
 	
 	case KILLING:
-	    if(1==0) {
+	    if(instance.isAlive()!=0) {
 		state = OFFLINE;	
 	    }
 	    break;
@@ -59,6 +59,7 @@ int MinecraftHandler::updateserverlog() {
 }
 
 int MinecraftHandler::startserver() {
+    resetserverlog();
     return instance.executeJarAsync("java","/mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env");
 }
 
@@ -81,9 +82,11 @@ int MinecraftHandler::killserver() {
 int MinecraftHandler::changePowerState(POWERACTION action) {
     switch(action) {
         case START:
-            if(state==OFFLINE) {
+            if(state==OFFLINE||state==FAULT) {
                 state = STARTING;
-                return startserver();
+                int returncode = startserver();
+		if(returncode!=0) state = FAULT;
+		return returncode;
             } else {
                 return -1;
             }
@@ -91,15 +94,21 @@ int MinecraftHandler::changePowerState(POWERACTION action) {
         case STOP:
             if(state==ONLINE) {
                 state = STOPPING;
-                return stopserver();
+		int returncode = stopserver();
+		if(returncode!=0) state = FAULT;
+                return returncode;
             } else {
                 return -1;
             }
 
         case KILL:
-            if(state==ONLINE||state==STARTING||state==RESTARTING) {
+            if(state==ONLINE||state==STARTING||state==RESTARTING||state==STOPPING) {
                 state = KILLING;
-                return killserver();
+		int returncode = killserver();
+		if(returncode!=0) {
+		    state = FAULT;
+		}
+                return returncode;
             } else {
                 return -1;
             }
@@ -107,7 +116,9 @@ int MinecraftHandler::changePowerState(POWERACTION action) {
         case RESTART:
             if(state==ONLINE) {
                 state = RESTARTING;
-                return restartserver();
+		int returncode = restartserver();
+                if(returncode!=0) state = FAULT;
+		return returncode;
             } else {
                 return -1;
             }
@@ -124,8 +135,17 @@ int MinecraftHandler::Stop() {
     return changePowerState(STOP);
 }
 
+int MinecraftHandler::Restart() {
+    return changePowerState(RESTART);
+}
+
+int MinecraftHandler::Kill() {
+    return changePowerState(KILL);
+}
+
 int MinecraftHandler::SendCommand(std::string _buffer) {
-    instance.setInput(_buffer.c_str(),sizeof(_buffer.c_str()));
+    instance.setInput(_buffer.c_str(),_buffer.length());
+    instance.setInput("\n",1);
     return 0;
 }
 
