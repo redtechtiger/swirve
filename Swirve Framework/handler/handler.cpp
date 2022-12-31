@@ -102,7 +102,7 @@ int MinecraftHandler::changePowerState(POWERACTION action) {
             }
 
         case KILL:
-            if(state==ONLINE||state==STARTING||state==RESTARTING||state==STOPPING) {
+            if(state==ONLINE||state==STARTING||state==RESTARTING||state==STOPPING||state==FAULT) {
                 state = KILLING;
 		int returncode = killserver();
 		if(returncode!=0) {

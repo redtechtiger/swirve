@@ -14,9 +14,9 @@
 #include "../logger/log.h"
 
 #define READ_BUFFER_SIZE 4096
-#define STOP_TIMEOUT 10
 
-void clearArray(auto& _buffer, int _len) {
+template <typename T>
+void clearArray(T& _buffer, int _len) {
     for(int i=0;i<_len-1;i++) {
         _buffer[i] = 0;
     }
@@ -33,13 +33,7 @@ int AsynchronousApplicationLoader::isAlive() {
 
 int AsynchronousApplicationLoader::tryStop() {
     setInput("stop\n",5);
-    sleep(10);
-    int _isAlive = isAlive();
-    if(_isAlive==0||_isAlive==-1) {
-	return -1;
-    } else {
-	return 0;
-    }
+    return 0;
 }
 
 std::string AsynchronousApplicationLoader::getOutput() {
