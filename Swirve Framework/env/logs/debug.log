@@ -1,0 +1,101 @@
+[27Dec2022 15:55:45.556] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--gameDir, ., --launchTarget, fmlserver, --fml.forgeVersion, 36.2.39, --fml.mcpVersion, 20210115.111550, --fml.mcVersion, 1.16.5, --fml.forgeGroup, net.minecraftforge]
+[27Dec2022 15:55:45.562] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 8.1.3+8.1.3+main-8.1.x.c94d18ec starting: java version 11.0.17 by Ubuntu
+[27Dec2022 15:55:45.589] [main/DEBUG] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Found launch services [minecraft,testharness,fmlclient,fmlserver]
+[27Dec2022 15:55:45.629] [main/DEBUG] [cpw.mods.modlauncher.NameMappingServiceHandler/MODLAUNCHER]: Found naming services : []
+[27Dec2022 15:55:45.778] [main/DEBUG] [cpw.mods.modlauncher.LaunchPluginHandler/MODLAUNCHER]: Found launch plugins: [mixin,eventbus,object_holder_definalize,runtime_enum_extender,capability_inject_definalize,accesstransformer,runtimedistcleaner]
+[27Dec2022 15:55:45.803] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Discovering transformation services
+[27Dec2022 15:55:45.827] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Found additional transformation services from discovery services: []
+[27Dec2022 15:55:45.956] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Found transformer services : [mixin,fml]
+[27Dec2022 15:55:45.957] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Transformation services loading
+[27Dec2022 15:55:45.958] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loading service mixin
+[27Dec2022 15:55:45.958] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loaded service mixin
+[27Dec2022 15:55:45.959] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loading service fml
+[27Dec2022 15:55:45.959] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/]: Injecting tracing printstreams for STDOUT/STDERR.
+[27Dec2022 15:55:45.966] [main/DEBUG] [net.minecraftforge.fml.loading.LauncherVersion/CORE]: Found FMLLauncher version 36.2
+[27Dec2022 15:55:45.966] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML 36.2 loading
+[27Dec2022 15:55:45.967] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found ModLauncher version : 8.1.3+8.1.3+main-8.1.x.c94d18ec
+[27Dec2022 15:55:45.967] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Initializing modjar URL handler
+[27Dec2022 15:55:45.969] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found AccessTransformer version : 3.0.1+61+master.47bca0e
+[27Dec2022 15:55:45.971] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found EventBus version : 4.0.0+65+master.6080a3f
+[27Dec2022 15:55:45.971] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Found Runtime Dist Cleaner
+[27Dec2022 15:55:45.975] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: FML found CoreMod version : 4.0.6+14+master.c21a551
+[27Dec2022 15:55:45.975] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Found ForgeSPI package implementation version 3.2.0+13+master.8ddb2cc
+[27Dec2022 15:55:45.975] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Found ForgeSPI package specification 3
+[27Dec2022 15:55:46.365] [main/INFO] [net.minecraftforge.fml.loading.FixSSL/CORE]: Added Lets Encrypt root certificates as additional trust
+[27Dec2022 15:55:46.366] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Loaded service fml
+[27Dec2022 15:55:46.367] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Configuring option handling for services
+[27Dec2022 15:55:46.388] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Transformation services initializing
+[27Dec2022 15:55:46.390] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initializing transformation service mixin
+[27Dec2022 15:55:46.446] [main/DEBUG] [mixin/]: Mixin bootstrap service org.spongepowered.asm.service.mojang.MixinServiceLaunchWrapperBootstrap is not available: LaunchWrapper is not available
+[27Dec2022 15:55:46.447] [main/DEBUG] [mixin/]: MixinService [ModLauncher] was successfully booted in jdk.internal.loader.ClassLoaders$AppClassLoader@55054057
+[27Dec2022 15:55:46.500] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.4 Source=file:/mnt/c/Users/jacaul/OneDrive%20-%20T%c3%a4by%20Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve%20Framework/env/libraries/org/spongepowered/mixin/0.8.4/mixin-0.8.4.jar Service=ModLauncher Env=SERVER
+[27Dec2022 15:55:46.511] [main/DEBUG] [mixin/]: Initialising Mixin Platform Manager
+[27Dec2022 15:55:46.511] [main/DEBUG] [mixin/]: Adding mixin platform agents for container ModLauncher Root Container(ModLauncher:4f56a0a2)
+[27Dec2022 15:55:46.512] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for ModLauncher Root Container(ModLauncher:4f56a0a2)
+[27Dec2022 15:55:46.513] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container ModLauncher Root Container(ModLauncher:4f56a0a2)
+[27Dec2022 15:55:46.514] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for ModLauncher Root Container(ModLauncher:4f56a0a2)
+[27Dec2022 15:55:46.514] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container ModLauncher Root Container(ModLauncher:4f56a0a2)
+[27Dec2022 15:55:46.517] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initialized transformation service mixin
+[27Dec2022 15:55:46.517] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initializing transformation service fml
+[27Dec2022 15:55:46.518] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Setting up basic FML game directories
+[27Dec2022 15:55:46.521] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Found existing GAMEDIR directory : /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env
+[27Dec2022 15:55:46.524] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path GAMEDIR is /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env
+[27Dec2022 15:55:46.524] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Found existing MODSDIR directory : /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/mods
+[27Dec2022 15:55:46.525] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path MODSDIR is /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/mods
+[27Dec2022 15:55:46.525] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Found existing CONFIGDIR directory : /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/config
+[27Dec2022 15:55:46.526] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path CONFIGDIR is /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/config
+[27Dec2022 15:55:46.526] [main/DEBUG] [net.minecraftforge.fml.loading.FMLPaths/CORE]: Path FMLCONFIG is /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/config/fml.toml
+[27Dec2022 15:55:46.526] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Loading configuration
+[27Dec2022 15:55:46.593] [main/DEBUG] [net.minecraftforge.fml.loading.FileUtils/CORE]: Found existing default config directory directory : /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/defaultconfigs
+[27Dec2022 15:55:46.593] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Preparing ModFile
+[27Dec2022 15:55:46.598] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Preparing launch handler
+[27Dec2022 15:55:46.599] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Using fmlserver as launch service
+[27Dec2022 15:55:46.617] [main/DEBUG] [net.minecraftforge.fml.loading.FMLLoader/CORE]: Received command line version data  : MC Version: '1.16.5' MCP Version: '20210115.111550' Forge Version: '36.2.39' Forge group: 'net.minecraftforge'
+[27Dec2022 15:55:46.621] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Found JAR asm at path /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/org/ow2/asm/asm/9.1/asm-9.1.jar
+[27Dec2022 15:55:46.621] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Found probable library path /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries
+[27Dec2022 15:55:46.622] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Found forge path /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-universal.jar is present
+[27Dec2022 15:55:46.623] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: SRG MC at /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraft/server/1.16.5-20210115.111550/server-1.16.5-20210115.111550-srg.jar is present
+[27Dec2022 15:55:46.624] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: MC Extras at /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraft/server/1.16.5-20210115.111550/server-1.16.5-20210115.111550-extra.jar is present
+[27Dec2022 15:55:46.624] [main/DEBUG] [net.minecraftforge.fml.loading.LibraryFinder/CORE]: Forge patches at /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-server.jar is present
+[27Dec2022 15:55:46.629] [main/DEBUG] [net.minecraftforge.fml.loading.LanguageLoadingProvider/CORE]: Found 0 language providers
+[27Dec2022 15:55:46.630] [main/DEBUG] [net.minecraftforge.fml.loading.LanguageLoadingProvider/CORE]: Adding forge as a language from /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-universal.jar
+[27Dec2022 15:55:46.634] [main/DEBUG] [net.minecraftforge.fml.loading.LanguageLoadingProvider/CORE]: Adding file:/mnt/c/Users/jacaul/OneDrive%20-%20Täby%20Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve%20Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-universal.jar to languageloader classloader
+[27Dec2022 15:55:46.729] [main/DEBUG] [net.minecraftforge.fml.loading.LanguageLoadingProvider/CORE]: Found 2 language providers
+[27Dec2022 15:55:46.730] [main/DEBUG] [net.minecraftforge.fml.loading.LanguageLoadingProvider/CORE]: Found language provider javafml, version 36.2
+[27Dec2022 15:55:46.749] [main/DEBUG] [net.minecraftforge.fml.loading.LanguageLoadingProvider/CORE]: Found language provider minecraft, version 1
+[27Dec2022 15:55:46.754] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initialized transformation service fml
+[27Dec2022 15:55:46.755] [main/DEBUG] [cpw.mods.modlauncher.NameMappingServiceHandler/MODLAUNCHER]: Current naming domain is 'srg'
+[27Dec2022 15:55:46.756] [main/DEBUG] [cpw.mods.modlauncher.NameMappingServiceHandler/MODLAUNCHER]: Identified name mapping providers {}
+[27Dec2022 15:55:46.757] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Transformation services begin scanning
+[27Dec2022 15:55:46.758] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Beginning scan trigger - transformation service mixin
+[27Dec2022 15:55:46.758] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: End scan trigger - transformation service mixin
+[27Dec2022 15:55:46.759] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Beginning scan trigger - transformation service fml
+[27Dec2022 15:55:46.759] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Initiating mod scan
+[27Dec2022 15:55:46.809] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModListHandler/CORE]: Found mod coordinates from lists: []
+[27Dec2022 15:55:46.881] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModDiscoverer/CORE]: Found Mod Locators : (mods folder:null),(maven libs:null),(exploded directory:null),(minecraft:null)
+[27Dec2022 15:55:46.945] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-universal.jar
+[27Dec2022 15:55:47.024] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file forge-1.16.5-36.2.39-universal.jar with {forge} mods - versions {36.2.39}
+[27Dec2022 15:55:47.062] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Loading mod file /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-universal.jar with language javafml
+[27Dec2022 15:55:47.123] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Found coremod fieldtomethodtransformers with Javascript path META-INF/fieldtomethodtransformers.js
+[27Dec2022 15:55:47.124] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Found coremod field_to_instanceof with Javascript path coremods/field_to_instanceof.js
+[27Dec2022 15:55:47.124] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Found coremod add_bouncer_method with Javascript path coremods/add_bouncer_method.js
+[27Dec2022 15:55:47.125] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Found coremod META-INF/fieldtomethodtransformers.js
+[27Dec2022 15:55:47.125] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Found coremod coremods/field_to_instanceof.js
+[27Dec2022 15:55:47.126] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Found coremod coremods/add_bouncer_method.js
+[27Dec2022 15:55:47.126] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-server.jar
+[27Dec2022 15:55:47.131] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file forge-1.16.5-36.2.39-server.jar with {minecraft} mods - versions {1.16.5}
+[27Dec2022 15:55:47.133] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Loading mod file /mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env/libraries/net/minecraftforge/forge/1.16.5-36.2.39/forge-1.16.5-36.2.39-server.jar with language minecraft
+[27Dec2022 15:55:47.160] [main/DEBUG] [net.minecraftforge.fml.loading.ModSorter/LOADING]: Found 0 mod requirements (0 mandatory, 0 optional)
+[27Dec2022 15:55:47.162] [main/DEBUG] [net.minecraftforge.fml.loading.ModSorter/LOADING]: Found 0 mod requirements missing (0 mandatory, 0 optional)
+[27Dec2022 15:55:47.513] [main/INFO] [STDERR/]: [jdk.nashorn.api.scripting.NashornScriptEngine:<init>:143]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[27Dec2022 15:55:47.725] [main/INFO] [STDERR/]: [jdk.nashorn.api.scripting.NashornScriptEngine:<init>:143]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[27Dec2022 15:55:47.741] [main/INFO] [STDERR/]: [jdk.nashorn.api.scripting.NashornScriptEngine:<init>:143]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[27Dec2022 15:55:48.226] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: End scan trigger - transformation service fml
+[27Dec2022 15:55:48.227] [main/DEBUG] [cpw.mods.modlauncher.TransformationServicesHandler/MODLAUNCHER]: Transformation services loading transformers
+[27Dec2022 15:55:48.228] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initializing transformers for transformation service mixin
+[27Dec2022 15:55:48.229] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initialized transformers for transformation service mixin
+[27Dec2022 15:55:48.230] [main/DEBUG] [cpw.mods.modlauncher.TransformationServiceDecorator/MODLAUNCHER]: Initializing transformers for transformation service fml
+[27Dec2022 15:55:48.230] [main/DEBUG] [net.minecraftforge.fml.loading.FMLServiceProvider/CORE]: Loading coremod transformers
+[27Dec2022 15:55:48.231] [main/DEBUG] [net.minecraftforge.coremod.CoreModEngine/COREMOD]: Loading CoreMod from META-INF/fieldtomethodtransformers.js
+[27Dec2022 15:55:48.721] [main/DEBUG] [net.minecraftforge.coremod.CoreModEngine/COREMOD]: CoreMod loaded successfully
+[27Dec2022 15:55:48.722] [main/DEBUG] [net.minecraftforge.coremod.CoreModEngine/COREMOD]: Loading CoreMod from coremods/field_to_instanceof.js
