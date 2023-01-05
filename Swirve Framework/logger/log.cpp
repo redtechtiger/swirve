@@ -1,22 +1,28 @@
 #include <iostream>
 #include "log.h"
 
-void Logger::logFunctionFail(int _return, const char* _name) {
-    if(_return==0) return;
-    std::cout << "[LOGGER]: Function '" << _name << "' failed, with return code '" << _return << "'.\n";
-}
-void Logger::logFunctionFailDebug(int _return, const char* _name) {
-    
-}
-void Logger::logFunction(int _return, const char* _name) {
-    std::cout << "[LOGGER]: Function '" << _name << "' gave return code '" << _return << "'.\n";
-}
-void Logger::logFunctionDebug(int _return, const char* _name) {
+#define MSG_0 "\u001b[32mOK\u001b[37m"
+#define MSG__ "\u001b[31mFAIL\u001b[37m"
 
+using namespace std;
+
+void Logger::setDebug() {
+    state = 1;
 }
-void Logger::log(const char* _content) {
-    std::cout << "[LOGGER]: " << _content << "\n";
+
+void Logger::unsetDebug() {
+    state = 0;
 }
-void Logger::logDebug(const char* _content) {
-    
+
+void Logger::logFunction(const string msg, const int ret) {
+    cout << msg << " [" << (ret == 0 ? MSG_0 : MSG__) << "\n";
+    fflush(stdout);
 }
+
+void Logger::logLengthyFunction(const string msg) {
+    cout << "[*] " << msg << " ";
+    fflush(stdout);
+    logging = 1;
+}
+
+void Logger::logFinish(const int ret);

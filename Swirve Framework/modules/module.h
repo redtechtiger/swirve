@@ -13,6 +13,7 @@ class ServerModule {
 	MinecraftHandler Handle;
 	std::string Name;
 	std::string LaunchPath;
+	unsigned long ID;
 	std::vector<unsigned long> AccessIDs;
 
 

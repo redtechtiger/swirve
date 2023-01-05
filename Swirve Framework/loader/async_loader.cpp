@@ -117,7 +117,7 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary, char* _env) {
         close(pipe1[0]); // Close unused pipe ends
         close(pipe2[1]);
         int flags = 1;
-        ioctl(pipe2[0],FIONBIO,&flags); // Enable non-blocking IO calls
+        ioctl(pipe2[0],FIONBIO,&flags); // Enable non-blocking IO calls.
         forkId = _forkid;
 	return 0;
     }
