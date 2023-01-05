@@ -71,6 +71,9 @@ void core_entry() {
 
     std::vector<ServerModule> modules;
     int loadedModules;
+    int fail = 0;
+
+    l.logLengthyFunction("Loading modules...");
 
     for(auto i : v) {
 	Archive tempArchive;
@@ -78,8 +81,10 @@ void core_entry() {
 	    ServerModule module(tempArchive);
 	    modules.push_back(module);
 	    loadedModules++;
-	}
+	} else fail = 1;
     }
+
+    l.logFinish(fail);
 
     std::cout << "Server boot finish, loaded " << loadedModules << " out of " << v.size() << " server modules.\n";
 

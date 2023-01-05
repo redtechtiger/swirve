@@ -6,14 +6,13 @@
 class Logger {
     private:
 	int state = 0;
-	int logging = 0;
     public:
-	static void setDebug();
-	static void unsetDebug();  
+	void setDebug();
+	void unsetDebug();  
 
-	static void logFunction(const std::string msg, const int ret); 
-	static void logLengthyFunction(const std::string msg);
-	static void logFinish(const int ret);
+	void logFunction(const std::string msg, const int ret); 
+	void logLengthyFunction(const std::string msg);
+	void logFinish(const int ret);
 };
 
 #endif
