@@ -18,7 +18,7 @@ void showLogo() {
     std::cout << "===================================================================================================\n";
 }
 
-void shell_loop(MinecraftHandler &handler) {
+void shell_loop(MinecraftHandler *handler) {
     std::string input;
     std::string output;
     while(1==1) {
@@ -28,24 +28,24 @@ void shell_loop(MinecraftHandler &handler) {
 	    std::cout << "[Shell]: Commands: help, log, status, stop, start, reboot, kill\n";
 	} else if(input=="log") {
 	    std::cout << "[Server Output]:\n";
-	    handler.GetLog(output);
+	    handler->GetLog(output);
 	    std::cout << output << "\n";
 	} else if(input=="status") {
-	    std::cout << "[Shell]: Server status [" << handler.State() << "]\n";
+	    std::cout << "[Shell]: Server status [" << handler->State() << "]\n";
 	} else if(input=="start") {
-	    std::cout << "[Shell]: Server start " << (handler.Start() == 0 ? "OK" : "FAIL") << "\n";
+	    std::cout << "[Shell]: Server start " << (handler->Start() == 0 ? "OK" : "FAIL") << "\n";
 	} else if(input=="stop") {
-	    std::cout << "[Shell]: Server stop " << (handler.Stop() == 0 ? "OK" : "FAIL") << "\n";
+	    std::cout << "[Shell]: Server stop " << (handler->Stop() == 0 ? "OK" : "FAIL") << "\n";
 	} else if(input=="reboot") {
-	    std::cout << "[Shell]: Server reboot " << (handler.Restart() == 0 ? "OK" : "FAIL") << "\n";
+	    std::cout << "[Shell]: Server reboot " << (handler->Restart() == 0 ? "OK" : "FAIL") << "\n";
 	} else if(input=="kill") {
-	    std::cout << "[Shell]: Server kill " << (handler.Kill() == 0 ? "OK" : "FAIL") << "\n";
+	    std::cout << "[Shell]: Server kill " << (handler->Kill() == 0 ? "OK" : "FAIL") << "\n";
 	} else if(input=="exit") {
 	    std::cout << "[Shell]: Bye\n";
 	    break;
 	} else {
 	    std::cout << "[Shell]: Treating command as server input\n";
-	    handler.SendCommand(input);
+	    handler->SendCommand(input);
 	}
 	fflush(stdout);
     }
@@ -64,10 +64,39 @@ void core_entry() {
     showLogo();
     std::cout << "Starting services...\n";
     
-    // std::cout << "[" << (handler.Start() == 0 ? "\u001b[32mOK\u001b[37m" : "\u001b[31mFAIL\u001b[37m") << "]\n";
+    Archive archive;
+    if(true) {
+    std::cout << "Generating new config...\n";
+    archive.Name = "Test server";
+    archive.LaunchPath = "/home/jacobaulin/GitHub/Swirve-Userclient/Swirve Framework/env/forge-1.16.5-36.2.39.jar";
+    archive.Ram = 4;
+    archive.ID = 1337;
+    if(Archiver::SaveArchive(1337,archive)) Archiver::PushID(1337);
+}
     
+     
+    Archive archiveToLoad;
+    Archiver::LoadArchive(1337,archiveToLoad);
+    ServerModule* module = new ServerModule(archive);
+    
+    std::cout << "Entering shell loop...\n";
+    shell_loop(module);
+
+    std::cout << "Deleting server module...\n";
+    delete(module);
+    std::cout << "Main early return\n";
+    return;
+
+
+
+
+
+
+
     std::vector<unsigned long> v;
-    l.logFunction("Loading IDs...", Archiver::LoadIDs(v));
+    l.logLengthyFunction("Loading IDs...");
+    l.logFinish(Archiver::LoadIDs(v));
+
 
     std::vector<ServerModule> modules;
     int loadedModules;
@@ -78,6 +107,7 @@ void core_entry() {
     for(auto i : v) {
 	Archive tempArchive;
 	if(Archiver::LoadArchive(i,tempArchive)==0) {
+	    fflush(stdout);
 	    ServerModule module(tempArchive);
 	    modules.push_back(module);
 	    loadedModules++;
@@ -87,8 +117,6 @@ void core_entry() {
     l.logFinish(fail);
 
     std::cout << "Server boot finish, loaded " << loadedModules << " out of " << v.size() << " server modules.\n";
-
-
     std::cout << "Finish\n";
     
     return;    

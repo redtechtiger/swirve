@@ -19,9 +19,14 @@ class MinecraftHandler {
         int killserver();
 	int updateserverlog();
 	int resetserverlog();
+	std::string getdirectoryfromfile(std::string _file);
+	std::string jarPath;
+	std::string envPath;
 	std::string log;
+	int ramAllocate;
     public:
         POWERSTATE State();
+	int Config(std::string _jarPath, int _ramAllocate);
 	int Start();
         int Stop();
         int Restart();

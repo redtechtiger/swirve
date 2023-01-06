@@ -14,6 +14,7 @@
 #include "../logger/log.h"
 
 #define READ_BUFFER_SIZE 4096
+#define JAVA_BIN "java"
 
 template <typename T>
 void clearArray(T& _buffer, int _len) {
@@ -55,13 +56,19 @@ void AsynchronousApplicationLoader::setInput(const char *_writeBuffer, unsigned 
     write(pipe1[1],_writeBuffer,_len);
 }
 
-int AsynchronousApplicationLoader::executeJarAsync(char* _binary) {
+int AsynchronousApplicationLoader::executeJarAsync(std::string _binary, std::vector<std::string> _args) {
     pipe(pipe1);
     pipe(pipe2);
 
-    const std::vector<std::string> cmdLine{"java","-jar","./forge-1.16.5-36.2.39.jar"}; // Downwards: Create "correct" argument list from a vector
+    std::vector<std::string> cmdLine{JAVA_BIN}; // Downwards: Create "correct" argument list from a vector
+    for(const auto& i : _args) {
+	cmdLine.push_back(i);
+    }
+    cmdLine.push_back("-jar");
+    cmdLine.push_back(_binary);
+
     std::vector<const char*> argv;
-    for (const auto& s : cmdLine) {
+    for(const auto& s : cmdLine) {
         argv.push_back(s.data());
     }
     argv.push_back(NULL);
@@ -75,7 +82,7 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary) {
         dup2(pipe2[1],STDOUT_FILENO);
         close(pipe1[1]); // Close pipe ends as no longer needed
         close(pipe2[0]);
-        execvp(_binary,const_cast<char* const*>(argv.data())); // Let binary take control
+        execvp(JAVA_BIN,const_cast<char* const*>(argv.data())); // Let binary take control
         std::cerr << "[FATAL] Forked child thread exited unexpectedly. Terminate program ASAP to prevent further damage to the system." << std::endl;
         throw std::runtime_error("[FATAL] Forked child thread exited unexpectedly.");
     } else { // Parent
@@ -88,11 +95,18 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary) {
     }
 }
 
-int AsynchronousApplicationLoader::executeJarAsync(char* _binary, char* _env) {
+int AsynchronousApplicationLoader::executeJarAsync(std::string _binary, std::vector<std::string> _args, std::string _env) {
     pipe(pipe1);
     pipe(pipe2);
 
-    const std::vector<std::string> cmdLine{"java","-jar","./forge-1.16.5-36.2.39.jar"}; // Downwards: Create "correct" argument list from a vector
+    std::vector<std::string> cmdLine{JAVA_BIN}; // Downwards: Create "correct" argument list from a vector
+								
+    for (const auto& i : _args) {
+	cmdLine.push_back(i);
+    }
+    cmdLine.push_back("-jar");
+    cmdLine.push_back(_binary);
+
     std::vector<const char*> argv;
     for (const auto& s : cmdLine) {
         argv.push_back(s.data());
@@ -107,10 +121,10 @@ int AsynchronousApplicationLoader::executeJarAsync(char* _binary, char* _env) {
         dup2(pipe1[0],STDIN_FILENO); // Assign (duplicate) new pipes
         dup2(pipe2[1],STDOUT_FILENO);
         dup2(pipe2[1],STDERR_FILENO);
-	close(pipe1[1]); // Close pipe ends as no longer needed
+	close(pipe1[1]); // Close pipe ends as no longer needed.
         close(pipe2[0]);
-        std::cerr << chdir(_env);
-        std::cerr << execvp(_binary,const_cast<char* const*>(argv.data())); // Let binary take control
+        std::cerr << chdir(_env.c_str());
+        std::cerr << execvp(JAVA_BIN,const_cast<char* const*>(argv.data())); // Let binary take control
         std::cerr << "[FATAL] Forked child thread exited unexpectedly. Terminate program ASAP to prevent further damage to the system." << std::endl;
         throw std::runtime_error("[FATAL] Forked child thread exited unexpectedly.");
     } else { // Parent

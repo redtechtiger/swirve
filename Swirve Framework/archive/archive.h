@@ -9,6 +9,7 @@ struct Archive {
     unsigned long ID;
     std::string Name;
     std::string LaunchPath;
+    int Ram;
     std::vector<unsigned long> AccessIDs;
 };
 

@@ -50,6 +50,7 @@ int Archiver::LoadIDs(std::vector<unsigned long> &_ids) {
     idStream.open("./data/config.arc");
     if(idStream.is_open()) {
 	while(getline(idStream,buffer,'[')) {
+	    if(buffer=="\n") continue; // At the end of file (?)
 	    _ids.push_back(std::stoul(buffer));
 	}
 	idStream.close();
@@ -83,6 +84,8 @@ int Archiver::LoadArchive(unsigned long _id, Archive &_archive) {
 		    _archive.LaunchPath = i.substr(1);
 		    break;
 		case 2:
+		    _archive.Ram = std::stoi(i.substr(1));
+		case 3:
 		    _archive.AccessIDs.push_back(std::stoul(i.substr(1)));
 		    break;
 		default:
@@ -102,8 +105,9 @@ int Archiver::SaveArchive(unsigned long _id, Archive &_archive) {
     if(archiveStream.is_open()) {
 	archiveStream << "0" << _archive.Name << '[';
 	archiveStream << "1" << _archive.LaunchPath << '[';
+	archiveStream << "2" << _archive.Ram << '[';
 	for(auto id : _archive.AccessIDs) {
-	    archiveStream << "2" << id << '[';
+	    archiveStream << "3" << id << '[';
 	}
 
 	archiveStream.close();
@@ -116,4 +120,5 @@ int Archiver::GetNewHash(unsigned long& _buffer) {
     std::hash<std::string> hash_obj;
     sleep(1);
     _buffer = hash_obj(std::to_string(static_cast<long>(time(nullptr)))); // Generate hash from epoch
+    return 0;
 }

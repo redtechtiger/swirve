@@ -5,15 +5,15 @@
 
 #include <string>
 
-class ServerModule {
+class ServerModule : public MinecraftHandler {
     private:
 
     public:
 	ServerModule(Archive _archive); // TODO: ADD SERIALIZATION DATA TYPE TO CONSTRUCTOR
-	MinecraftHandler Handle;
 	std::string Name;
 	std::string LaunchPath;
 	unsigned long ID;
+	int RamAllocated;
 	std::vector<unsigned long> AccessIDs;
 
 

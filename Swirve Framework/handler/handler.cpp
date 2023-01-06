@@ -1,8 +1,32 @@
 #include <iostream>
+#include <sstream>
 #include "handler.h"
 #include "../loader/async_loader.h"
 
 #define ONLINE_STR "Done"
+#define JAVA_BIN "java"
+
+std::string MinecraftHandler::getdirectoryfromfile(std::string _file) {
+
+    // Get position of first "/"
+    int _index = 0;
+    for(int i=_file.length()-1;i>=0;i--) {
+	if(_file[i]=='/') {
+	   _index = i;
+	   break;
+	}
+    }
+    if(_index==0) return "";
+    return _file.substr(0,_index);
+}
+
+int MinecraftHandler::Config(std::string _jarPath, int _ramAllocate) {
+    jarPath = _jarPath;
+    envPath = getdirectoryfromfile(_jarPath);
+    ramAllocate = _ramAllocate;
+    return 0;
+}
+
 
 POWERSTATE MinecraftHandler::State() {
     updateserverlog();
@@ -51,6 +75,7 @@ POWERSTATE MinecraftHandler::State() {
 
 int MinecraftHandler::resetserverlog() {
     log = "";
+    return 0;
 }
 
 int MinecraftHandler::updateserverlog() {
@@ -60,7 +85,10 @@ int MinecraftHandler::updateserverlog() {
 
 int MinecraftHandler::startserver() {
     resetserverlog();
-    return instance.executeJarAsync("java","/mnt/c/Users/jacaul/OneDrive - Täby Friskola/Skrivbordet/GitHub/Swirve-Userclient/Swirve-Userclient/Swirve Framework/env");
+    std::stringstream ramarg;
+    ramarg << "-Xmx" << ramAllocate << "G";
+    std::vector<std::string> args{ramarg.str()};
+    return instance.executeJarAsync(jarPath, args, envPath);
 }
 
 int MinecraftHandler::stopserver() {

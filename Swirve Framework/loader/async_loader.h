@@ -21,8 +21,9 @@ class AsynchronousApplicationLoader {
 	void setInput(const char* _writeBuffer, unsigned long _len);
         std::string getOutput();
 
-	int executeJarAsync(char* _binary);
-        int executeJarAsync(char* _binary, char* _env);
+	int executeJarAsync(std::string _binary, std::vector<std::string> _args);
+        int executeJarAsync(std::string _binary, std::vector<std::string> _args, std::string _env);
+
 };
 
 #endif
