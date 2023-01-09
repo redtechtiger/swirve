@@ -1,8 +1,15 @@
 #ifndef ARCHIVER_H
 #define ARCHIVER_H
 
+// Defines
+#define ARCHIVECONFIGPATH "./data/archiveconfig.arc"
+#define ARCHIVEDATAPATH "./data/arhivedata."
+
+// Types
 #include <string>
 #include <vector>
+
+// Handler
 #include "../handler/handler.h"
 
 struct Archive {

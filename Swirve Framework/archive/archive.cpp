@@ -9,13 +9,13 @@
 
 std::string Archiver::getPath(unsigned long _id) {
     std::stringstream pathStream;
-    pathStream << "./data/" << _id << ".arc";
+    pathStream << ARCHIVEDATAPATH << _id << ".arc";
     return pathStream.str();
 }
 
 int Archiver::writeIDVector(std::vector<unsigned long> _ids) {
     std::ofstream idStream;
-    idStream.open("./data/config.arc");
+    idStream.open(ARCHIVECONFIGPATH);
     if(idStream.is_open()) {
 	for(auto id : _ids) {
 	    idStream << id << '[';
@@ -47,7 +47,7 @@ int Archiver::LoadIDs(std::vector<unsigned long> &_ids) {
     std::ifstream idStream;
     std::string buffer;
     
-    idStream.open("./data/config.arc");
+    idStream.open(ARCHIVECONFIGPATH);
     if(idStream.is_open()) {
 	while(getline(idStream,buffer,'[')) {
 	    if(buffer=="\n") continue; // At the end of file (?)

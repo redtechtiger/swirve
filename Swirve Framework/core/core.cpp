@@ -3,10 +3,11 @@
 #include "../handler/handler.h"
 #include "../modules/module.h"
 #include "../archive/archive.h"
+#include "../netcom/netcom.h"
 #include "../logger/log.h"
 
 void showLogo() {
-    std::cout << "===================================================================================================\n";
+    std::cout << "\u001b[26m===================================================================================================\n";
     std::cout << "\n";
     std::cout << "  _________       .__                     \n";
     std::cout << " /   _____/_  _  _|__|_________  __ ____  \n";
@@ -15,7 +16,8 @@ void showLogo() {
     std::cout << "/_______  / \\/\\_/ |__||__|    \\_/  \\___  >\n";
     std::cout << "        \\/                             \\/\n";
     std::cout << "						Framework 1.0.0-ALPHA.1\n";
-    std::cout << "===================================================================================================\n";
+    std::cout << "===================================================================================================\n\u001b[0m";
+    std::cout << "DISCLAIMER: THIS SOFTWARE IS WRITTEN BY AND BELONGS TO REDTECHTIGER MEDIA. USE IS PROHIBITED OUTSIDE THE LPQ SERVER COMMUNITY. IF SOURCE CODE IS LEAKED, PLEASE CONTACT THE OWNER IMMEDIATELY.\n";
 }
 
 void shell_loop(MinecraftHandler *handler) {
@@ -53,73 +55,31 @@ void shell_loop(MinecraftHandler *handler) {
 
 template <typename T>
 void print_vector(T couts) {
-    for(auto i : couts) {
+    for(const auto &i : couts) {
 	std::cout << i << "\n";
     }
 }
 
 void core_entry() {
-    std::cout << "Initiating framework core...\n";
+    std::cout << "Main: Initiating framework core...\n";
     Logger l;
     showLogo();
-    std::cout << "Starting services...\n";
-    
-    Archive archive;
-    if(true) {
-    std::cout << "Generating new config...\n";
-    archive.Name = "Test server";
-    archive.LaunchPath = "/home/jacobaulin/GitHub/Swirve-Userclient/Swirve Framework/env/forge-1.16.5-36.2.39.jar";
-    archive.Ram = 4;
-    archive.ID = 1337;
-    if(Archiver::SaveArchive(1337,archive)) Archiver::PushID(1337);
-}
-    
-     
-    Archive archiveToLoad;
-    Archiver::LoadArchive(1337,archiveToLoad);
-    ServerModule* module = new ServerModule(archive);
-    
-    std::cout << "Entering shell loop...\n";
-    shell_loop(module);
+    std::cout << "Main: Starting services...\n"; 
+    NetworkCommunicator netcom;
 
-    std::cout << "Deleting server module...\n";
-    delete(module);
-    std::cout << "Main early return\n";
-    return;
+    std::cout << "Main: ---- Launching test: TCP/IP server on IP:PORT ->[NOT IMPLEMENTED]" << "<- ----\n";
+    int ret = netcom.SetUpListener();
 
-
-
-
-
-
-
-    std::vector<unsigned long> v;
-    l.logLengthyFunction("Loading IDs...");
-    l.logFinish(Archiver::LoadIDs(v));
-
-
-    std::vector<ServerModule> modules;
-    int loadedModules;
-    int fail = 0;
-
-    l.logLengthyFunction("Loading modules...");
-
-    for(auto i : v) {
-	Archive tempArchive;
-	if(Archiver::LoadArchive(i,tempArchive)==0) {
-	    fflush(stdout);
-	    ServerModule module(tempArchive);
-	    modules.push_back(module);
-	    loadedModules++;
-	} else fail = 1;
+    if(ret<0) {
+	std::cout << "Main: ---- Test failed with NETCOM returncode " << ret << ". Program will abort. ----\n";
+    } else {
+	std::cout << "Main: ---- Test PASS with returncode " << ret << "! ----\n";
     }
 
-    l.logFinish(fail);
-
-    std::cout << "Server boot finish, loaded " << loadedModules << " out of " << v.size() << " server modules.\n";
-    std::cout << "Finish\n";
-    
-    return;    
+    std::cout << "Main: Return in 5 seconds\n";
+    sleep(5);
+    std::cout << "Main: Return\n";
+    return;
 }
 
 
