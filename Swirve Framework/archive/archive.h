@@ -3,7 +3,8 @@
 
 // Defines
 #define ARCHIVECONFIGPATH "./data/archiveconfig.arc"
-#define ARCHIVEDATAPATH "./data/arhivedata."
+#define ARCHIVEDATAPATH "./data/archivedata."
+#define ARCHIVEDATAEXT ".arc"
 
 // Types
 #include <string>

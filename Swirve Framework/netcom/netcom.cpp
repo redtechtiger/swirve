@@ -39,7 +39,7 @@ int NetworkCommunicator::GetPort(string &port_out) {
 }
 
 int NetworkCommunicator::GeneratePortConfig(const int* port) {
-    int dPort = (port == nullptr ? PORT : *port); // Choose default port if *port is null
+    int dPort = (port == nullptr ? PORT : *port); // Choose default port ( PORT ) if *port is null
     string dPortStr = to_string(dPort);
     ofstream configStream(PORTCONFIGPATH,ios::binary);
     if(!configStream.good()) return -1;
@@ -58,6 +58,7 @@ int NetworkCommunicator::serverLoop() { // Function called by fork
 	inet_ntop(AF_INET, iConnection.sockaddrdata, ipBuffer, INET_ADDRSTRLEN);
 	iConnection.ip = string(ipBuffer);
 	connections.push_back(iConnection); // Add connection to vector
+	sleep(1);
     }
     return 0;
 }
@@ -65,8 +66,9 @@ int NetworkCommunicator::serverLoop() { // Function called by fork
 int NetworkCommunicator::stopServerLoop() {
     // TODO : Set NetworkCommunicator::stopping to True; if thread hasn't exited after x defined seconds, kill it through SIGTERM signal
     stopping=true;
+    sleep(2);
     
-    return -1; // Not implemented yet
+    return 0; // Not implemented yet! TODO : FIX ERROR HANDLING
 }
 
 int NetworkCommunicator::SetUpListener() {
@@ -102,6 +104,7 @@ int NetworkCommunicator::SetUpListener() {
     // Fork & start serverloop() on another thread for non-blocking accept()
     int forkPid = fork();
     if(forkPid<0) { // Failed to start thread to handle connections
+	
 	StopListener();
 	KillConnections();
 	return -1;
@@ -121,8 +124,6 @@ int NetworkCommunicator::SetUpListener() {
     cerr << "SOCKET CLOSED, THROWING EXCEPTION..." << endl;
     throw runtime_error("Exhaustive if-statement not exhaustive ( netcom.cpp @~100 ) ");
     return 0;
-
-    // TODO: ADD FORKED THREAD TO HANDLE SERVER REQUESTS
     
 }
 
@@ -152,6 +153,10 @@ int NetworkCommunicator::WriteIncomingConnection(const int id, const std::string
 }
 
 int NetworkCommunicator::StopListener() {
+    int ret = -1;
+    ret = stopServerLoop();
+    if(ret<0) return -1;
+    close(lSocket);
     return close(lSocket);
 }
 

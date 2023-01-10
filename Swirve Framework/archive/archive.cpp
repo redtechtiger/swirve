@@ -9,7 +9,7 @@
 
 std::string Archiver::getPath(unsigned long _id) {
     std::stringstream pathStream;
-    pathStream << ARCHIVEDATAPATH << _id << ".arc";
+    pathStream << ARCHIVEDATAPATH << _id << ARCHIVEDATAEXT;
     return pathStream.str();
 }
 

@@ -9,7 +9,7 @@ class ServerModule : public MinecraftHandler {
     private:
 
     public:
-	ServerModule(Archive _archive); // TODO: ADD SERIALIZATION DATA TYPE TO CONSTRUCTOR
+	ServerModule(Archive _archive);
 	std::string Name;
 	std::string LaunchPath;
 	unsigned long ID;

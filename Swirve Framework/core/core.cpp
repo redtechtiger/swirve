@@ -67,6 +67,28 @@ void core_entry() {
     std::cout << "Main: Starting services...\n"; 
     NetworkCommunicator netcom;
 
+    std::vector<ServerModule> modules;
+
+    std::vector<ulong> ids; 
+    Archiver::LoadIDs(ids);
+    for(const auto &i : ids) {
+	    Archive tempArchive;
+	    if(Archiver::LoadArchive(i, tempArchive)<0) {
+		    continue;
+	    }
+	    ServerModule tempModule(tempArchive);
+	    modules.push_back(tempModule);
+    }
+
+    std::cout << "Framework start finished, " << modules.size() << " modules loaded successfully out of " << ids.size() << "\n";
+
+
+
+
+    // std::cout << "Main return\n";
+
+    // return;
+
     std::cout << "Main: ---- Launching test: TCP/IP server on IP:PORT ->[NOT IMPLEMENTED]" << "<- ----\n";
     int ret = netcom.SetUpListener();
 
@@ -75,6 +97,8 @@ void core_entry() {
     } else {
 	std::cout << "Main: ---- Test PASS with returncode " << ret << "! ----\n";
     }
+
+    l.logFunction("Main: Stopping TCP/IP Server daemon...", netcom.StopListener());
 
     std::cout << "Main: Return in 5 seconds\n";
     sleep(5);
