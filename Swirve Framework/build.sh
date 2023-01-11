@@ -1,2 +1,2 @@
-g++ ./core/*.cpp ./handler/*.cpp ./loader/*.cpp ./logger/*.cpp ./modules/*.cpp ./archive/*.cpp ./netcom/*.cpp -o ./binary/main
+g++ ./core/*.cpp ./handler/*.cpp ./loader/*.cpp ./logger/*.cpp ./modules/*.cpp ./archive/*.cpp ./netcom/*.cpp -pthread -o ./binary/main
 ./binary/main

@@ -8,6 +8,7 @@
 // Types
 #include <string>
 #include <vector>
+#include <thread>
 
 // Network communication
 #include <sys/socket.h>
@@ -23,18 +24,21 @@ struct Connection {
     std::string buffer;
 };
 
+
+
 class NetworkCommunicator {
     private:
 	std::vector<Connection> connections;
 	int lSocket;
 	int readPortConfig(int &port);
-	int serverLoop();
-	int stopServerLoop();
-	int forkThreadPid;
-	bool stopping;
+	void serverLoop(bool* shouldStop);
+	int stopServerLoop(); // Sets "stopping" and joins thread
 
 	std::string extIp;
 	std::string port;
+	bool stopping;
+    
+	std::thread tcpDaemon;
 
     public:
 	int GeneratePortConfig(const int* port);

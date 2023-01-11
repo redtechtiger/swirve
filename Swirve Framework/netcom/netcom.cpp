@@ -4,6 +4,7 @@
 // Types
 #include <string>
 #include <vector>
+#include <thread>
 
 // Streams
 #include <fstream>
@@ -47,35 +48,33 @@ int NetworkCommunicator::GeneratePortConfig(const int* port) {
     return 0;
 }
 
-int NetworkCommunicator::serverLoop() { // Function called by fork
-    while(!stopping) {
+void NetworkCommunicator::serverLoop(bool* shouldStop) { // Function called by fork
+    while(!*shouldStop) {
 	Connection iConnection;
-	cout << "TCPDAEMON: WAITING FOR CONNECTION..." << endl;
-	// fflush(stdout);
 	iConnection.sockfd = accept(lSocket, iConnection.sockaddrdata, iConnection.sockaddrlen);
-	if(iConnection.sockfd<0) return -1; // Error
+	if(iConnection.sockfd<0&&errno!=EAGAIN&&errno!=EWOULDBLOCK) return; // Error
+	if(iConnection.sockfd<0&&(errno==EAGAIN||errno==EWOULDBLOCK)) continue; // No incoming
 	char ipBuffer[INET_ADDRSTRLEN];
-	inet_ntop(AF_INET, iConnection.sockaddrdata, ipBuffer, INET_ADDRSTRLEN);
+	inet_ntop(AF_INET, (sockaddr*)&iConnection.sockaddrdata, ipBuffer, INET_ADDRSTRLEN);
 	iConnection.ip = string(ipBuffer);
 	connections.push_back(iConnection); // Add connection to vector
 	sleep(1);
     }
-    return 0;
+    return;
 }
 
 int NetworkCommunicator::stopServerLoop() {
-    // TODO : Set NetworkCommunicator::stopping to True; if thread hasn't exited after x defined seconds, kill it through SIGTERM signal
     stopping=true;
-    sleep(2);
+    tcpDaemon.join();
     
-    return 0; // Not implemented yet! TODO : FIX ERROR HANDLING
+    return 0; // TODO : FIX ERROR HANDLING
 }
 
 int NetworkCommunicator::SetUpListener() {
     int ret = -1; // Return code for calls further
 		  
     // Create listening socket : IPv4, TCP/IP, auto
-    lSocket = socket(AF_INET, SOCK_STREAM, 0);
+    lSocket = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
     if(lSocket<0) return -1;
 
     // ( Prep for sockaddr ) Read port from portconfig file ( PORTCONFIGPATH )
@@ -90,6 +89,10 @@ int NetworkCommunicator::SetUpListener() {
     ret = inet_pton(AF_INET, "0.0.0.0", &sock_addr.sin_addr); // Convert "0.0.0.0" to binary ( 0.0.0.0 = auto)
     if(ret<0) return -1;
 
+    int yes = 1;
+    ret = setsockopt(lSocket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, (void*)&yes, sizeof(yes));
+    if(ret<0) return -1;
+
     // Bind the listening socket to the sockaddr_in ( hint )
     ret = bind(lSocket, (struct sockaddr*)&sock_addr, sizeof(sock_addr));
     if(ret<0) return -1;
@@ -100,31 +103,10 @@ int NetworkCommunicator::SetUpListener() {
 
     stopping = false; // Make sure server doesn't exit immediately
 
-    cout << "Info: Launching server..." << endl;
     // Fork & start serverloop() on another thread for non-blocking accept()
-    int forkPid = fork();
-    if(forkPid<0) { // Failed to start thread to handle connections
-	
-	StopListener();
-	KillConnections();
-	return -1;
-    } else if (forkPid>0) { // Parent ( forkPid = pid of fork )
-	forkThreadPid = forkPid; // Assign fork PID ( for emergency killing )
-	return 0;
-    } else if (forkPid==0) { // Child (server script)
-	// TODO : ADD PROPER ERROR HANDLING
-	serverLoop();
-	cout << "Warn: TCPServer loop exited, killing thread..." << endl;
-	exit(0);
-	return 0;
-    }
-
-    cerr << "FATAL: EXHAUSTIVE IF STATEMENT NOT EXHAUSTIVE, CLOSING SOCKET" << endl;
-    StopListener();
-    cerr << "SOCKET CLOSED, THROWING EXCEPTION..." << endl;
-    throw runtime_error("Exhaustive if-statement not exhaustive ( netcom.cpp @~100 ) ");
-    return 0;
-    
+    tcpDaemon = thread(&NetworkCommunicator::serverLoop,this,&stopping);
+    fflush(stdout);
+    return 0; 
 }
 
 int NetworkCommunicator::ReadIncomingConnections(std::vector<Connection> &connections) {
@@ -143,7 +125,7 @@ int NetworkCommunicator::ReadIncomingConnections(std::vector<Connection> &connec
 	    connection->buffer = string(_buffer);
 	}
     }
-    return -1; // Return error as function isn't implemented yet
+    return -1; // Return error as function ( isn't implemented yet ) hasn't been tested accordingly.
 }
 
 int NetworkCommunicator::WriteIncomingConnection(const int id, const std::string buffer) {
@@ -156,7 +138,6 @@ int NetworkCommunicator::StopListener() {
     int ret = -1;
     ret = stopServerLoop();
     if(ret<0) return -1;
-    close(lSocket);
     return close(lSocket);
 }
 

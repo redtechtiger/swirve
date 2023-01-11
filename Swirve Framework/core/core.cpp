@@ -61,14 +61,15 @@ void print_vector(T couts) {
 }
 
 void core_entry() {
-    std::cout << "Main: Initiating framework core...\n";
+    std::cout << "Core-preinit: Initiating framework core...\n";
     Logger l;
     showLogo();
-    std::cout << "Main: Starting services...\n"; 
-    NetworkCommunicator netcom;
 
+    std::cout << "Core: Starting services...\n"; 
+    NetworkCommunicator netcom;
     std::vector<ServerModule> modules;
 
+    l.logLengthyFunction("Core: Loading server modules from archives...");
     std::vector<ulong> ids; 
     Archiver::LoadIDs(ids);
     for(const auto &i : ids) {
@@ -76,33 +77,26 @@ void core_entry() {
 	    if(Archiver::LoadArchive(i, tempArchive)<0) {
 		    continue;
 	    }
-	    ServerModule tempModule(tempArchive);
+    ServerModule tempModule(tempArchive);
 	    modules.push_back(tempModule);
     }
+    l.logFinish(((float)modules.size() / ids.size()) > 0.10 ? 0 : -1); // If over 90% of servers are loaded and initialized correctly
 
-    std::cout << "Framework start finished, " << modules.size() << " modules loaded successfully out of " << ids.size() << "\n";
-
-
-
-
-    // std::cout << "Main return\n";
-
-    // return;
-
-    std::cout << "Main: ---- Launching test: TCP/IP server on IP:PORT ->[NOT IMPLEMENTED]" << "<- ----\n";
+    l.logLengthyFunction("Core: Booting up TCP/IP Daemon...");
     int ret = netcom.SetUpListener();
+    l.logFinish(ret);
 
-    if(ret<0) {
-	std::cout << "Main: ---- Test failed with NETCOM returncode " << ret << ". Program will abort. ----\n";
-    } else {
-	std::cout << "Main: ---- Test PASS with returncode " << ret << "! ----\n";
-    }
 
-    l.logFunction("Main: Stopping TCP/IP Server daemon...", netcom.StopListener());
 
-    std::cout << "Main: Return in 5 seconds\n";
+
     sleep(5);
-    std::cout << "Main: Return\n";
+    std::cout << "Core: Press enter to shut down Swirve Framework.\n";
+    getchar();
+    
+    
+    l.logLengthyFunction("Core: Stopping TCP/IP Server Daemon...");
+    l.logFinish(netcom.StopListener());
+    std::cout << "Core: Return\n";
     return;
 }
 
