@@ -86,7 +86,19 @@ void core_entry() {
     int ret = netcom.SetUpListener();
     l.logFinish(ret);
 
+    std::cout << "Core: ----- SWIRVE FRAMEWORK BOOTUP FINISHED -----\n";
+    std::cout << "Swirve Framework is now online. Going into TCP Request answer loop...\n";
+    fflush(stdout);
 
+    while(true) {
+	sleep(2);
+	std::vector<Connection> _connections;
+	netcom.ReadIncomingConnections(_connections);
+	for(const auto &i : _connections) {
+	    std::cout << "Core: Connection at " << i.ip << " with fd " << i.sockfd << " has data ->" << i.buffer << "<- in buffer.\n";
+	}
+	fflush(stdout);
+    }
 
 
     sleep(5);
