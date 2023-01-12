@@ -23,6 +23,10 @@ void clearArray(T& _buffer, int _len) {
     }
 }
 
+AsynchronousApplicationLoader::AsynchronousApplicationLoader() { // Constructor!!
+    signal(SIGPIPE, SIG_IGN);
+}
+
 int AsynchronousApplicationLoader::killFork() {
     return kill(forkId,SIGKILL);
 }

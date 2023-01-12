@@ -4,11 +4,13 @@
 // Defines
 #define PORT 48949 // Default port when new config is generated 
 #define PORTCONFIGPATH "./data/portconfig.bin"
+#define EXTIPSHELLEXECUTE "curl --silent ifconfig.me"
 
 // Types
 #include <string>
 #include <vector>
 #include <thread>
+#include <chrono>
 
 // Network communication
 #include <sys/socket.h>
@@ -46,7 +48,7 @@ class NetworkCommunicator {
 	int ReadIncomingConnections(std::vector<Connection> &connections); // Get vector of <Connection>
 	int WriteIncomingConnection(const int sockfd, const std::string buffer); // Write to Connection
 	int StopListener(); // Delete listening socket
-	int CloseConnection(const int id);
+	int CloseConnection(const int socketfd);
 	int KillConnections();
 
 	int GetIp(std::string &external_ip_out);

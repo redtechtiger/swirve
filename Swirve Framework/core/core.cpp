@@ -90,22 +90,34 @@ void core_entry() {
     std::cout << "Swirve Framework is now online. Going into TCP Request answer loop...\n";
     fflush(stdout);
 
-    while(true) {
+    std::cout << "Debug: ";
+    std::string s;
+    netcom.GetIp(s);
+    std::cout << std::endl;
+
+    bool stopLoop = false;
+
+    while(!stopLoop) {
 	sleep(2);
 	std::vector<Connection> _connections;
 	netcom.ReadIncomingConnections(_connections);
 	for(const auto &i : _connections) {
 	    std::cout << "Core: Connection at " << i.ip << " with fd " << i.sockfd << " has data ->" << i.buffer << "<- in buffer.\n";
+	    if(i.buffer=="stop") {
+		stopLoop = true;
+		break;
+	    } else if(i.buffer=="discon") {
+		netcom.CloseConnection(i.sockfd);
+	    } else if(!i.buffer.empty()||i.buffer!="\0") {
+		netcom.WriteIncomingConnection(i.sockfd, i.buffer);
+	    }
+
 	}
 	fflush(stdout);
     }
 
+    sleep(10);
 
-    sleep(5);
-    std::cout << "Core: Press enter to shut down Swirve Framework.\n";
-    getchar();
-    
-    
     l.logLengthyFunction("Core: Stopping TCP/IP Server Daemon...");
     l.logFinish(netcom.StopListener());
     std::cout << "Core: Return\n";

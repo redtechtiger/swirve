@@ -30,6 +30,12 @@ int NetworkCommunicator::readPortConfig(int &port) {
 }
 
 int NetworkCommunicator::GetIp(string &external_ip_out) {
+    
+    FILE* extIpStream = popen(EXTIPSHELLEXECUTE, "r");
+    if(!extIpStream) return -1; // Error
+    char buffer[128];
+    fgets(buffer,sizeof(buffer),extIpStream);
+    cout << "Server launching on: " << buffer;
     // TODO : OPEN A PIPE AND READ OUTPUT OF "curl ifconfig.me" ( EXTERNAL IP )
     return -1; // Not yet implemented
 }
@@ -50,15 +56,18 @@ int NetworkCommunicator::GeneratePortConfig(const int* port) {
 
 void NetworkCommunicator::serverLoop(bool* shouldStop) { // Function called by fork
     while(!*shouldStop) {
+	sleep(1); // DO NOT MOVE! CONTINUE COMMAND IGNORES SLEEP AT BOTTOM OF LOOP
 	Connection iConnection;
 	iConnection.sockfd = accept(lSocket, iConnection.sockaddrdata, iConnection.sockaddrlen);
-	if(iConnection.sockfd<0&&errno!=EAGAIN&&errno!=EWOULDBLOCK) return; // Error
+	if(iConnection.sockfd<0&&errno!=EAGAIN&&errno!=EWOULDBLOCK) { // Error
+		cerr << "FATAL: TCPDaemon: The TCP/IP Server ran into an error while accepting incoming client connection requests. Daemon will terminate." << endl;
+		return;
+	}
 	if(iConnection.sockfd<0&&(errno==EAGAIN||errno==EWOULDBLOCK)) continue; // No incoming
 	char ipBuffer[INET_ADDRSTRLEN];
 	inet_ntop(AF_INET, (sockaddr*)&iConnection.sockaddrdata, ipBuffer, INET_ADDRSTRLEN);
 	iConnection.ip = string(ipBuffer);
 	connections.push_back(iConnection); // Add connection to vector
-	sleep(1);
     }
     return;
 }
@@ -67,12 +76,12 @@ int NetworkCommunicator::stopServerLoop() {
     stopping=true;
     tcpDaemon.join();
     
-    return 0; // TODO : FIX ERROR HANDLING
+    return 0;
 }
 
 int NetworkCommunicator::SetUpListener() {
     int ret = -1; // Return code for calls further
-		  
+
     // Create listening socket : IPv4, TCP/IP, auto
     lSocket = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
     if(lSocket<0) return -1;
@@ -113,30 +122,43 @@ int NetworkCommunicator::ReadIncomingConnections(std::vector<Connection> &connec
     
     for(int index=0;index<connections.size();index++) {
 	Connection* connection = &connections[index];
-	char _buffer[4096];
+	char _buffer[4096] = {0};
 	int _bytesRead = static_cast<int>(recv(connection->sockfd, _buffer, sizeof(_buffer), MSG_DONTWAIT));
         if(_bytesRead<0) { // Read failed or nothing to read
 	    if(errno!=EAGAIN||errno!=EWOULDBLOCK) { // Read failed
 		return -1;
 	    } else {
+		connection->buffer = {0};
 		continue;
 	    }
         } else if(_bytesRead==0) { // Connection closed
-	    cout << "NETCOM: Debug: Would've closed connection with filedescriptor " << connection->sockfd << " at IP " << connection->ip << "\n";
-	    fflush(stdout);
-	    // connections.erase(connections.begin()+index); // Delete from vector
+	    connections.erase(connections.begin()+index); // Delete from vector
 	} else { // Bytes have been read
+	    connection->buffer = {0};
 	    connection->buffer = string(_buffer);
 	}
     }
     connections_out = connections; // Copy internal connections
-    return 0; // Return error as function ( isn't implemented yet ) hasn't been tested accordingly.
+    return 0;
 }
 
-int NetworkCommunicator::WriteIncomingConnection(const int id, const std::string buffer) {
-    // TODO : Send data according to file descriptor ID
-    
-    return -1; // Return error as function isn't implemented yet
+int NetworkCommunicator::WriteIncomingConnection(const int sockfd, const std::string buffer) {
+    for(auto &connection : connections) {
+	if(connection.sockfd==sockfd) { // Found connection to write to
+	    cout << "NETCOM: Debug: Found socket: Writing to [" << sockfd << "] at " << connection.ip << "\n";
+	    int ret;
+	    ret = send(connection.sockfd, buffer.c_str(), buffer.size(),0);
+	    if(ret<0) {
+		cout << "NETCOM: Error: Couldn't write/send to connection.\n";
+	    } else if (ret==0){
+		cout << "Netcom: Debug: Unexpected input";
+	    } else {
+		cout << "Successfully wrote " << ret << " bytes of data.\n";
+	    }
+	}
+    }
+
+    return 0;
 }
 
 int NetworkCommunicator::StopListener() {
@@ -144,6 +166,10 @@ int NetworkCommunicator::StopListener() {
     ret = stopServerLoop();
     if(ret<0) return -1;
     return close(lSocket);
+}
+
+int NetworkCommunicator::CloseConnection(const int sockfd) {
+    return close(sockfd);
 }
 
 int NetworkCommunicator::KillConnections() {

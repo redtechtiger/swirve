@@ -18,6 +18,8 @@ class AsynchronousApplicationLoader {
         int tryStop();
 	int isAlive();
 
+	AsynchronousApplicationLoader();
+
 	void setInput(const char* _writeBuffer, unsigned long _len);
         std::string getOutput();
 
