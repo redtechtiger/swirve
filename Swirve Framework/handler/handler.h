@@ -4,15 +4,15 @@
 #include <string>
 #include "../loader/async_loader.h"
 
- enum POWERSTATE {OFFLINE,STARTING,ONLINE,STOPPING,RESTARTING,KILLING,FAULT};
+enum EPowerState {OFFLINE,STARTING,ONLINE,STOPPING,RESTARTING,KILLING,FAULT};
+enum EPowerAction {START, STOP, KILL, RESTART};
 
 class MinecraftHandler {
     private:
         AsynchronousApplicationLoader instance;
-        enum POWERACTION {START, STOP, KILL, RESTART};
-        POWERSTATE state = OFFLINE;
+        EPowerState state = OFFLINE;
         std::string serverLog;
-        int changePowerState(POWERACTION action);
+        int changePowerState(EPowerAction action);
         int stopserver();
         int startserver();
         int restartserver();
@@ -25,7 +25,7 @@ class MinecraftHandler {
 	std::string log;
 	int ramAllocate;
     public:
-        POWERSTATE State();
+        EPowerState State();
 	int Config(std::string _jarPath, int _ramAllocate);
 	int Start();
         int Stop();

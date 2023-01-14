@@ -28,17 +28,19 @@ int MinecraftHandler::Config(std::string _jarPath, int _ramAllocate) {
 }
 
 
-POWERSTATE MinecraftHandler::State() {
+EPowerState MinecraftHandler::State() {
     updateserverlog();
     switch(state) {
 	case OFFLINE:
 	    break;
 
 	case STARTING:
+	    std::cout << "HandlerState: Begin, Starting..." << std::endl;
 	    if(log.find(ONLINE_STR)!=std::string::npos) {
 		state = ONLINE;
 	    }
 	    if(instance.isAlive()!=0) {
+		std::cout << "HandlerState: End, isAlive()==0!!" << std::endl;
 		state = FAULT;
 	    }
 	    break;
@@ -107,7 +109,7 @@ int MinecraftHandler::killserver() {
     return instance.killFork();
 }
 
-int MinecraftHandler::changePowerState(POWERACTION action) {
+int MinecraftHandler::changePowerState(EPowerAction action) {
     switch(action) {
         case START:
             if(state==OFFLINE||state==FAULT) {

@@ -32,7 +32,6 @@ class NetworkCommunicator {
     private:
 	std::vector<Connection> connections;
 	int lSocket;
-	int readPortConfig(int &port);
 	void serverLoop(bool* shouldStop);
 	int stopServerLoop(); // Sets "stopping" and joins thread
 
@@ -45,15 +44,17 @@ class NetworkCommunicator {
     public:
 	int GeneratePortConfig(const int* port);
 	int SetUpListener(); // Start socket & set it to listen
-	int ReadIncomingConnections(std::vector<Connection> &connections); // Get vector of <Connection>
-	int WriteIncomingConnection(const int sockfd, const std::string buffer); // Write to Connection
 	int StopListener(); // Delete listening socket
-	int CloseConnection(const int socketfd);
 	int KillConnections();
 
 	int GetIp(std::string &external_ip_out);
 	int GetPort(std::string &port_out);
 	
+	int readPortConfig(int &port);
+	int ReadIncomingConnections(std::vector<Connection> &connections); // Get vector of <Connection>	
+	int WriteIncomingConnection(const int sockfd, const std::string buffer); // Write to Connection
+	int CloseConnection(const int socketfd); 
+
 };
 
 #endif

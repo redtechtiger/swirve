@@ -18,7 +18,6 @@
 // Namespaces
 using namespace std;
 
-
 // Internal func : Read bin config file for port info
 int NetworkCommunicator::readPortConfig(int &port) {
     char buffer[10];
@@ -30,14 +29,12 @@ int NetworkCommunicator::readPortConfig(int &port) {
 }
 
 int NetworkCommunicator::GetIp(string &external_ip_out) {
-    
     FILE* extIpStream = popen(EXTIPSHELLEXECUTE, "r");
     if(!extIpStream) return -1; // Error
     char buffer[128];
     fgets(buffer,sizeof(buffer),extIpStream);
-    cout << "Server launching on: " << buffer;
-    // TODO : OPEN A PIPE AND READ OUTPUT OF "curl ifconfig.me" ( EXTERNAL IP )
-    return -1; // Not yet implemented
+    external_ip_out = buffer;
+    return 0; 
 }
 
 int NetworkCommunicator::GetPort(string &port_out) {
@@ -63,7 +60,9 @@ void NetworkCommunicator::serverLoop(bool* shouldStop) { // Function called by f
 		cerr << "FATAL: TCPDaemon: The TCP/IP Server ran into an error while accepting incoming client connection requests. Daemon will terminate." << endl;
 		return;
 	}
-	if(iConnection.sockfd<0&&(errno==EAGAIN||errno==EWOULDBLOCK)) continue; // No incoming
+	if(iConnection.sockfd<0&&(errno==EAGAIN||errno==EWOULDBLOCK)) { // No new incoming connections
+		continue;
+	}
 	char ipBuffer[INET_ADDRSTRLEN];
 	inet_ntop(AF_INET, (sockaddr*)&iConnection.sockaddrdata, ipBuffer, INET_ADDRSTRLEN);
 	iConnection.ip = string(ipBuffer);
@@ -119,7 +118,6 @@ int NetworkCommunicator::SetUpListener() {
 }
 
 int NetworkCommunicator::ReadIncomingConnections(std::vector<Connection> &connections_out) {
-    
     for(int index=0;index<connections.size();index++) {
 	Connection* connection = &connections[index];
 	char _buffer[4096] = {0};
@@ -151,13 +149,12 @@ int NetworkCommunicator::WriteIncomingConnection(const int sockfd, const std::st
 	    if(ret<0) {
 		cout << "NETCOM: Error: Couldn't write/send to connection.\n";
 	    } else if (ret==0){
-		cout << "Netcom: Debug: Unexpected input";
+		cout << "Netcom: Debug: Nothing to write\n";
 	    } else {
 		cout << "Successfully wrote " << ret << " bytes of data.\n";
 	    }
 	}
     }
-
     return 0;
 }
 
@@ -173,8 +170,11 @@ int NetworkCommunicator::CloseConnection(const int sockfd) {
 }
 
 int NetworkCommunicator::KillConnections() {
-
-    // TODO : Iterate through vector of connections and close all of them forcefully, return 0 if all connections successfully closed.
-
-    return -1; // Not implemented
+    int connsClosed;
+    for(const auto &conn : connections) {
+	close(conn.sockfd);
+	connsClosed++;
+    }
+    if(connsClosed==connections.size()) return 0;
+    return -1;
 }

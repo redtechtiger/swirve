@@ -5,6 +5,7 @@
 #include "../archive/archive.h"
 #include "../netcom/netcom.h"
 #include "../logger/log.h"
+#include "../parser/parser.h"
 
 void showLogo() {
     std::cout << "\u001b[26m===================================================================================================\n";
@@ -77,7 +78,7 @@ void core_entry() {
 	    if(Archiver::LoadArchive(i, tempArchive)<0) {
 		    continue;
 	    }
-    ServerModule tempModule(tempArchive);
+    	    ServerModule tempModule(tempArchive);
 	    modules.push_back(tempModule);
     }
     l.logFinish(((float)modules.size() / ids.size()) > 0.10 ? 0 : -1); // If over 90% of servers are loaded and initialized correctly
@@ -86,37 +87,23 @@ void core_entry() {
     int ret = netcom.SetUpListener();
     l.logFinish(ret);
 
+    l.logLengthyFunction("Core: Booting up ActiveParser Daemon...");
+    ActiveParser parser(&netcom,&modules[0]);
+    ret = parser.StartParser();
+    l.logFinish(ret);
+
     std::cout << "Core: ----- SWIRVE FRAMEWORK BOOTUP FINISHED -----\n";
-    std::cout << "Swirve Framework is now online. Going into TCP Request answer loop...\n";
+    std::string ip;
+    netcom.GetIp(ip);
+    std::cout << "Core: Note: Swirve Framework online on [" << ip << "]\n";
     fflush(stdout);
 
-    std::cout << "Debug: ";
-    std::string s;
-    netcom.GetIp(s);
-    std::cout << std::endl;
-
-    bool stopLoop = false;
-
-    while(!stopLoop) {
-	sleep(2);
-	std::vector<Connection> _connections;
-	netcom.ReadIncomingConnections(_connections);
-	for(const auto &i : _connections) {
-	    std::cout << "Core: Connection at " << i.ip << " with fd " << i.sockfd << " has data ->" << i.buffer << "<- in buffer.\n";
-	    if(i.buffer=="stop") {
-		stopLoop = true;
-		break;
-	    } else if(i.buffer=="discon") {
-		netcom.CloseConnection(i.sockfd);
-	    } else if(!i.buffer.empty()||i.buffer!="\0") {
-		netcom.WriteIncomingConnection(i.sockfd, i.buffer);
-	    }
-
-	}
-	fflush(stdout);
+    while(true) {
+	sleep(5);
+	std::cout << "Core: Idle\n";
     }
 
-    sleep(10);
+    sleep(5);
 
     l.logLengthyFunction("Core: Stopping TCP/IP Server Daemon...");
     l.logFinish(netcom.StopListener());
