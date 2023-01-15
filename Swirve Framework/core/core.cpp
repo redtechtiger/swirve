@@ -10,7 +10,7 @@
 void showLogo() {
     std::cout << "\u001b[26m===================================================================================================\n";
     std::cout << "\n";
-    std::cout << "  _________       .__                     \n";
+    std::cout << "  _________        __                     \n";
     std::cout << " /   _____/_  _  _|__|_________  __ ____  \n";
     std::cout << " \\_____  \\\\ \\/ \\/ /  \\_  __ \\  \\/ // __ \\ \n";
     std::cout << " /        \\\\     /|  ||  | \\/\\   /\\  ___/ \n";
@@ -61,7 +61,7 @@ void print_vector(T couts) {
     }
 }
 
-void core_entry() {
+int core_entry() {
     std::cout << "Core-preinit: Initiating framework core...\n";
     Logger l;
     showLogo();
@@ -87,6 +87,7 @@ void core_entry() {
     int ret = netcom.SetUpListener();
     l.logFinish(ret);
 
+    std::cout << "Core: Debug: Selected module ID " << modules[0].ID << "\n";
     l.logLengthyFunction("Core: Booting up ActiveParser Daemon...");
     ActiveParser parser(&netcom,&modules[0]);
     ret = parser.StartParser();
@@ -108,11 +109,10 @@ void core_entry() {
     l.logLengthyFunction("Core: Stopping TCP/IP Server Daemon...");
     l.logFinish(netcom.StopListener());
     std::cout << "Core: Return\n";
-    return;
+    return 0;
 }
 
 
 int main(void) {
-    core_entry();
-    return 0;
+    return(core_entry());
 }

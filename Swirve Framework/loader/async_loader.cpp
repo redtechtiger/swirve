@@ -33,7 +33,7 @@ int AsynchronousApplicationLoader::killFork() {
 
 int AsynchronousApplicationLoader::isAlive() {
     int status;
-    return waitpid(-1,&status,WNOHANG);
+    return (waitpid(-1,&status,WNOHANG)>=0 ? 1 : 0);
 }
 
 int AsynchronousApplicationLoader::tryStop() {

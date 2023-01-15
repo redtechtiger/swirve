@@ -31,46 +31,51 @@ int MinecraftHandler::Config(std::string _jarPath, int _ramAllocate) {
 EPowerState MinecraftHandler::State() {
     updateserverlog();
     switch(state) {
-	case OFFLINE:
+	case OFFLINE: {
 	    break;
+	}
 
-	case STARTING:
-	    std::cout << "HandlerState: Begin, Starting..." << std::endl;
+	case STARTING: {
 	    if(log.find(ONLINE_STR)!=std::string::npos) {
 		state = ONLINE;
 	    }
-	    if(instance.isAlive()!=0) {
-		std::cout << "HandlerState: End, isAlive()==0!!" << std::endl;
+	    if(instance.isAlive()==0) {
 		state = FAULT;
 	    }
 	    break;
+	}
 	
-	case ONLINE:
-	    if(instance.isAlive()!=0) {
+	case ONLINE: {
+	    if(instance.isAlive()==0) {
 		state = FAULT;
 	    }
 	    break;
+	}
 	
-	case STOPPING:
-	    if(instance.isAlive()!=0) {
+	case STOPPING: {
+	    if(instance.isAlive()==0) {
 		state = OFFLINE;
 	    }
 	    break;
+	}
 
-	case RESTARTING:
+	case RESTARTING: {
 	    if(log.find(ONLINE_STR)!=std::string::npos) {
 	    	state = ONLINE;
 	    }
 	    break;
-	
-	case KILLING:
-	    if(instance.isAlive()!=0) {
+	}
+
+	case KILLING: {
+	    if(instance.isAlive()==0) {
 		state = OFFLINE;	
 	    }
 	    break;
+	}
 
-	case FAULT:
+	case FAULT: {
 	    break;
+	}
     }
     return state;
 }
