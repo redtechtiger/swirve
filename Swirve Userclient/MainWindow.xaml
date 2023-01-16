@@ -149,7 +149,7 @@
         <Grid x:Name="sidePanel" HorizontalAlignment="Left" Width="200">
             <Border Background="#FFF1F1F1" CornerRadius="15,0,0,15"/>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="176" Height="40" Margin="12.5,30,0,0">
-                <Button x:Name="userButton"  Content="RedTechTiger" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="userButton_Click"/>
+                <Button x:Name="userButton"  Content="Not logged in" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="userButton_Click"/>
                 <Image Source="Resources\menu.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
             </Grid>
             <ItemsControl HorizontalAlignment="Left" VerticalAlignment="Top" Width="176" Margin="12.5, 150, 0, 0">
@@ -212,10 +212,10 @@
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     </ItemsControl>
-                                <Label Margin="0,120,0,0" FontSize="15" Content="127.0.0.1:3306" Foreground="DimGray"/>
+                                <Label Margin="0,120,0,0" FontSize="15" Content="98.128.213.31:25565" Foreground="DimGray"/>
                                 <ItemsControl Margin="0,170,0,0">
                                     <Label FontSize="15" Content="Server Status:"/>
-                                    <Label FontSize="15" Content="Online" Foreground="Green"/>
+                                    <Label x:Name="statusLabel" FontSize="15" Content="[ PLEASE WAIT FOR FRAMEWORK API ]" Foreground="Red"/>
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal"/>
@@ -223,9 +223,10 @@
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
                                 <ItemsControl Margin="5,210,0,0">
-                                    <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="Start" Width="80" BorderThickness="2" BorderBrush="LightGray" FontSize="13"/>
-                                    <Button HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 0" Content="Stop" Width="80" BorderThickness="2" BorderBrush="LightGray" FontSize="13"/>
-                                    <Button HorizontalAlignment="Left" VerticalAlignment="Top" Content="Reboot" Width="80" BorderThickness="2" BorderBrush="LightGray" FontSize="13"/>
+                                    <Button x:Name="startBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Start" Width="80" BorderThickness="2" BorderBrush="LightGray" FontSize="13" Click="startBtn_Click"/>
+                                    <Button x:Name="stopBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10, 0" Content="Stop" Width="80" BorderThickness="2" BorderBrush="LightGray" FontSize="13" Click="stopBtn_Click"/>
+                                    <Button x:Name="restartBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Restart" Width="80" BorderThickness="2" BorderBrush="LightGray" FontSize="13" Click="restartBtn_Click"/>
+                                    <Button x:Name="killBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0" Content="Kill" Width="80" BorderThickness="2" BorderBrush="LightGray" FontSize="13" Click="killBtn_Click"/>
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal"/>
@@ -243,7 +244,9 @@
                         <Label Content="Console" FontSize="25"/>
                         <ScrollViewer Margin="0,40,0,0">
                             <Grid Height="2000">
-                                <Label Margin="0,50,0,0" Content="Test" FontSize="20"/>
+                                <Label Margin="0,50,0,0" Content="Output" FontSize="20"/>
+                                <TextBox x:Name="logOutput" IsReadOnly="True" Margin="0,100,10,1550" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible"/>
+                                <TextBox x:Name="logInput" Margin="0,460,10,1510" KeyDown="logInput_KeyDown"/>
                             </Grid>
                         </ScrollViewer>
                     </Grid>

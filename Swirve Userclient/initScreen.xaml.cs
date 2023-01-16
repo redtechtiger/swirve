@@ -31,6 +31,7 @@ namespace Swirve_Userclient
             Version _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             DateTime _buildDate = new DateTime(2000, 1, 1).AddDays(_version.Build).AddSeconds(_version.Revision * 2);
             versionNumber.Content = $"Devbuild {_version}, Build date: {_buildDate}";
+            workDescriptor.Visibility = Visibility.Visible;
 
         }
 

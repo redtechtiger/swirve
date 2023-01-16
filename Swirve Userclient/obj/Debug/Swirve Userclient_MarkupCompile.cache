@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\obj\Debug\
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\
 Swirve_Userclient
 none
 false
 DEBUG;TRACE
-C:\Users\Jacob\Desktop\Github\Swirve_Userclient\Swirve Userclient\App.xaml
-2-900484434
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\App.xaml
+4-1795872673
 11671207558
-61673981698
+91053446759
 13-1505183044
-initScreen.xaml;MainWindow.xaml;
+DebugLog.xaml;ErrorMessage.xaml;initScreen.xaml;MainWindow.xaml;
 
 False
 
