@@ -149,7 +149,11 @@ int NetworkCommunicator::WriteIncomingConnection(const int sockfd, const std::st
 	    if(ret<0) {
 		cout << "NETCOM: Error: Couldn't write/send to connection.\n";
 	    } else if (ret==0){
-		cout << "Netcom: Debug: Nothing to write\n";
+		cout << "NETCOM: WARN: Nothing to write, appending 0\n";
+		send(connection.sockfd, "0", 1, 0);
+	    } else if (ret%100==0) {
+		cout << "NETCOM: WARN: Sending multiple of 100, adding 0...";
+		send(connection.sockfd, "0", 1, 0);
 	    } else {
 		cout << "Successfully wrote " << ret << " bytes of data.\n";
 	    }

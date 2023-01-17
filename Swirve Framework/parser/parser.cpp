@@ -41,14 +41,15 @@ int ActiveParser::executeDemand(const Demand demand, ServerModule* serverModule,
 	    switch(demand.PrimaryArgument) {
 		case PWR: {
 		    int pwrMode = stoi(demand.DataArgument);
-		    if(pwrMode==START) serverModule->Start();
-		    if(pwrMode==STOP) serverModule->Stop();
-		    if(pwrMode==RESTART) serverModule->Restart();
-		    if(pwrMode==KILL) serverModule->Kill();
+		    if(pwrMode==START) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Start()));
+		    if(pwrMode==STOP) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Stop()));
+		    if(pwrMode==RESTART) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Restart()));
+		    if(pwrMode==KILL) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Kill()));
 		    break;
 		}
 		case LOG: {
-		    serverModule->SendCommand(demand.DataArgument);
+		    netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->SendCommand(demand.DataArgument)));
+		    
 		    break;
 		}
 	    }
@@ -96,7 +97,7 @@ int ActiveParser::parseDemand(const std::string buffer, Demand &demand) {
 void ActiveParser::parseLoop(bool* running, NetworkCommunicator* netcom, ServerModule* serverModule) {
     vector<Connection> connections;
     while(*running) {
-	sleep(1);
+	usleep(1000*50); // Sleep 50ms (1000uS=1ms => *50)
 	cout << "ActiveParser: Stage 1/5: Fetching data from TCP/IP Daemon..." << endl;
 	if(netcom->ReadIncomingConnections(connections)<0) continue;
 	for(Connection &connection : connections) {
