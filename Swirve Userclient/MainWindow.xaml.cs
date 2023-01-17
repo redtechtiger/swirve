@@ -31,17 +31,27 @@ namespace Swirve_Userclient
             InitializeComponent();
         }
 
-        private void asyncUpdate(object sender, EventArgs e)
+        private async void asyncUpdate(object sender, EventArgs e)
         {
             if (System.Threading.Monitor.TryEnter(timerLock))
             {
                 string statusContent = "";
                 Brush statusColor = Brushes.Transparent;
                 string console = "";
-                poll_refresh(ref statusContent, ref statusColor, ref console);
+                await Task.Run(() => poll_refresh(ref statusContent, ref statusColor, ref console));
                 statusLabel.Content = statusContent;
                 statusLabel.Foreground = statusColor;
-                logOutput.Text = console;
+                if (console != "-1")
+                {
+
+                    logOutput.Text = console;
+                    logOutput.ScrollToEnd();
+                } else
+                {
+                    ErrorMessage errMsg = new ErrorMessage();
+                    errMsg.errorDescription.Content = "Warning: Bad Socket from Framework API";
+                    errMsg.ShowDialog();
+                }
                 System.Threading.Monitor.Exit(timerLock);
             } else
             {
@@ -51,11 +61,11 @@ namespace Swirve_Userclient
 
         private void poll_refresh(ref string statusContent, ref Brush statusColor, ref string console)
         {
-            Console.WriteLine("Refresher: Getting API Power");
+            Console.WriteLine("---------- Refresher: Getting API Power ----------");
             int pwr = api.GetPower();
-            Console.WriteLine("Refresher: Getting Log");
+            Console.WriteLine("---------- Refresher: Getting Log ----------");
             console = api.GetLog();
-            Console.WriteLine("Refresher: API Work done");
+            Console.WriteLine("---------- Refresher: API Work done ----------");
             switch(pwr)
             {
                 case 0:
@@ -93,8 +103,9 @@ namespace Swirve_Userclient
                     break;
 
                 default:
-                    statusContent = "[ SWIRVE FRAMEWORK API HARD ERROR ]";
-                    statusColor = Brushes.Red;
+                    ErrorMessage errMsg = new ErrorMessage();
+                    errMsg.errorDescription.Content = "Warning: Bad PWRSTATE from Framework API";
+                    errMsg.ShowDialog();
                     break;
             }
             Console.WriteLine("Power set, done");
@@ -104,25 +115,36 @@ namespace Swirve_Userclient
         {
             ErrorMessage errMsg = new ErrorMessage();
             Hide();
+            ErrorMessage _errMsg = new ErrorMessage();
+            _errMsg.errorDescription.Content = "Warning: This is a devbuild and is strictly\nnot meant for production environments!!!";
+            _errMsg.errorAction.Content = "I understand";
+            _errMsg.ShowDialog();
             initScreen _splash = new initScreen();
             _splash.Show();
-            _splash.workDescriptor.Content = "Connecting...";
+            _splash.workDescriptor.Content = "Preparing API";
+            await Task.Run(() => System.Threading.Thread.Sleep(200));
+            _splash.workDescriptor.Content = "Connecting to Framework";
+            await Task.Run(() => System.Threading.Thread.Sleep(500));
             api.Connect();
             if(!api.connected) {
+                errMsg.errorDescription.Content = "Failed to connect to Framework";
+                errMsg.errorAction.Content = "Shut down";
                 errMsg.ShowDialog();
                 _splash.Close();
                 Close();
                 Application.Current.Shutdown();
                 return;
             }
-            _splash.workDescriptor.Content = "Requesting data...";
+            _splash.workDescriptor.Content = "Waiting for API";
+            await Task.Run(() => System.Threading.Thread.Sleep(500));
             string ans = api.Request("getval|pwr|0");
             _splash.workDescriptor.Content = "Request data: " + ans;
             dpTimer.Tick += new EventHandler(asyncUpdate);
             dpTimer.Interval = new TimeSpan(0, 0, 2);
             dpTimer.Start();
 
-            //_splash.workDescriptor.Content = "Launching application...";
+            _splash.workDescriptor.Content = "Starting Swirve Userclient";
+            await Task.Run(() => System.Threading.Thread.Sleep(500));
             this.playersButton.IsEnabled = false;
             this.performanceButton.IsEnabled = false;
             this.configButton.IsEnabled = false;
@@ -130,7 +152,10 @@ namespace Swirve_Userclient
             this.userButton.IsEnabled = false;
             this.mainGrid.Visibility = Visibility.Visible;
             this.mainTabControl.SelectedIndex = 1;
-        
+
+            _splash.workDescriptor.Content = "Welcome to the Future";
+            await Task.Run(() => System.Threading.Thread.Sleep(2000));
+
             _splash.Close();
             Show();
         }
@@ -210,22 +235,22 @@ namespace Swirve_Userclient
 
         private async void startBtn_Click(object sender, RoutedEventArgs e)
         {
-            api.StartServer();
+            await Task.Run(() => api.StartServer());
         }
 
         private async void stopBtn_Click(object sender, RoutedEventArgs e)
         {
-            api.StopServer();
+            await Task.Run(() => api.StopServer());
         }
 
         private async void restartBtn_Click(object sender, RoutedEventArgs e)
         {
-            api.RestartServer();
+            await Task.Run(() => api.RestartServer());
         }
 
         private async void killBtn_Click(object sender, RoutedEventArgs e)
         {
-            api.KillServer();
+            await Task.Run(() => api.KillServer());
         }
 
         private async void logInput_KeyDown(object sender, KeyEventArgs e)
