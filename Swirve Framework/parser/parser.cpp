@@ -2,6 +2,9 @@
 #include "../parser/parser.h"
 #include "../netcom/netcom.h" // For constructor / NETCOM functions
 
+// Defines
+#define ENDOFTRANSMIT "\\\\_!end_!\\\\"
+
 // Types
 #include <string>
 #include <vector>
@@ -39,19 +42,18 @@ int ActiveParser::executeDemand(const Demand demand, ServerModule* serverModule,
     switch(demand.Command) {
 	case SETVAL:
 	    switch(demand.PrimaryArgument) {
-		case PWR: {
-		    int pwrMode = stoi(demand.DataArgument);
-		    if(pwrMode==START) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Start()));
-		    if(pwrMode==STOP) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Stop()));
-		    if(pwrMode==RESTART) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Restart()));
-		    if(pwrMode==KILL) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Kill()));
-		    break;
-		}
-		case LOG: {
-		    netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->SendCommand(demand.DataArgument)));
-		    
-		    break;
-		}
+			case PWR: {
+				int pwrMode = stoi(demand.DataArgument);
+				if(pwrMode==START) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Start()));
+				if(pwrMode==STOP) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Stop()));
+				if(pwrMode==RESTART) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Restart()));
+				if(pwrMode==KILL) netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->Kill()));
+				break;
+			}
+			case LOG: {
+				netcomRef->WriteIncomingConnection(connection->sockfd, to_string(serverModule->SendCommand(demand.DataArgument)));
+				break;
+			}
 	    }
 	    break;
 
@@ -68,6 +70,7 @@ int ActiveParser::executeDemand(const Demand demand, ServerModule* serverModule,
 	    }
 	    break;
     } // TODO: ERROR HANDLING
+	netcomRef->WriteIncomingConnection(connection->sockfd, ENDOFTRANSMIT);
     return 0;
 }
 
@@ -97,24 +100,14 @@ int ActiveParser::parseDemand(const std::string buffer, Demand &demand) {
 void ActiveParser::parseLoop(bool* running, NetworkCommunicator* netcom, ServerModule* serverModule) {
     vector<Connection> connections;
     while(*running) {
-	usleep(1000*50); // Sleep 50ms (1000uS=1ms => *50)
-	cout << "ActiveParser: Stage 1/5: Fetching data from TCP/IP Daemon..." << endl;
-	if(netcom->ReadIncomingConnections(connections)<0) continue;
-	for(Connection &connection : connections) {
-	    if(connection.buffer[0]==0) continue;
-	    cout << "ActiveParser: Stage 2/5: Debug: Analysing buffer data... : ";
-	    for(const auto &_char : connection.buffer) {
-		cout << static_cast<int>(_char) << " ";
-	    }
-	    fflush(stdout);
-	    cout << "\nActiveParser: Stage 3/5: Parsing fetched data for " << connection.ip << "..." << endl;
-	    Demand demand;
-	    if(parseDemand(connection.buffer, demand)<0) continue;
-	    cout << "ActiveParser: Stage 4/5: Parsed data: [Command]->" << demand.Command << "<- [PrimaryArgument]->" << demand.PrimaryArgument << "<- [SecondaryArgument]->"<< demand.DataArgument << "<-" << endl;
-	    cout << "ActiveParser: Stage 5/5: Executing demand..." << endl;
-	    executeDemand(demand, serverModule, &connection);
-	    cout << "ActiveParser: Finished request parsing and execution pipeline for " << connection.ip << "\n";
-	}
+		usleep(1000*50); // Sleep 50ms (1000uS=1ms => *50)
+		if(netcom->ReadIncomingConnections(connections)<0) continue;
+		for(Connection &connection : connections) {
+			if(connection.buffer[0]==0) continue;
+			Demand demand;
+			if(parseDemand(connection.buffer, demand)<0) continue;
+			executeDemand(demand, serverModule, &connection);
+		}
     }
 }
 

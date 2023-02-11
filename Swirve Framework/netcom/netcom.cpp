@@ -142,22 +142,15 @@ int NetworkCommunicator::ReadIncomingConnections(std::vector<Connection> &connec
 
 int NetworkCommunicator::WriteIncomingConnection(const int sockfd, const std::string buffer) {
     for(auto &connection : connections) {
-	if(connection.sockfd==sockfd) { // Found connection to write to
-	    cout << "NETCOM: Debug: Found socket: Writing to [" << sockfd << "] at " << connection.ip << "\n";
-	    int ret;
-	    ret = send(connection.sockfd, buffer.c_str(), buffer.size(),0);
-	    if(ret<0) {
-		cout << "NETCOM: Error: Couldn't write/send to connection.\n";
-	    } else if (ret==0){
-		cout << "NETCOM: WARN: Nothing to write, appending 0\n";
-		send(connection.sockfd, "0", 1, 0);
-	    } else if (ret%100==0) {
-		cout << "NETCOM: WARN: Sending multiple of 100, adding 0...";
-		send(connection.sockfd, "0", 1, 0);
-	    } else {
-		cout << "Successfully wrote " << ret << " bytes of data.\n";
-	    }
-	}
+        if(connection.sockfd==sockfd) { // Found connection to write to
+            int ret;
+            ret = send(connection.sockfd, buffer.c_str(), buffer.size(),0);
+            if(ret<0) {
+                cout << "NETCOM: Error: Couldn't write/send to connection.\n";
+            } else if (ret==0){
+                send(connection.sockfd, " ", 1, 0);
+            }
+        }
     }
     return 0;
 }
