@@ -11,10 +11,12 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <sys/ioctl.h>
+#include <sstream>
 #include "../logger/log.h"
 
 #define READ_BUFFER_SIZE 4096
 #define JAVA_BIN "java"
+#define BASH_BIN "bash"
 
 template <typename T>
 void clearArray(T& _buffer, int _len) {
@@ -103,13 +105,32 @@ int AsynchronousApplicationLoader::executeJarAsync(std::string _binary, std::vec
     pipe(pipe1);
     pipe(pipe2);
 
-    std::vector<std::string> cmdLine{JAVA_BIN}; // Downwards: Create "correct" argument list from a vector
-								
-    for (const auto& i : _args) {
-	cmdLine.push_back(i);
+    // Parse input file and decide if it shall be executed by bash or java
+    std::stringstream filenameStream(_binary);
+    std::string buffer;
+    while(getline(filenameStream, buffer, '.')) {
     }
-    cmdLine.push_back("-jar");
-    cmdLine.push_back(_binary);
+
+    std::cout << "AsyncLoader: Detected file extension: " << buffer;
+    bool isShell = false;
+    if(buffer=="sh") {
+        isShell = true;
+        std::cout << "AsyncLoader: Warning: Running shell file! Several features will be disabled.";
+    }
+
+    std::string binaryExecute = isShell == true ? BASH_BIN : JAVA_BIN;
+
+    std::vector<std::string> cmdLine{binaryExecute}; // Downwards: Create "correct" argument list from a vector
+
+    if(!isShell) {							
+        for (const auto& i : _args) {
+        cmdLine.push_back(i);
+        }
+        cmdLine.push_back("-jar");
+        cmdLine.push_back(_binary);
+    } else {
+        cmdLine.push_back(_binary);
+    }
 
     std::vector<const char*> argv;
     for (const auto& s : cmdLine) {
@@ -128,7 +149,7 @@ int AsynchronousApplicationLoader::executeJarAsync(std::string _binary, std::vec
 	close(pipe1[1]); // Close pipe ends as no longer needed.
         close(pipe2[0]);
         std::cerr << chdir(_env.c_str());
-        std::cerr << execvp(JAVA_BIN,const_cast<char* const*>(argv.data())); // Let binary take control
+        std::cerr << execvp(binaryExecute.c_str(),const_cast<char* const*>(argv.data())); // Let binary take control
         std::cerr << "[FATAL] Forked child thread exited unexpectedly. Terminate program ASAP to prevent further damage to the system." << std::endl;
         throw std::runtime_error("[FATAL] Forked child thread exited unexpectedly.");
     } else { // Parent

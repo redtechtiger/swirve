@@ -13,7 +13,10 @@
             "windowsSdkVersion": "10.0.19041.0",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "compilerPath": "C:/mingw64/bin/g++.exe"
+            "compilerPath": "/usr/bin/g++",
+            "compilerArgs": [
+                "-pthread"
+            ]
         }
     ],
     "version": 4
