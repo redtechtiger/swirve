@@ -8,7 +8,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         UseLayoutRounding="True"
-        Title="Delta-V Server Manager" Height="600" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="1000" MinHeight="600" Loaded="Window_Loaded" ResizeMode="CanResize">
+        Title="Swirve Userclient" Height="600" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" MinWidth="1000" MinHeight="600" Loaded="Window_Loaded" ResizeMode="CanResize">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -150,37 +150,37 @@
             <Border Background="#FFF1F1F1" CornerRadius="15,0,0,15"/>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="176" Height="40" Margin="12.5,30,0,0">
                 <Button x:Name="userButton"  Content="Not logged in" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="userButton_Click"/>
-                <Image Source="Resources\menu.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                <Image x:Name="userButtonPng" Source="Resources\menu.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
             </Grid>
             <ItemsControl HorizontalAlignment="Left" VerticalAlignment="Top" Width="176" Margin="12.5, 150, 0, 0">
                 <Grid Height="30" Margin="0,5">
                     <Button x:Name="overviewButton" Content="Overview" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="overviewButton_Click"/>
-                    <Image Source="Resources\server.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                    <Image x:Name="overviewButtonPng" Source="Resources\server.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
                 </Grid>
                 <Grid Height="30" Margin="0,5">
                     <Button x:Name="consoleButton" Content="Console" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="consoleButton_Click"/>
-                    <Image Source="Resources\terminal.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                    <Image x:Name="consoleButtonPng" Source="Resources\terminal.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
                 </Grid>
                 <Grid Height="30" Margin="0,5">
                     <Button x:Name="playersButton" Content="Players" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="playersButton_Click"/>
-                    <Image Source="Resources\network.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                    <Image x:Name="playersButtonPng" Source="Resources\network.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
                 </Grid>
                 <Grid Height="30" Margin="0,5">
                     <Button x:Name="performanceButton" Content="Performance" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="performanceButton_Click"/>
-                    <Image Source="Resources\speed.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                    <Image x:Name="performanceButtonPng" Source="Resources\speed.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
                 </Grid>
                 <Grid Height="30" Margin="0,5">
                     <Button x:Name="configButton" Content="Configuration" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="configButton_Click"/>
-                    <Image Source="Resources\database_settings.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                    <Image x:Name="configButtonPng" Source="Resources\database_settings.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
                 </Grid>
             </ItemsControl>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="176" Height="40" Margin="12.5,0,0,70">
                 <Button x:Name="settingsButton"  Content="Settings" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="settingsButton_Click"/>
-                <Image Source="Resources\settings.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                <Image x:Name="settingsButtonPng" Source="Resources\settings.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
             </Grid>
             <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="176" Height="40" Margin="12.5,0,0,30">
                 <Button x:Name="exitButton"  Content="Exit" HorizontalContentAlignment="Left" Padding="50,0,0,0" Style="{DynamicResource SidebarButton}" Click="exitButton_Click"/>
-                <Image Source="Resources\exit.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
+                <Image x:Name="exitButtonPng" Source="Resources\exit.png" HorizontalAlignment="Left" Margin="10,0" Width="20"/>
             </Grid>
         </Grid>
         <TabControl x:Name="mainTabControl" Margin="200,30,0,0" Style="{DynamicResource mainTabControl}">
@@ -204,7 +204,7 @@
                             <Grid Height="2000">
                                 <Label Margin="0,50,0,0" Content="Server info" FontSize="20"/>
                                 <ItemsControl Margin="0,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Height="Auto">
-                                    <TextBox x:Name="serverName" Text="LPQ Modded"  Margin="3,0" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="15" BorderThickness="0"/>
+                                    <TextBox x:Name="serverName" Text="Wait ..."  Margin="3,0" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="15" BorderThickness="0" TextChanged="serverName_TextChanged"/>
                                     <Image Source="Resources\exit.png" Width="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ItemsControl}}"/>
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -212,10 +212,10 @@
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     </ItemsControl>
-                                <Label Margin="0,120,0,0" FontSize="15" Content="98.128.213.31:25565" Foreground="DimGray"/>
+                                <Label Margin="0,120,0,0" FontSize="15" x:Name="serverConnect" Content="Wait ..." Foreground="DimGray"/>
                                 <ItemsControl Margin="0,170,0,0">
                                     <Label FontSize="15" Content="Server Status:"/>
-                                    <Label x:Name="statusLabel" FontSize="15" Content="[ PLEASE WAIT FOR FRAMEWORK API ]" Foreground="Red"/>
+                                    <Label x:Name="statusLabel" FontSize="15" Content="Wait ..." Foreground="DarkCyan"/>
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal"/>
@@ -245,8 +245,10 @@
                         <ScrollViewer Margin="0,40,0,0">
                             <Grid Height="2000">
                                 <Label Margin="0,50,0,0" Content="Output" FontSize="20"/>
+                                <Button x:Name="dataDumpBtn" HorizontalAlignment="Right" VerticalAlignment="Top" Width="150" Height="25" Margin="10,60" Content="Generate data dump" BorderThickness="2" BorderBrush="LightGray" FontSize="13" Click="dataDumpBtn_Click"/>
                                 <TextBox x:Name="logOutput" IsReadOnly="True" Margin="0,100,10,1550" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible"/>
-                                <TextBox x:Name="logInput" Margin="0,460,10,1510" KeyDown="logInput_KeyDown"/>
+                                <Label Margin="-5, 460, 0, 0" Content="Server Command Interpreter (Send: Enter)" FontSize="10" FontStyle="Italic"/>
+                                <TextBox x:Name="logInput" Margin="0,480,10,1495" KeyDown="logInput_KeyDown"/>
                             </Grid>
                         </ScrollViewer>
                     </Grid>

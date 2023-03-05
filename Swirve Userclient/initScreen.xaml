@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Swirve_Userclient"
         mc:Ignorable="d"
         AllowsTransparency="True"
-        Title="initScreen" Height="226" Width="447" ResizeMode="NoResize" Loaded="Window_Loaded" FontFamily="OCR A Extended" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}">
+        Title="Swirve Userclient" Height="226" Width="447" ResizeMode="NoResize" Loaded="Window_Loaded" FontFamily="OCR A Extended" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}">
 
     <Grid MouseDown="Grid_MouseDown">
         <Border CornerRadius="15" Background="White"/>

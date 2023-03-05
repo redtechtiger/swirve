@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,11 +42,18 @@ namespace Swirve_Userclient
                 await Task.Run(() => poll_refresh(ref statusContent, ref statusColor, ref console));
                 statusLabel.Content = statusContent;
                 statusLabel.Foreground = statusColor;
+                if(statusContent=="[Bad EPowerState]")
+                {
+                    ErrorMessage errMsg = new ErrorMessage();
+                    errMsg.errorDescription.Content = "Warning: Bad EPowerState from Framework API";
+                    errMsg.ShowDialog();
+                }
                 if (console != "-1")
                 {
-
+                    Console.WriteLine(console);
+                    if (logOutput.Text == console) Console.WriteLine("Note: Console log hasn't changed");
                     logOutput.Text = console;
-                    logOutput.ScrollToEnd();
+                    if(!logOutput.IsFocused) logOutput.ScrollToEnd();
                 } else
                 {
                     ErrorMessage errMsg = new ErrorMessage();
@@ -61,12 +69,10 @@ namespace Swirve_Userclient
 
         private void poll_refresh(ref string statusContent, ref Brush statusColor, ref string console)
         {
-            Console.WriteLine("---------- Refresher: Getting API Power ----------");
             int pwr = api.GetPower();
-            Console.WriteLine("---------- Refresher: Getting Log ----------");
             console = api.GetLog();
-            Console.WriteLine("---------- Refresher: API Work done ----------");
-            switch(pwr)
+            console = console.Substring(Math.Max(0, console.Length - 5000));
+            switch (pwr)
             {
                 case 0:
                     statusContent = "Offline";
@@ -103,12 +109,9 @@ namespace Swirve_Userclient
                     break;
 
                 default:
-                    ErrorMessage errMsg = new ErrorMessage();
-                    errMsg.errorDescription.Content = "Warning: Bad PWRSTATE from Framework API";
-                    errMsg.ShowDialog();
+                    statusContent = "[Bad EPowerState]";
                     break;
             }
-            Console.WriteLine("Power set, done");
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -116,7 +119,7 @@ namespace Swirve_Userclient
             ErrorMessage errMsg = new ErrorMessage();
             Hide();
             ErrorMessage _errMsg = new ErrorMessage();
-            _errMsg.errorDescription.Content = "Warning: This is a devbuild and is strictly\nnot meant for production environments!!!";
+            _errMsg.errorDescription.Content = "Caution: You are running a release candidate.\nSystem instability may be present.";
             _errMsg.errorAction.Content = "I understand";
             _errMsg.ShowDialog();
             initScreen _splash = new initScreen();
@@ -125,7 +128,9 @@ namespace Swirve_Userclient
             await Task.Run(() => System.Threading.Thread.Sleep(200));
             _splash.workDescriptor.Content = "Connecting to Framework";
             await Task.Run(() => System.Threading.Thread.Sleep(500));
-            api.Connect();
+            string ip = Properties.Settings.Default.ip;
+            int port = Properties.Settings.Default.port;
+            api.Connect(ip, port);
             if(!api.connected) {
                 errMsg.errorDescription.Content = "Failed to connect to Framework";
                 errMsg.errorAction.Content = "Shut down";
@@ -152,12 +157,27 @@ namespace Swirve_Userclient
             this.userButton.IsEnabled = false;
             this.mainGrid.Visibility = Visibility.Visible;
             this.mainTabControl.SelectedIndex = 1;
+            this.userButton.Visibility = Visibility.Hidden;
+            this.userButtonPng.Visibility = Visibility.Hidden;
+            this.settingsButton.Visibility = Visibility.Hidden;
+            this.settingsButtonPng.Visibility = Visibility.Hidden;
+            this.playersButton.Visibility = Visibility.Hidden;
+            this.playersButtonPng.Visibility = Visibility.Hidden;
+            this.performanceButton.Visibility = Visibility.Hidden;
+            this.performanceButtonPng.Visibility = Visibility.Hidden;
+            this.configButton.Visibility = Visibility.Hidden;
+            this.configButtonPng.Visibility = Visibility.Hidden;
 
             _splash.workDescriptor.Content = "Welcome to the Future";
             await Task.Run(() => System.Threading.Thread.Sleep(2000));
 
             _splash.Close();
             Show();
+            await Task.Run(() => System.Threading.Thread.Sleep(500));
+            this.serverName.Text = Properties.Settings.Default.servername;
+            await Task.Run(() => System.Threading.Thread.Sleep(200));
+            string _serverport = Properties.Settings.Default.mcport.ToString();
+            this.serverConnect.Content = Properties.Settings.Default.ip + ":" + _serverport;
         }
 
         private void dragBar_MouseDown(object sender, MouseButtonEventArgs e)
@@ -262,5 +282,44 @@ namespace Swirve_Userclient
                 logInput.Text = "";
             }
         }
-    }
+
+        private async void dataDumpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            dumpProgress dpProgress = new dumpProgress();
+            dpProgress.Show();
+            dpProgress.Topmost = true;
+            string rawdata = "";
+            dpProgress.progressDone.Value = 0;
+            await Task.Run(() => asynclog(ref rawdata));
+            dpProgress.progressDone.Value = 50;
+            await Task.Run(() => writeToLogFile(rawdata));
+            await Task.Run(() => Task.Delay(500));
+            dpProgress.progressDone.Value = 100;
+            await Task.Run(() => Task.Delay(1000));
+            dpProgress.Close();
+        }
+
+        private void writeToLogFile(string rawdata)
+        {
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + $"\\Swirve-LogDump-{DateTime.Now.ToString("dd-MM-yyyy")}#{DateTime.Now.ToString("FFF")}.txt";
+            Console.WriteLine(folderPath);
+            StreamWriter sw = new StreamWriter(folderPath);
+            sw.Write(rawdata);
+            sw.Flush();
+            sw.Close();
+            return;
+        }
+
+        private void asynclog(ref string data)
+        {
+            data = api.GetLog();
+        }
+
+        private void serverName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (serverName.Text == "Wait ...") return;
+            Properties.Settings.Default.servername = serverName.Text;
+            Properties.Settings.Default.Save();
+        }
+    } 
 }

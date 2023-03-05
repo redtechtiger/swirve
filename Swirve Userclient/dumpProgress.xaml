@@ -1,0 +1,82 @@
+﻿<Window x:Class="Swirve_Userclient.dumpProgress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Swirve_Userclient"
+        mc:Ignorable="d"
+        Title="Swirve Userclient - Dumping data" Height="130.667" Width="350" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <SolidColorBrush x:Key="ProgressBar.Progress" Color="#FF06B025"/>
+        <SolidColorBrush x:Key="ProgressBar.Background" Color="#FFE6E6E6"/>
+        <SolidColorBrush x:Key="ProgressBar.Border" Color="#FFBCBCBC"/>
+        <Style x:Key="indefProgBar" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Foreground" Value="{StaticResource ProgressBar.Progress}"/>
+            <Setter Property="Background" Value="{StaticResource ProgressBar.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ProgressBar.Border}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Border CornerRadius="7">
+                        <Grid x:Name="TemplateRoot">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Determinate"/>
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard RepeatBehavior="Forever" FrameworkElement.FlowDirection="LeftToRight">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="Animation">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.25"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                            <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="Animation">
+                                                <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
+                                                <EasingPointKeyFrame KeyTime="0:0:0.5" Value="0.5,0.5"/>
+                                                <EasingPointKeyFrame KeyTime="0:0:1" Value="1.5,0.5"/>
+                                            </PointAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="7"/>
+                            <Rectangle x:Name="PART_Track" RadiusX="7" RadiusY="7"/>
+                            <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
+                                <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" RadiusX="7" RadiusY="7"/>
+                                <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5" RadiusX="7" RadiusY="7">
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                        </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Orientation" Value="Vertical">
+                                <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsIndeterminate" Value="true">
+                                <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Label Content="Generating log data dump..." HorizontalAlignment="Center" Margin="74,18,74,0" Width="Auto" VerticalAlignment="Top" FontSize="15"/>
+        <Border Height="18" Margin="55,59,55,0" VerticalAlignment="Top" CornerRadius="7" ClipToBounds="True">
+            <ProgressBar x:Name="progressDone" Style="{DynamicResource indefProgBar}" Foreground="#FF00D8C5"/>
+        </Border>
+    </Grid>
+</Window>

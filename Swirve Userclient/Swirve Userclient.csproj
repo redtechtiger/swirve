@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>false</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,10 +25,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -48,9 +49,25 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Swirve Userclient.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Swirve_Userclient.App</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>dns_FILL0_wght400_GRAD0_opsz48.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>79A10CC7C85B6E830049722D08DCCADA5A0A5375</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Swirve Userclient_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -76,11 +93,18 @@
     <Compile Include="DebugLog.xaml.cs">
       <DependentUpon>DebugLog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="dumpProgress.xaml.cs">
+      <DependentUpon>dumpProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ErrorMessage.xaml.cs">
       <DependentUpon>ErrorMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="frameworkApi.cs" />
     <Page Include="DebugLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="dumpProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,9 +150,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Swirve Userclient_TemporaryKey.pfx" />
     <Resource Include="Fonts\DoFuturistic-JRwaB.ttf" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
@@ -160,6 +185,7 @@
     <Resource Include="Resources\menu.png" />
     <Resource Include="Resources\terminal.png" />
     <None Include="Resources\Swirve_Splash.mp4" />
+    <Resource Include="dns_FILL0_wght400_GRAD0_opsz48.ico" />
     <Content Include="Swirve_Splash.mp4">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

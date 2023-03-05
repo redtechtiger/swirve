@@ -57,3 +57,9 @@ C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\Debu
 C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\DebugLog.baml
 C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\ErrorMessage.g.cs
 C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\ErrorMessage.baml
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\dumpProgress.g.cs
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\dumpProgress.baml
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\bin\Debug\Swirve Userclient.exe.manifest
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\bin\Debug\Swirve Userclient.application
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\Swirve Userclient.exe.manifest
+C:\Users\Jacob\Desktop\GitHub\Swirve-Userclient\Swirve Userclient\obj\Debug\Swirve Userclient.application
