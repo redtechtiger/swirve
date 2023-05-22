@@ -1,0 +1,273 @@
+﻿<Window x:Class="Swirve_Userclient.ServerCreationWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Swirve_Userclient"
+        mc:Ignorable="d"
+        Title="Swirve - Create Server" Height="420" Width="800" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}">
+    <Window.Resources>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#202020"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#303030"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#282828"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#191919"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="controlBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="tabcontrol_fade" TargetType="{x:Type TabControl}">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="SelectionChanged">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="roundedTextbox" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Loaded="Grid_Loaded">
+        <Border Background="{DynamicResource Color_Background}" CornerRadius="15" Margin="10" MouseDown="Border_MouseDown">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10"/>
+            </Border.Effect>
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            <Grid>
+                <TabControl Style="{DynamicResource tabcontrol_fade}"  Margin="10, 70, 10, 10" Background="{x:Null}" BorderThickness="0" x:Name="main_tabcontrol" SelectedIndex="1">
+                    <TabItem Visibility="Collapsed">
+                        <Grid>
+                            <StackPanel>
+                                <Border Background="{DynamicResource Color_Highlight0}" CornerRadius="15" Padding="10" Height="250" Margin="15, 0">
+                                    <StackPanel Width="400" VerticalAlignment="Center">
+                                        <TextBlock Margin="0, 0, 0, 0" Text="Please fill in the following information. The specified server RAM is in gigabytes." FontFamily="Fonts/#Roboto" Padding="5" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
+                                        <Label Content="Server Name" FontFamily="Fonts/#Roboto" FontStyle="Italic" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                        <Border Background="{DynamicResource Color_Highlight1}" CornerRadius="15" Padding="5">
+                                            <TextBox x:Name="init_servername" Background="{DynamicResource Color_Highlight1}" Height="30" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                        </Border>
+                                        <Label Content="Server RAM" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                        <Border Background="{DynamicResource Color_Highlight1}" CornerRadius="15" Padding="5">
+                                            <TextBox Style="{DynamicResource roundedTextbox}" x:Name="init_serverram" Background="{DynamicResource Color_Highlight1}" Height="30" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
+                                    <Button Template="{DynamicResource Button_Freefloating1}" x:Name="init_quit" Margin="0, 0, 20, 0" Content="Quit" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="init_quit_Click"/>
+                                    <Button Template="{DynamicResource Button_Freefloating1}" x:Name="init_continue"  Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="init_continue_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Label Content="" Foreground="Red" FontFamily="Fonts/#Roboto" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0,35" FontSize="16" x:Name="Error_Verify"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Visibility="Collapsed">
+                        <Border Background="{DynamicResource Color_Highlight0}" Height="80" Width="300" CornerRadius="10" Margin="75" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="Resources/busy_dark.png" Height="40" Margin="10, 0" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5" RenderOptions.BitmapScalingMode="HighQuality">
+                                    <Image.RenderTransform>
+                                        <RotateTransform Angle="0">
+                                        </RotateTransform>
+                                    </Image.RenderTransform>
+                                    <Image.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <Label Content="Please Wait" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Roboto" FontSize="30"/>
+                            </StackPanel>
+                        </Border>
+                    </TabItem>
+                    <TabItem Visibility="Collapsed">
+                        <StackPanel>
+                            <Border Background="{DynamicResource Color_Highlight0}" CornerRadius="15" Padding="10" Height="250" Margin="15, 0">
+                                <StackPanel Width="400" VerticalAlignment="Center">
+                                    <TextBlock Padding="5" Margin="0, 10" Text="Please upload your server files into the directory specified below. Make sure that ALL the files are uploaded correctly or the configuration may fail." FontFamily="Fonts/#Roboto" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Label Content="FTP IP: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_ip" Content="ip" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Label Content="FTP Port: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_port" Content="port" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Label Content="FTP Username: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_username" Content="username" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Label Content="FTP Password: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_password" Content="password" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <Label Content="Directory ID: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_id"  Content="xxxxxxxxxxxxx" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
+                                <Button Template="{DynamicResource Button_Freefloating1}" x:Name="ftp_continue" Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="ftp_continue_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Visibility="Collapsed">
+                        <StackPanel>
+                            <Border Background="{DynamicResource Color_Highlight0}" CornerRadius="15" Padding="10" Height="250" Margin="15, 0">
+                                <StackPanel Width="400" VerticalAlignment="Center">
+                                    <TextBlock Margin="0, 10" Text="Please fill in the following information. Make sure that the path is relative to the server root directory." FontFamily="Fonts/#Roboto" Padding="5" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
+                                    <Label Content="Startup File" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                    <Border Background="{DynamicResource Color_Highlight1}" CornerRadius="15" Padding="5">
+                                        <TextBox x:Name="launch_path" Background="{DynamicResource Color_Highlight1}" Height="35" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="8"/>
+                                    </Border>
+                                    <Label Content="Java Version" FontFamily="Fonts/#Roboto" FontSize="16" Margin="0, 10, 0, 0" Foreground="{DynamicResource Color_Text}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border x:Name="java8btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" CornerRadius="10, 0, 0, 10" MouseDown="java8btn_MouseDown">
+                                            <Label Content="8" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                        </Border>
+                                        <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
+                                        <Border x:Name="java16btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" MouseDown="java16btn_MouseDown">
+                                            <Label Content="16" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                        </Border>
+                                        <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
+                                        <Border x:Name="java17btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" MouseDown="java17btn_MouseDown">
+                                            <Label Content="17" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                        </Border>
+                                        <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
+                                        <Border x:Name="java18btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" CornerRadius="0, 10, 10, 0" MouseDown="java18btn_MouseDown">
+                                            <Label Content="18" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                        </Border>
+                                        <Label VerticalAlignment="Center" Content="?" FontSize="35" Padding="0" Foreground="{DynamicResource Color_Highlight2}" FontFamily="Fonts/#Roboto" Margin="10, 0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
+                                <Button Style="{DynamicResource controlBtn}" x:Name="launch_continue" Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="launch_continue_Click" ToolTip="Minecraft Versions 1.16.5 and under uses Java 8, Versions 1.17 and newer uses Java 16, and Versions 1.18+ uses Java 18. Certain modpacks may require Java 17."/>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Visibility="Collapsed">
+                        <Border Background="{DynamicResource Color_Highlight0}" Height="80" Width="300" CornerRadius="10" Margin="75" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="Resources/busy_dark.png" Height="40" Margin="10, 0" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5" RenderOptions.BitmapScalingMode="HighQuality">
+                                    <Image.RenderTransform>
+                                        <RotateTransform Angle="0">
+                                        </RotateTransform>
+                                    </Image.RenderTransform>
+                                    <Image.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <Label Content="Please Wait" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Roboto" FontSize="30"/>
+                            </StackPanel>
+                        </Border>
+                    </TabItem>
+                    <TabItem Visibility="Collapsed">
+                        <StackPanel>
+                            <Border Background="{DynamicResource Color_Highlight0}" Height="80" Width="300" CornerRadius="10" Margin="75" VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Image Source="Resources/icon_success_dark.png" Height="40" Margin="10, 0" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    <Label Content="Server Created" Foreground="{DynamicResource Color_Text}"  FontFamily="Fonts/#Roboto" FontSize="30"/>
+                                </StackPanel>
+                            </Border>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
+                                <Button Template="{DynamicResource Button_Freefloating1}" x:Name="connect" Content="Connect" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="connect_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+                <Border Style="{DynamicResource Pagetitle_Border}" HorizontalAlignment="Center" Margin="0, 10" Background="{DynamicResource Color_Palette2}">
+                    <Label Content="Server Creation Wizard" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Pagetitle_Label}"/>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
