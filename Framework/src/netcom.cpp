@@ -64,8 +64,8 @@ void NetworkCommunicator::serverLoop(bool* shouldStop) { // Function called by f
         iConnection.sockaddrlen = sizeof(iConnection.sockaddrdata);
         iConnection.sockfd = accept(lSocket, &iConnection.sockaddrdata, &iConnection.sockaddrlen);
         if(iConnection.sockfd<0&&errno!=EAGAIN&&errno!=EWOULDBLOCK) { // Error
-            cerr << "TCPDaemon: Warning: The TCP/IP Server ran into an error while accepting incoming client connection requests. Connection skipped." << endl;
-            cerr << "TCPDaemon: Error code = " << errno << endl;
+            cout << "TCPDaemon: Warning: The TCP/IP Server ran into an error while accepting incoming client connection requests. Connection skipped." << endl;
+            cout << "TCPDaemon: Error code = " << errno << endl;
             continue;
         }
         if(iConnection.sockfd<0&&(errno==EAGAIN||errno==EWOULDBLOCK)) { // No new incoming connections
