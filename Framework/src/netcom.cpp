@@ -141,7 +141,7 @@ int NetworkCommunicator::ReadIncomingConnections(std::vector<Connection> &connec
         } else if(_bytesRead==0) { // Connection closed
             (*auth)[connection->sockfd] = false;
             connections.erase(connections.begin()+index); // Delete from vector
-            CloseConnection(index);
+            CloseConnection(connection->sockfd);
         } else { // Bytes have been read
             connection->buffer = {0};
             connection->buffer = string(_buffer);
