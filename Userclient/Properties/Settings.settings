@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="ip" Type="System.String" Scope="User">
-      <Value Profile="(Default)">98.128.213.31</Value>
+      <Value Profile="(Default)">10.0.2.2</Value>
     </Setting>
     <Setting Name="port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">12555</Value>
     </Setting>
     <Setting Name="theme" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pollfrequency" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>

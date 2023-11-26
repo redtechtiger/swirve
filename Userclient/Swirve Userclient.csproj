@@ -58,22 +58,20 @@
     <ApplicationIcon>output-onlinepngtools.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>79A10CC7C85B6E830049722D08DCCADA5A0A5375</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Swirve Userclient_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>swirveuserclient-releasev1.1rc3.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
@@ -116,9 +114,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DebugLog.xaml.cs">
-      <DependentUpon>DebugLog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="dumpProgress.xaml.cs">
       <DependentUpon>dumpProgress.xaml</DependentUpon>
     </Compile>
@@ -132,10 +127,6 @@
     <Compile Include="ServerCreationWizard.xaml.cs">
       <DependentUpon>ServerCreationWizard.xaml</DependentUpon>
     </Compile>
-    <Page Include="DebugLog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="dumpProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,7 +189,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="swirveuserclient-releasev1.1rc3.pfx" />
     <Resource Include="Fonts\Montserrat-Black.ttf" />
     <Resource Include="Fonts\Montserrat-BlackItalic.ttf" />
     <Resource Include="Fonts\Montserrat-Bold.ttf" />
@@ -231,6 +221,7 @@
     <Resource Include="Fonts\Roboto-ThinItalic.ttf" />
     <None Include="packages.config" />
     <Resource Include="Fonts\DoFuturistic-JRwaB.ttf" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -252,57 +243,53 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Swirve_Splash.mp4" />
-    <Resource Include="Resources\icon_terminal_send.png" />
     <Resource Include="Resources\busy.png" />
-    <Resource Include="Resources\icon_server.png" />
-    <Resource Include="Resources\icon_back_page.png" />
-    <Resource Include="Resources\icon_forward_page.png" />
-    <Resource Include="Resources\icon_add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\swirve_icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_switch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_terminal.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\busy_dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icon_dashboard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_players.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_performance.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_logout.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_configuration.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_admin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_success_dark.png" />
-    <Resource Include="Resources\icon_success.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon_lock_dark.png" />
-    <Resource Include="Resources\icon_lock.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="output-onlinepngtools.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\arrow_back_ios_FILL0_wght200_GRAD0_opsz48.png" />
+    <Content Include="Resources\arrow_back_ios_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Resource Include="Resources\arrow_forward_ios_FILL0_wght200_GRAD0_opsz48.png" />
+    <Content Include="Resources\arrow_forward_ios_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Resource Include="Resources\data_usage_FILL0_wght200_GRAD0_opsz48.png" />
+    <Resource Include="Resources\deployed_code_FILL0_wght200_GRAD0_opsz48.png" />
+    <Resource Include="Resources\done_all_FILL0_wght200_GRAD0_opsz48.png" />
+    <Resource Include="Resources\icon_admin_dark.png" />
+    <Resource Include="Resources\icon_configuration_dark.png" />
+    <Resource Include="Resources\icon_dashboard_dark.png" />
+    <Resource Include="Resources\icon_logout_dark.png" />
+    <Resource Include="Resources\icon_performance_dark.png" />
+    <Resource Include="Resources\icon_players_dark.png" />
+    <Resource Include="Resources\icon_settings_dark.png" />
+    <Resource Include="Resources\icon_switch_dark.png" />
+    <Resource Include="Resources\icon_terminal_dark.png" />
+    <Content Include="Resources\icon_terminal_dark.svg" />
+    <Content Include="Resources\data_usage_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Content Include="Resources\deployed_code_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Content Include="Resources\done_all_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Content Include="Resources\icon_players_dark.svg" />
+    <Resource Include="Resources\library_add_FILL0_wght200_GRAD0_opsz48.png" />
+    <Content Include="Resources\library_add_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Content Include="Resources\icon_logout_dark.svg" />
+    <Content Include="Resources\icon_settings_dark.svg" />
+    <Content Include="Resources\icon_configuration_dark.svg" />
+    <Resource Include="Resources\page_info_FILL0_wght200_GRAD0_opsz48.png" />
+    <Content Include="Resources\page_info_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Content Include="Resources\icon_performance_dark.svg" />
+    <Resource Include="Resources\send_FILL0_wght200_GRAD0_opsz48.png" />
+    <Content Include="Resources\send_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Resource Include="Resources\shield_locked_FILL0_wght200_GRAD0_opsz48.png" />
+    <Content Include="Resources\shield_locked_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Content Include="Resources\icon_admin_dark.svg" />
+    <Content Include="Resources\icon_dashboard_dark.svg" />
+    <Content Include="Resources\icon_switch_dark.svg" />
+    <Resource Include="Resources\view_in_ar_FILL0_wght200_GRAD0_opsz48.png" />
+    <Content Include="Resources\view_in_ar_FILL0_wght200_GRAD0_opsz48.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

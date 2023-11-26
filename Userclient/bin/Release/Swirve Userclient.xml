@@ -4,19 +4,6 @@
         <name>Swirve Userclient</name>
     </assembly>
     <members>
-        <member name="T:Swirve_Userclient.DebugLog">
-            <summary>
-            Interaction logic for DebugLog.xaml
-            </summary>
-            <summary>
-            DebugLog
-            </summary>
-        </member>
-        <member name="M:Swirve_Userclient.DebugLog.InitializeComponent">
-            <summary>
-            InitializeComponent
-            </summary>
-        </member>
         <member name="T:Swirve_Userclient.dumpProgress">
             <summary>
             Interaction logic for dumpProgress.xaml

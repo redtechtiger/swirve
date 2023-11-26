@@ -16,51 +16,41 @@
     <Grid x:Name="mainGrid" Margin="10" Visibility="Visible" Focusable="True">
 
         <!-- Window -->
-        <Border CornerRadius="8" Width="1190" Margin="10, 0, 0, 0" Height="700" Background="{DynamicResource Color_Background}" Unloaded="Border_Unloaded">
+        <Border CornerRadius="8" Margin="10, 0, 0, 0" Height="700" Background="{DynamicResource Color_Background}" Unloaded="Border_Unloaded">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.5"/>
             </Border.Effect>
         </Border>
 
-        <TabControl x:Name="mainTabControl" Margin="90,20,20,20" Style="{DynamicResource Content_Tabcontrol}">
+        <TabControl x:Name="mainTabControl" Margin="70,20,20,20" Padding="20, 0, 0, 0" Style="{DynamicResource Content_Tabcontrol}">
             <!-- Overview -->
             <TabItem x:Name="overview" Visibility="Hidden">
                 <Grid>
                     <StackPanel>
                         <!-- Title -->
-                        <Border Style="{DynamicResource Pagetitle_Border}">
-                            <Label Content="Dashboard" Style="{DynamicResource Pagetitle_Label}"/>
-                        </Border>
+                        <Label Content="Dashboard" Style="{DynamicResource Pagetitle_Label}"/>
 
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0, 20, 0, 0">
                             <Border Style="{DynamicResource Dashboard_GroupPronounced_Border}" Width="400">
                                 <StackPanel>
-                                    <Label Content="Server Info" Style="{DynamicResource Dashboard_Group_Title}"/>
-                                    <Label Content="LPQ Modded" x:Name="Overview_Servername" FontSize="30" Margin="10, 0, 0, 0" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Roboto" FontWeight="SemiBold"/>
-                                    <StackPanel Orientation="Horizontal"  Margin="10, -15, 0, 0">
-                                        <Label Content="98.168.213.31" x:Name="Overview_ServerIp" FontSize="25" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Roboto"/>
-                                        <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="12.5" Padding="5, 0" Height="25">
-                                            <Label Content="25565" x:Name="Overview_ServerPort" VerticalContentAlignment="Center" Margin="0,-10" FontSize="20" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}"/>
-                                        </Border>
+                                    <Label Content="LPQ Modded" x:Name="Overview_Servername" FontSize="30" Margin="15, 15, 0, 0" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Montserrat" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal"  Margin="15, -15, 0, 0">
+                                        <Label Content="98.168.213.31" x:Name="Overview_ServerIp" FontSize="22" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Montserrat" FontWeight="Light"/>
+                                        <Label Content="25565" x:Name="Overview_ServerPort" VerticalContentAlignment="Center" Margin="0,-10" FontSize="22" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_TextInverted}" FontWeight="Light"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="15, 10">
-                                        <Border Background="{DynamicResource Color_Background}" Padding="10, 0" CornerRadius="12.5" Height="25">
-                                            <Label Content="8GB" x:Name="Overview_ServerRamTotal" VerticalContentAlignment="Center" Margin="0,-10" FontSize="20" Foreground="{DynamicResource Color_TextAdditional1}" FontFamily="Fonts/#Roboto"/>
-                                        </Border>
-                                        <Border Margin="8, 0" Background="{DynamicResource Color_Background}" Padding="10, 0" CornerRadius="12.5" Height="25">
-                                            <Label Foreground="{DynamicResource Color_TextAdditional1}"  Content="Java 17" x:Name="Overview_ServerJava" VerticalContentAlignment="Center" Margin="0,-10" FontSize="20" FontFamily="Fonts/#Roboto"/>
-                                        </Border>
+                                    <StackPanel Orientation="Horizontal" Margin="15, 20">
+                                        <Label Content="💾 8GB" x:Name="Overview_ServerRamTotal" VerticalContentAlignment="Center" Margin="0,-10" FontSize="20" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Montserrat"/>
+                                        <Label Foreground="{DynamicResource Color_TextInverted}"  Content="⚙ Java 17" x:Name="Overview_ServerJava" VerticalContentAlignment="Center" Margin="0,-10" FontSize="20" FontFamily="Fonts/#Montserrat"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
-                            <Border Margin="30, 0" Style="{DynamicResource Dashboard_Group_Border}" Width="465" HorizontalAlignment="Center" Background="{DynamicResource Color_Palette3}">
+                            <Border Margin="30, 0" Style="{DynamicResource Dashboard_Group_Border}" Width="465" HorizontalAlignment="Center">
                                 <StackPanel>
-                                    <Label Content="Power" Style="{DynamicResource Dashboard_Group_Title}"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Content="Offline" x:Name="Overview_ServerPower" FontSize="30" Margin="10, 0" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold" FontFamily="Fonts/#Roboto"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0, 30, 0, 0">
+                                        <Label Content="Node stopping... ✋" x:Name="Overview_ServerPower" FontSize="26" Margin="15, 0" Foreground="{DynamicResource Color_Text}" FontWeight="Normal" FontFamily="Fonts/#Montserrat"/>
                                         <Image Visibility="Hidden" x:Name="UpdatePowerSpinner" Style="{DynamicResource Spinner}" Height="30"/>
                                     </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="15,15">
+                                    <StackPanel Orientation="Horizontal" Margin="15,0">
                                         <Grid>
                                             <Button x:Name="Overview_StartServer" Style="{DynamicResource PowerButton}" Click="StartRemoteServer" Content="Start"/>
                                         </Grid>
@@ -79,26 +69,24 @@
                         </StackPanel>
                         <Border Style="{DynamicResource Dashboard_Group_Border}" HorizontalAlignment="Left" Height="350" Width="720" VerticalAlignment="Top" Margin="0, 30">
                             <StackPanel>
-                                <Label Content="Console" Style="{DynamicResource Dashboard_Group_Title}"/>
-                                <TextBox x:Name="Overview_Console" IsReadOnly="True" Template="{DynamicResource Dashboard_Console}" Margin="10" Height="300" FontFamily="Consolas" Foreground="{DynamicResource Color_TextInverted}" FontSize="12" TextWrapping="Wrap"/>
+                                <TextBox x:Name="Overview_Console" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." IsReadOnly="True" Template="{DynamicResource Dashboard_Console}" Margin="10" Height="300" FontFamily="Consolas" Foreground="{DynamicResource Color_Text}" FontSize="12" TextWrapping="Wrap"/>
                             </StackPanel>
                         </Border>
                     </StackPanel>
-                    <Grid Margin="750, 210, 0, 0">
+                    <Grid Margin="750, 214, 0, 0">
                         <StackPanel>
-                            <Border Style="{DynamicResource Dashboard_Group_Border}" Margin="0, 30" Background="{DynamicResource Color_Palette3}">
+                            <Border Style="{DynamicResource Dashboard_Group_Border}" Margin="0, 30" Height="140">
                                 <StackPanel>
-                                    <Label Content="Performance" Style="{DynamicResource Dashboard_Group_Title}"/>
-                                    <Label Content="CPU 20%" x:Name="Overview_CpuText" FontSize="30" Margin="10, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                    <ProgressBar x:Name="Overview_CpuProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="10"/>
-                                    <Label Content="RAM 3.7GB" x:Name="Overview_RamText" FontSize="30" Margin="10, 8, 0, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                    <ProgressBar x:Name="Overview_RamProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="80" Margin="15, -5, 15, 0" Height="10"/>
+                                    <Label Content="20% utilization" x:Name="Overview_CpuText" FontSize="24" Margin="15, 15, 0, 0" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontWeight="Normal"/>
+                                    <ProgressBar x:Name="Overview_CpuProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="3" Foreground="{DynamicResource Color_Palette1}"/>
+                                    <Label Content="3.7GB memory" x:Name="Overview_RamText" FontSize="24" Margin="15, 15, 0, 0" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontWeight="Normal"/>
+                                    <ProgressBar x:Name="Overview_RamProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="80" Margin="15, -5, 15, 0" Height="3" Foreground="LawnGreen"/>
                                 </StackPanel>
                             </Border>
-                            <Border Style="{DynamicResource Dashboard_Group_Border}" Background="{DynamicResource Color_Palette3}" Height="100">
+                            <Border Style="{DynamicResource Dashboard_Group_Border}" Height="100">
                                 <StackPanel>
-                                    <Label Content="Players" Style="{DynamicResource Dashboard_Group_Title}"/>
-                                    <Label Content="0" x:Name="Overview_PlayersOnline" FontSize="30" Margin="10, 0" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold" FontFamily="Fonts/#Roboto"/>
+                                    <Label Content="0 online" x:Name="Overview_PlayersOnline" FontSize="24" Margin="15, 15, 0, 0" Foreground="{DynamicResource Color_Text}" FontWeight="Normal" FontFamily="Fonts/#Montserrat"/>
+                                    <Label Content="✨ 0 since start" x:Name="Overview_PlayersTotal" FontSize="17" Margin="15, 0" Foreground="{DynamicResource Color_Text}" FontWeight="Normal" FontFamily="Fonts/#Montserrat"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -421,7 +409,6 @@
                         <Border Style="{DynamicResource Pagetitle_Border}" Margin="0, 0, 10, 0">
                             <Label Content="Framework Control Panel" Style="{DynamicResource Pagetitle_Label}"/>
                         </Border>
-                        <Image Style="{DynamicResource Adminlock_Image}" Height="30"/>
                     </StackPanel>
                     <Border Style="{DynamicResource Dashboard_Group_Border}" Width="600" Height="190">
                         <StackPanel>

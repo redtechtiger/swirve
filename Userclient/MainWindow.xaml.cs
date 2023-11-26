@@ -39,7 +39,7 @@ namespace Swirve_Userclient
 
     public partial class MainWindow : Window
     {
-        string[] PowerString = new string[] { "Offline", "Starting", "Online", "Stopping", "Restarting", "Killing", "Fault" };
+        string[] PowerString = new string[] { "Node is offline 🚫", "Node starting... 🕑", "Node is online ☁", "Node stopping... ✋", "Node restarting... 🕑", "Node stopping... ✋", "Node crashed ⚠" };
 
         object powerdownlock = new object();
 
@@ -146,8 +146,8 @@ namespace Swirve_Userclient
             Overview_Servername.Content = serverArchive.Name;
             Overview_ServerIp.Content = Properties.Settings.Default.ip;
             Overview_ServerPort.Content = serverArchive.AssignedPort;
-            Overview_ServerRamTotal.Content = serverArchive.RamAllocated + "GB";
-            Overview_ServerJava.Content = "Java " + serverArchive.JavaVersion;
+            Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
+            Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
 
             // Clear graph
             SeriesCollection[0].Values.Clear();
@@ -350,11 +350,11 @@ namespace Swirve_Userclient
                         UpdatePowerSpinner.Visibility = Visibility.Hidden;
 
                         Overview_CpuProgressbar.Value = dataresponse.ServerCPU;
-                        Overview_CpuText.Content = "CPU " + dataresponse.ServerCPU.ToString() + "%";
+                        Overview_CpuText.Content = "" + dataresponse.ServerCPU.ToString() + "% utilization";
                         Overview_RamProgressbar.Maximum = serverArchive.RamAllocated * 1024; // From GB to MB
                         Overview_RamProgressbar.Value = dataresponse.ServerVmRSS;
-                        Overview_RamText.Content = "RAM " + Math.Round((double)dataresponse.ServerVmRSS / 1024, 1).ToString() + "GB";
-                        Overview_PlayersOnline.Content = api.GetCachedPlayerCount();
+                        Overview_RamText.Content = "" + Math.Round((double)dataresponse.ServerVmRSS / 1024, 1).ToString() + "GB memory";
+                        Overview_PlayersOnline.Content = api.GetCachedPlayerCount() + " online";
 
                         Overview_Console.Text = dataresponse.ServerLog.Substring(dataresponse.ServerLog.Length - Math.Min(Settings.Default.consolecutoff, dataresponse.ServerLog.Length));
                         Overview_Console.ScrollToEnd();
@@ -506,8 +506,8 @@ namespace Swirve_Userclient
             Overview_Servername.Content = serverArchive.Name;
             Overview_ServerIp.Content = Properties.Settings.Default.ip;
             Overview_ServerPort.Content = serverArchive.AssignedPort;
-            Overview_ServerRamTotal.Content = serverArchive.RamAllocated + "GB";
-            Overview_ServerJava.Content = "Java " + serverArchive.JavaVersion;
+            Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
+            Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
 
             // Clear graph
             SeriesCollection[0].Values.Clear();
