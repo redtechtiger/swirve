@@ -24,6 +24,7 @@
     <SolidColorBrush x:Key="Color_SidebarHighlight0" Color="#4C5353"/>
     <SolidColorBrush x:Key="Color_SidebarHighlight1" Color="#6C7373"/>
 
+    <SolidColorBrush x:Key="Color_WidgetBackground" Color="#FFFFFF"/>
 
 
 
@@ -289,7 +290,7 @@
 
     <Style x:Key="PowerButton" TargetType="{x:Type Button}">
         <Setter Property="FontFamily" Value="/Fonts/#Montserrat"/>
-        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="Margin" Value="5, 20, 5, 20"/>
         <Setter Property="Width" Value="100"/>
         <Setter Property="Height" Value="30"/>
@@ -310,8 +311,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            
-                                <Setter Property="Effect">
+                            <Setter Property="Effect">
                                 <Setter.Value>
                                     <DropShadowEffect BlurRadius="60" Opacity=".10"/>
                                 </Setter.Value>
@@ -331,56 +331,30 @@
     </Style>
 
     <ControlTemplate x:Key="Button_Freefloating0" TargetType="{x:Type ButtonBase}">
-        <Border CornerRadius="5" x:Name="border" Background="{DynamicResource Color_Palette0}" BorderThickness="0" SnapsToDevicePixels="true">
+        <Border CornerRadius="15" x:Name="border" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" SnapsToDevicePixels="true">
             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="40" Opacity=".25"/>
+            </Border.Effect>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette1}"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="60" Opacity=".10"/>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette1}"/>-->
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
+                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
+                <!--<Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>-->
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
-    <ControlTemplate x:Key="Button_Freefloating1" TargetType="{x:Type ButtonBase}">
-        <Border CornerRadius="5" x:Name="border" Background="{DynamicResource Color_Palette1}" BorderThickness="0" SnapsToDevicePixels="true">
-            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette3}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="Button_Freefloating2" TargetType="{x:Type ButtonBase}">
-        <Border CornerRadius="5" x:Name="border" Background="{DynamicResource Color_Palette2}" BorderThickness="0" SnapsToDevicePixels="true">
-            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette3}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
 
     <Style x:Key="Spinner" TargetType="{x:Type Image}">
         <Setter Property="Source" Value="../Resources/busy.png"/>

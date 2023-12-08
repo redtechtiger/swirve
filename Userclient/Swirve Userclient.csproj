@@ -281,8 +281,8 @@
     <Resource Include="Resources\page_info_FILL0_wght200_GRAD0_opsz48.png" />
     <Content Include="Resources\page_info_FILL0_wght200_GRAD0_opsz48.svg" />
     <Content Include="Resources\icon_performance_dark.svg" />
-    <Resource Include="Resources\send_FILL0_wght200_GRAD0_opsz48.png" />
-    <Content Include="Resources\send_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Resource Include="Resources\icon_terminalsend_dark.png" />
+    <Content Include="Resources\icon_terminalsend_dark.svg" />
     <Resource Include="Resources\shield_locked_FILL0_wght200_GRAD0_opsz48.png" />
     <Content Include="Resources\shield_locked_FILL0_wght200_GRAD0_opsz48.svg" />
     <Content Include="Resources\icon_admin_dark.svg" />

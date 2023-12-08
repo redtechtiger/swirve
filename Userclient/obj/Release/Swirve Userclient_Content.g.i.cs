@@ -21,7 +21,7 @@
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_configuration_dark.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/page_info_fill0_wght200_grad0_opsz48.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_performance_dark.svg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/send_fill0_wght200_grad0_opsz48.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_terminalsend_dark.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/shield_locked_fill0_wght200_grad0_opsz48.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_admin_dark.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_dashboard_dark.svg")]

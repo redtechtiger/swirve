@@ -168,34 +168,34 @@ namespace Swirve_Userclient
             switch(serverArchive.JavaVersion)
             {
                 case 8:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_Highlight1");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = false;
                     user_serverjava = 8;
                     break;
 
                 case 16:
-                    java16btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = false;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 16;
                     break;
 
                 case 17:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = false;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 17;
                     break;
 
                 case 18:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = false;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 18;
                     break;
             }
@@ -359,24 +359,24 @@ namespace Swirve_Userclient
                         Overview_Console.Text = dataresponse.ServerLog.Substring(dataresponse.ServerLog.Length - Math.Min(Settings.Default.consolecutoff, dataresponse.ServerLog.Length));
                         Overview_Console.ScrollToEnd();
 
-                        Performance_TotalRam.Content = "RAM " + Math.Round((double)dataresponse.SystemTotalMemory / 1024, 1).ToString() + " GB";
-                        Performance_TotalCores.Content = "CORES " + dataresponse.SystemTotalCores.ToString();
-                        Performance_SysCpuProgressbar.Value = dataresponse.SystemCPU;
-                        Performance_SysCpuText.Content = "CPU " + dataresponse.SystemCPU.ToString() + "%";
-                        Performance_SysRamProgressbar.Value = dataresponse.SystemMemory;
-                        Performance_SysRamProgressbar.Maximum = dataresponse.SystemTotalMemory;
-                        Performance_SysRamText.Content = "RAM " + Math.Round((double)dataresponse.SystemMemory / 1024, 1) + "GB";
+                        // Performance_TotalRam.Content = "RAM " + Math.Round((double)dataresponse.SystemTotalMemory / 1024, 1).ToString() + " GB";
+                        //Performance_TotalCores.Content = "CORES " + dataresponse.SystemTotalCores.ToString();
+                        //Performance_SysCpuProgressbar.Value = dataresponse.SystemCPU;
+                        //Performance_SysCpuText.Content = "CPU " + dataresponse.SystemCPU.ToString() + "%";
+                        //Performance_SysRamProgressbar.Value = dataresponse.SystemMemory;
+                        //Performance_SysRamProgressbar.Maximum = dataresponse.SystemTotalMemory;
+                        //Performance_SysRamText.Content = "RAM " + Math.Round((double)dataresponse.SystemMemory / 1024, 1) + "GB";
                         Performance_CpuProgressbar.Value = dataresponse.ServerCPU;
-                        Performance_CpuText.Content = "CPU " + dataresponse.ServerCPU.ToString() + "%";
+                        Performance_CpuText.Content = "" + dataresponse.ServerCPU.ToString() + "% utilization";
                         Performance_VmSizeProgressbar.Value = dataresponse.ServerVmSize;
                         Performance_VmSizeProgressbar.Maximum = serverArchive.RamAllocated * 1024;
-                        Performance_VmSizeText.Content = "VmSize " + Math.Round((double)dataresponse.ServerVmSize / 1024, 1).ToString() + "GB";
-                        Performance_VmRssProgressbar.Value = dataresponse.ServerVmRSS;
-                        Performance_VmRssProgressbar.Maximum = serverArchive.RamAllocated * 1024;
-                        Performance_VmRssText.Content = "VmRSS " + Math.Round((double)dataresponse.ServerVmRSS / 1024, 1) + "GB";
+                        Performance_VmSizeText.Content = "" + Math.Round((double)dataresponse.ServerVmSize / 1024, 1).ToString() + "GB memory";
+                        Performance_VmRSSProgressbar.Value = dataresponse.ServerVmRSS;
+                        Performance_VmRSSProgressbar.Maximum = serverArchive.RamAllocated * 1024;
+                        Performance_VmRSSText.Content = "" + Math.Round((double)dataresponse.ServerVmRSS / 1024, 1) + "GB allocated";
 
-                        Performance_ModulesLoaded.Content = "Loaded Modules: " + TotalModules;
-                        Performance_ModulesOnline.Content = "Online Modules: " + OnlineModules;
+                        //Performance_ModulesLoaded.Content = "Loaded Modules: " + TotalModules;
+                        //Performance_ModulesOnline.Content = "Online Modules: " + OnlineModules;
 
                         logOutput.Text = dataresponse.ServerLog.Substring(dataresponse.ServerLog.Length - Math.Min(Properties.Settings.Default.terminalcutoff, dataresponse.ServerLog.Length));
                         if (!logOutput.IsFocused) logOutput.ScrollToEnd();
@@ -528,34 +528,34 @@ namespace Swirve_Userclient
             switch (serverArchive.JavaVersion)
             {
                 case 8:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_Highlight1");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = false;
                     user_serverjava = 8;
                     break;
 
                 case 16:
-                    java16btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = false;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 16;
                     break;
 
                 case 17:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = false;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 17;
                     break;
 
                 case 18:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = false;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 18;
                     break;
             }
@@ -832,52 +832,40 @@ namespace Swirve_Userclient
             stopuserclient();
         }
 
-        private void java8btn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void java8btn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                java8btn.Background = (Brush)FindResource("Color_Highlight1");
-                user_serverjava = 8;
-            }
+            java16btn.IsEnabled = true;
+            java17btn.IsEnabled = true;
+            java18btn.IsEnabled = true;
+            java8btn.IsEnabled = false;
+            user_serverjava = 8;
         }
 
-        private void java16btn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void java16btn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                java16btn.Background = (Brush)FindResource("Color_Highlight1");
-                java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                java8btn.Background = (Brush)FindResource("Color_TextInverted");
-                user_serverjava = 16;
-            }
+            java16btn.IsEnabled = false;
+            java17btn.IsEnabled = true;
+            java18btn.IsEnabled = true;
+            java8btn.IsEnabled = true;
+            user_serverjava = 16;
         }
 
-        private void java17btn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void java17btn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                java17btn.Background = (Brush)FindResource("Color_Highlight1");
-                java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                java8btn.Background = (Brush)FindResource("Color_TextInverted");
-                user_serverjava = 17;
-            }
+            java16btn.IsEnabled = true;
+            java17btn.IsEnabled = false;
+            java18btn.IsEnabled = true;
+            java8btn.IsEnabled = true;
+            user_serverjava = 17;
         }
 
-        private void java18btn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void java18btn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                java18btn.Background = (Brush)FindResource("Color_Highlight1");
-                java8btn.Background = (Brush)FindResource("Color_TextInverted");
-                user_serverjava = 18;
-            }
+            java16btn.IsEnabled = true;
+            java17btn.IsEnabled = true;
+            java18btn.IsEnabled = false;
+            java8btn.IsEnabled = true;
+            user_serverjava = 18;
         }
 
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
@@ -895,34 +883,34 @@ namespace Swirve_Userclient
             switch (serverArchive.JavaVersion)
             {
                 case 8:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_Highlight1");
-                    user_serverjava = 18;
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = false;
+                    user_serverjava = 8;
                     break;
 
                 case 16:
-                    java16btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = false;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 16;
                     break;
 
                 case 17:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java18btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = false;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 17;
                     break;
 
                 case 18:
-                    java16btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java17btn.Background = (Brush)FindResource("Color_TextInverted");
-                    java18btn.Background = (Brush)FindResource("Color_Highlight1");
-                    java8btn.Background = (Brush)FindResource("Color_TextInverted");
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = false;
+                    java8btn.IsEnabled = true;
                     user_serverjava = 18;
                     break;
             }
@@ -981,8 +969,8 @@ namespace Swirve_Userclient
             await Task.Run(() => { serverArchive = api.GetArchive(serverArchive.ID); });
             Overview_Servername.Content = serverArchive.Name;
             Overview_ServerPort.Content = serverArchive.AssignedPort;
-            Overview_ServerRamTotal.Content = serverArchive.RamAllocated + "GB";
-            Overview_ServerJava.Content = "Java " + serverArchive.JavaVersion;
+            Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
+            Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
             await Task.Run(() => Thread.Sleep(1000));
 
             // Hide loading wheel

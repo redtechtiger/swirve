@@ -22,7 +22,7 @@
             </Border.Effect>
         </Border>
 
-        <TabControl x:Name="mainTabControl" Margin="70,20,20,20" Padding="20, 0, 0, 0" Style="{DynamicResource Content_Tabcontrol}">
+        <TabControl x:Name="mainTabControl" Margin="70,20,0,0" Padding="20, 0, 20, 20" Style="{DynamicResource Content_Tabcontrol}">
             <!-- Overview -->
             <TabItem x:Name="overview" Visibility="Hidden">
                 <Grid>
@@ -94,189 +94,145 @@
                 </Grid>
             </TabItem>
             <TabItem x:Name="console" Visibility="Hidden">
-                <Grid>
-                    <Border Style="{DynamicResource Pagetitle_Border}">
-                        <Label Content="Terminal" Style="{DynamicResource Pagetitle_Label}"/>
-                    </Border>
-                    <Grid Margin="0,60,0,0">
+                <StackPanel>
+                    <Label Content="Terminal" Style="{DynamicResource Pagetitle_Label}"/>
+                    <Grid Margin="0,20,0,0">
                         <StackPanel>
-                            <Border x:Name="console_log_border" Margin="0" Height="535" VerticalAlignment="Top" Padding="10" CornerRadius="15" Background="{DynamicResource Color_Palette1}">
-                                <TextBox x:Name="logOutput" FontSize="12" Text="Swirve: Ready to boot" TextWrapping="Wrap" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" FontFamily="Consolas" Height="Auto" Width="Auto" Background="{DynamicResource Color_Palette1}" BorderThickness="0" Foreground="{DynamicResource Color_TextInverted}" KeyDown="logOutput_KeyDown" GotKeyboardFocus="logOutput_GotKeyboardFocus"/>
+                            <Border x:Name="console_log_border" Margin="0" Height="535" Width="1090" VerticalAlignment="Top" Padding="10" CornerRadius="15" Style="{DynamicResource Dashboard_Group_Border}">
+                                <TextBox x:Name="logOutput" FontSize="12" Text="Swirve: Ready to boot" TextWrapping="Wrap" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" FontFamily="Consolas" Height="Auto" Width="Auto" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" Foreground="{DynamicResource Color_Text}" KeyDown="logOutput_KeyDown" GotKeyboardFocus="logOutput_GotKeyboardFocus"/>
                             </Border>
                             <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0, 17, 0, 0">
-                                <Button x:Name="dataDumpBtn" Template="{DynamicResource Button_Freefloating2}" FontFamily="Fonts/#Roboto" VerticalAlignment="Center" Width="90" Height="Auto" Content="Dump log" FontSize="13" Foreground="{DynamicResource Color_TextInverted}" Padding="10" Click="dataDumpBtn_Click"/>
+                                <Button x:Name="dataDumpBtn" Template="{DynamicResource Button_Freefloating0}" FontFamily="Fonts/#Montserrat" VerticalAlignment="Center" Width="90" Height="Auto" Content="Dump log" FontSize="13" Foreground="{DynamicResource Color_Text}" Padding="10" Click="dataDumpBtn_Click"/>
                                 <Grid>
-                                    <Button Template="{DynamicResource Button_Freefloating2}" x:Name="sendBtn" Margin="15, 0" FontFamily="Fonts/#Roboto" HorizontalContentAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto" Content="Send" FontSize="13" Foreground="{DynamicResource Color_TextInverted}" Padding="30, 10, 15, 10" Click="sendLogBtn_Click"/>
-                                    <Image Source="/Resources/icon_terminal_send.png" Height="16" Margin="0, 0, 40, 0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="Linear"/>
+                                    <Button Template="{DynamicResource Button_Freefloating0}" x:Name="sendBtn" Margin="15, 0" FontFamily="Fonts/#Montserrat" HorizontalContentAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto" Content="Send" FontSize="13" Foreground="{DynamicResource Color_Text}" Padding="30, 10, 15, 10" Click="sendLogBtn_Click"/>
+                                    <Image Source="/Resources/icon_terminalsend_dark.png" Height="24" Margin="0, 0, 40, 0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Grid>
-                                <Border Padding="15,0" Width="892" Height="38" CornerRadius="15" Background="{DynamicResource Color_Palette2}">
-                                    <TextBox x:Name="logInput" Text="Enter command..." FlowDirection="LeftToRight" VerticalContentAlignment="Center" Height="38" Width="862" FontFamily="Consolas" FontSize="14" KeyDown="logInput_KeyDown" Foreground="{DynamicResource Color_TextInverted}" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{DynamicResource Color_Palette2}" BorderThickness="0" GotKeyboardFocus="logInput_GotKeyboardFocus" LostKeyboardFocus="logInput_LostKeyboardFocus"/>
+                                <Border Padding="15,0" Width="892" Height="38" CornerRadius="15" Background="{DynamicResource Color_WidgetBackground}" Style="{DynamicResource Dashboard_Group_Border}">
+                                    <TextBox x:Name="logInput" Text="Enter command..." FlowDirection="LeftToRight" VerticalContentAlignment="Center" Height="38" Width="862" FontFamily="Fonts/#Montserrat" FontSize="13" KeyDown="logInput_KeyDown" Foreground="{DynamicResource Color_Text}" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" GotKeyboardFocus="logInput_GotKeyboardFocus" LostKeyboardFocus="logInput_LostKeyboardFocus"/>
                                 </Border>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
-                </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem x:Name="players" Visibility="Hidden">
-                <Grid>
-                    <Border Style="{DynamicResource Pagetitle_Border}">
-                        <Label Content="Players" Style="{DynamicResource Pagetitle_Label}"/>
-                    </Border>
-                    <Grid Margin="0,60,0,0">
+                <StackPanel>
+                    <Label Content="Players" Style="{DynamicResource Pagetitle_Label}"/>
+                    <Grid Margin="0,20,0,0">
                         <StackPanel>
-                            <Border Margin="0" Padding="10" CornerRadius="15" Background="{DynamicResource Color_Palette1}">
+                            <Border Margin="0" Padding="10" CornerRadius="15" Height="Auto" Width="1090" Style="{DynamicResource Dashboard_Group_Border}">
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="Players Online:" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="White"/>
-                                    <Border Margin="10, 0" Background="{DynamicResource Color_TextInverted}" Padding="10, 0" CornerRadius="15">
-                                        <Label x:Name="players_count" Content="10" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="{DynamicResource Color_Text}" FontSize="16" FontFamily="Fonts/#Roboto"/>
-                                    </Border>
+                                    <Label x:Name="players_count" Content="0 players online" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}"/>
                                 </StackPanel>
                             </Border>
-                            <Border Margin="0, 17, 0, 0" CornerRadius="15" Height="523" Padding="10" Background="{DynamicResource Color_Palette2}">
+                            <Border Margin="0, 17, 0, 0" CornerRadius="15" Height="523" Width="1090" Padding="10" Style="{DynamicResource Dashboard_Group_Border}">
                                 <Grid>
                                     <ItemsControl x:Name="player_list" BorderThickness="0">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel>
-                                                    <Border Background="{Binding HighlightColor}" HorizontalAlignment="Left" VerticalAlignment="Center" Tag="{Binding PlayerNameTag}" Padding="0, 0, 50, 0" CornerRadius="10" MouseDown="playerSelectedEvent" >
-                                                        <Label Content="{Binding PlayerName}" FontFamily="Fonts/#Roboto" FontSize="14" Margin="5" Foreground="{DynamicResource Color_TextInverted}" IsHitTestVisible="False"/>
+                                                    <Border Background="{Binding HighlightColor}" HorizontalAlignment="Left" VerticalAlignment="Center" Tag="{Binding PlayerNameTag}" Padding="0, 0, 50, 0" CornerRadius="10" MouseDown="playerSelectedEvent">
+                                                        <Label Content="{Binding PlayerName}" FontFamily="Fonts/#Montserrat" FontSize="14" Margin="5" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
                                                     </Border>
-                                                    <Border Height="1" SnapsToDevicePixels="True" VerticalAlignment="Bottom" CornerRadius="1" Margin="0, 5" Background="{DynamicResource Color_Palette3}" IsHitTestVisible="False"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
-                                    <Button Height="38" Width="84" Content="Ban" Style="{DynamicResource PowerButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Roboto" FontSize="13" Click="BanButton_Click"/>
+                                    <Button Margin="0, 0" Height="38" Width="84" Content="Ban" Style="{DynamicResource PowerButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Roboto" FontSize="13" Click="BanButton_Click"/>
                                     <Button Margin="102, 0" Height="38" FontSize="13" Width="84" Content="Kick" Style="{DynamicResource PowerButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Roboto" Click="KickButton_Click"/>
                                 </Grid>
                             </Border>
                         </StackPanel>
                     </Grid>
-                </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem x:Name="performance" Visibility="Hidden">
-                <Grid>
-                    <Border Style="{DynamicResource Pagetitle_Border}">
-                        <Label Content="Performance" Style="{DynamicResource Pagetitle_Label}"/>
-                    </Border>
-                    <Grid Margin="0, 60, 0, 0">
+                <StackPanel>
+                    <Label Content="Performance" Style="{DynamicResource Pagetitle_Label}"/>
+                    <Grid Margin="0, 20, 0, 0">
                         <StackPanel>
                             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
-                                <Border Background="{DynamicResource Color_Palette1}" Height="200" Width="700" CornerRadius="15">
-                                    <StackPanel>
-                                        <Label Content="Server" Style="{DynamicResource Dashboard_Group_Title}"/>
+                                <Border Style="{DynamicResource Dashboard_Group_Border}" Height="100" Width="800" CornerRadius="15">
+                                    <StackPanel Margin="5">
                                         <StackPanel Orientation="Horizontal">
-                                            <StackPanel Width="230" HorizontalAlignment="Left">
-                                                <Label Content="CPU 20%" x:Name="Performance_CpuText" FontSize="25" Margin="10, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                                <ProgressBar x:Name="Performance_CpuProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="10"/>
+                                            <StackPanel Orientation="Vertical" Margin="0, 0, 50, 0">
+                                                <Label Content="20% utilization" x:Name="Performance_CpuText" FontSize="24" Margin="15, 15, 0, 0" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontWeight="Normal"/>
+                                                <ProgressBar x:Name="Performance_CpuProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="3" Foreground="{DynamicResource Color_Palette1}"/>
                                             </StackPanel>
-                                            <StackPanel Width="230" HorizontalAlignment="Left">
-                                                <Label Content="VmSize 12GB" x:Name="Performance_VmSizeText" FontSize="25" Margin="10, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                                <ProgressBar x:Name="Performance_VmSizeProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="10"/>
+                                            <StackPanel Orientation="Vertical" Margin="0, 0, 50, 0">
+                                                <Label Content="3.7GB memory" x:Name="Performance_VmRSSText" FontSize="24" Margin="15, 15, 0, 0" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontWeight="Normal"/>
+                                                <ProgressBar x:Name="Performance_VmRSSProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="40" Margin="15, -5, 15, 0" Height="3" Foreground="LawnGreen"/>
                                             </StackPanel>
-                                            <StackPanel Width="230" HorizontalAlignment="Left">
-                                                <Label Content="VmRSS 4.1GB" x:Name="Performance_VmRssText" FontSize="25" Margin="10, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                                <ProgressBar x:Name="Performance_VmRssProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="10"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <Label Content="8GB allocated" x:Name="Performance_VmSizeText" FontSize="24" Margin="15, 15, 0, 0" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontWeight="Normal"/>
+                                                <ProgressBar x:Name="Performance_VmSizeProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="90" Margin="15, -5, 15, 0" Height="3" Foreground="#FFFEC007"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        <Label Content="System" Style="{DynamicResource Dashboard_Group_Title}" Margin="10, 20, 0, -10"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel Width="350" HorizontalAlignment="Left">
-                                                <Label Content="CPU 20%" x:Name="Performance_SysCpuText" FontSize="25" Margin="10, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                                <ProgressBar x:Name="Performance_SysCpuProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="10"/>
-                                            </StackPanel>
-                                            <StackPanel Width="350" HorizontalAlignment="Left">
-                                                <Label Content="RAM 12GB" x:Name="Performance_SysRamText" FontSize="25" Margin="10, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                                <ProgressBar x:Name="Performance_SysRamProgressbar" Style="{DynamicResource Dashboard_MiniProgressBar}" Value="20" Margin="15, -5" Height="10"/>
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Background="{DynamicResource Color_Palette2}" Height="200" Width="350" CornerRadius="15" Margin="30, 0">
-                                    <StackPanel>
-                                        <Label Content="System Info" Style="{DynamicResource Dashboard_Group_Title}"/>
-                                        <Label Content="CORES 24" x:Name="Performance_TotalCores" FontSize="25" Margin="10, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                        <Label Content="RAM 32GB" x:Name="Performance_TotalRam" FontSize="25" Margin="10, -10, 0, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontWeight="SemiBold"/>
-                                        <Label Content="Modules Loaded: 3" x:Name="Performance_ModulesLoaded" FontSize="25" Margin="10, 0, 0, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}"/>
-                                        <Label Content="Modules Online: 1" x:Name="Performance_ModulesOnline" FontSize="25" Margin="10, -10, 0, 0" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}"/>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
-                            <Border Background="{DynamicResource Color_Palette3}" CornerRadius="15" Padding="10" Height="350" Margin="0, 30, 5, 0">
+                            <Border Style="{DynamicResource Dashboard_Group_Border}" Width="1000" CornerRadius="15" Padding="10" Height="355" Margin="0, 30, 0, 0">
                                 <StackPanel>
                                     <lvc:CartesianChart Series="{Binding SeriesCollection}" x:Name="DataChart" Margin="0, 0, 0, 30" Height="320" DisableAnimations="True">
                                         <lvc:CartesianChart.AxisX>
-                                            <lvc:Axis FontFamily="Fonts/#Roboto" FontSize="15" Foreground="{DynamicResource Color_TextInverted}" Labels="{Binding GraphTimes}" ShowLabels="False"/>
+                                            <lvc:Axis FontFamily="Fonts/#Montserrat" FontSize="15" Foreground="{DynamicResource Color_Text}" Labels="{Binding GraphTimes}" ShowLabels="False"/>
                                         </lvc:CartesianChart.AxisX>
                                         <lvc:CartesianChart.AxisY>
-                                            <lvc:Axis FontFamily="Fonts/#Roboto" FontSize="15" LabelFormatter="{Binding YDataFormatter}" Foreground="{DynamicResource Color_TextInverted}" MaxValue="100" MinValue="0"/>
+                                            <lvc:Axis FontFamily="Fonts/#Montserrat" FontSize="15" LabelFormatter="{Binding YDataFormatter}" Foreground="{DynamicResource Color_Text}" MaxValue="100" MinValue="0"/>
                                         </lvc:CartesianChart.AxisY>
                                     </lvc:CartesianChart>
                                     <StackPanel FlowDirection="RightToLeft" Margin="0, -40" Orientation="Horizontal">
-                                        <Label Content="CPU" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontSize="15"/>
-                                        <Border Height="10" Width="10" Background="#FF2195F2" VerticalAlignment="Top" CornerRadius="10" Margin="0, 9, 15, 0"/>
-                                        <Label Content="VmSize" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontSize="15"/>
-                                        <Border Height="10" Width="10" Background="#FFF34336" VerticalAlignment="Top" CornerRadius="10" Margin="0, 9, 15, 0"/>
-                                        <Label Content="VmRSS" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_TextInverted}" FontSize="15"/>
+                                        <Label Content="Utilization" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontSize="15"/>
+                                        <Border Height="10" Width="10" Background="{DynamicResource Color_Palette1}" VerticalAlignment="Top" CornerRadius="10" Margin="0, 9, 15, 0"/>
+                                        <Label Content="Allocated" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontSize="15"/>
+                                        <Border Height="10" Width="10" Background="LimeGreen" VerticalAlignment="Top" CornerRadius="10" Margin="0, 9, 15, 0"/>
+                                        <Label Content="Memory" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" FontSize="15"/>
                                         <Border Height="10" Width="10" Background="#FFFEC007" VerticalAlignment="Top" Margin="0, 9" CornerRadius="10"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
                     </Grid>
-                </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem x:Name="configuration" Visibility="Hidden">
-                <Grid>
-                    <Border Style="{DynamicResource Pagetitle_Border}">
-                        <Label Content="Configuration" Style="{DynamicResource Pagetitle_Label}"/>
-                    </Border>
-                    <Grid Margin="0, 60, 0, 0">
+                <StackPanel>
+                    <Label Content="Configuration" Style="{DynamicResource Pagetitle_Label}"/>
+                    <Grid Margin="0, 20, 0, 0">
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
-                                <Border Style="{DynamicResource Dashboard_Group_Border}" Width="684" Height="355" Background="{DynamicResource Color_Palette1}">
-                                    <StackPanel Margin="10">
-                                        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 0">
+                                <Border Style="{DynamicResource Dashboard_Group_Border}" Width="684" Height="355">
+                                    <StackPanel Margin="15, 15, 0, 0">
+                                        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 30">
                                             <StackPanel>
-                                                <Label Content="Name" FontFamily="Fonts/#Roboto" FontStyle="Italic" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                                <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0" Width="250" Height="35">
-                                                    <TextBox x:Name="Configuration_servername" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                                <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0" Width="250" Height="35">
+                                                    <TextBox x:Name="Configuration_servername" Text="LPQ Modded" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
                                                 </Border>
+                                                <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                             </StackPanel>
                                             <StackPanel Margin="30, 0">
-                                                <Label Content="Memory [GB]" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                                <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0" Width="100">
-                                                    <TextBox x:Name="Configuration_serverram" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                                <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0" Width="60">
+                                                    <TextBox x:Name="Configuration_serverram" Text="24 GB" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
                                                 </Border>
+                                                <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                             </StackPanel>
                                         </StackPanel>
-                                        
-                                        <Label Content="Launch Path" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                        <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0, 270, 50">
-                                            <TextBox x:Name="Configuration_serverpath" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
-                                        </Border>
-                                        <Label Content="Java Version" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                        <StackPanel Orientation="Horizontal" Margin="5, 0">
-                                            <Border x:Name="java8btn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" CornerRadius="15, 0, 0, 15" MouseDown="java8btn_MouseDown">
-                                                <Label Content="8" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                        <StackPanel Width="350" HorizontalAlignment="Left">
+                                            <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0">
+                                                <TextBox x:Name="Configuration_serverpath" Text="run.sh" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
                                             </Border>
-                                            <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
-                                            <Border x:Name="java16btn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" MouseDown="java16btn_MouseDown">
-                                                <Label Content="16" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
-                                            </Border>
-                                            <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
-                                            <Border x:Name="java17btn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" MouseDown="java17btn_MouseDown">
-                                                <Label Content="17" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
-                                            </Border>
-                                            <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
-                                            <Border x:Name="java18btn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" CornerRadius="0, 15, 15, 0" MouseDown="java18btn_MouseDown">
-                                                <Label Content="18" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
-                                            </Border>
+                                            <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Margin="5, 50, 0, 0">
+                                            <Button x:Name="java8btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 8"  Click="java8btn_MouseDown" IsEnabled="False"/>
+                                            <Button x:Name="java16btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 16" Click="java16btn_MouseDown"/>
+                                            <Button x:Name="java17btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 17" Click="java17btn_MouseDown"/>
+                                            <Button x:Name="java18btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 18" Click="java18btn_MouseDown"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="5, 45, 0, 0">
                                             <Button Style="{DynamicResource PowerButton}" Content="Save" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="SaveButton_Click"/>
                                             <Button Style="{DynamicResource PowerButton}" Content="Discard" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="DiscardButton_Click"/>
-                                            <Button Style="{DynamicResource PowerButton}" Content="Rebuild Cache" Margin="259, 0, 10, 0"  Height="40" Width="130" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="RebuildButton_Click"/>
+                                            <Button Style="{DynamicResource PowerButton}" Content="Rebuild Cache" Margin="245, 0, 10, 0"  Height="40" Width="130" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="RebuildButton_Click"/>
                                             <Button Style="{DynamicResource PowerButton}" Content="Delete" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="Red" Click="DeleteButton_Click" FontStyle="Italic"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -308,7 +264,7 @@
                             </Border>
                         </StackPanel>
                     </Grid>
-                </Grid>
+                </StackPanel>
             </TabItem>
             <TabItem x:Name="adminpanel" Visibility="Hidden">
                 <Grid>
