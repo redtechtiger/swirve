@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 #include "handler.hpp"
+#include "sysinfo.hpp"
 #include "module.hpp"
 #include "archive.hpp"
 #include "netcom.hpp"
@@ -142,6 +143,26 @@ int core_entry(vector<string> args) {
         if(arg=="--ignorefatal") FLAGS.IGNOREFATAL = true;
     }
     Logger l(FLAGS);
+
+    l.warn("Core","GOING INTO DEBUG MODE!");
+    l.info("SysInfo", "KERNEL:");
+    l.info("SysInfo", SysInfo::GetKernelName());
+    l.info("SysInfo", "UPTIME:");
+    l.info("SysInfo", SysInfo::GetKernelUptime());
+    l.info("SysInfo", "FRAMEWORK:");
+    l.info("SysInfo", SysInfo::GetFrameworkName());
+    l.info("SysInfo", "API:");
+    l.info("SysInfo", SysInfo::GetFrameworkAPI());
+    l.info("SysInfo", "DEPLOYED BY:");
+    l.info("SysInfo", SysInfo::GetDeployOrganization());
+    
+
+    // TODO: REMOVE EARLY RETURN!
+    return 1;
+
+
+
+
     l.info("Core", "Booting Swirve Framework...");
 
 
