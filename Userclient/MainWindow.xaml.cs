@@ -36,6 +36,17 @@ namespace Swirve_Userclient
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+     
+    public static class ProgressBarExtensions
+    {
+        private static TimeSpan duration = TimeSpan.FromSeconds(.2);
+
+        public static void SetPercent(this ProgressBar progressBar, double percentage)
+        {
+            DoubleAnimation animation = new DoubleAnimation(percentage, duration);
+            progressBar.BeginAnimation(ProgressBar.ValueProperty, animation);
+        }
+    }
 
     public partial class MainWindow : Window
     {
@@ -97,12 +108,9 @@ namespace Swirve_Userclient
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Hide(); // Show splash first
-
+            rootTabControl.SelectedIndex = 0;
+            rootStart_Progressbar.Value = 0;
             ErrorMessage errMsg = new ErrorMessage(); // Windows to be used
-            initScreen _splash = new initScreen();
-
-            _splash.Show(); // Show splash
 
             // Fetch connection prerequisites
             string ip = Properties.Settings.Default.ip;
@@ -120,27 +128,35 @@ namespace Swirve_Userclient
                 errMsg.ShowDialog();
 
                 // Shut down Userclient
-                _splash.Close();
                 Close();
                 Application.Current.Shutdown();
                 return;
             }
 
+            rootStart_Progressbar.SetPercent(10);
+
             // Fetch all servers
             List<FrameworkApi.ServerModule> modules = new List<FrameworkApi.ServerModule>();
             await Task.Run(() => { modules = api.GetModules(); });
+
+            rootStart_Progressbar.SetPercent(30);
 
             // User selects server
             ulong selectedModuleID = getUserServer(modules);
 
             // Assign module
-            await Task.Run(() => Thread.Sleep(1000));
+            await Task.Run(() => Thread.Sleep(300));
             await Task.Run(() => { api.SetModule(selectedModuleID); });
+
+            rootStart_Progressbar.SetPercent(50);
 
             // Fetch all neccesary information
             await Task.Run(() => { serverArchive = api.GetArchive(selectedModuleID); });
+            rootStart_Progressbar.SetPercent(60);
             await Task.Run(() => { api.GetSwiss(); });
+            rootStart_Progressbar.SetPercent(70);
             await Task.Run(() => api.GetLog());
+            rootStart_Progressbar.SetPercent(80);
 
             // Set all neccessary information
             Overview_Servername.Content = serverArchive.Name;
@@ -252,8 +268,11 @@ namespace Swirve_Userclient
             button_admin.IsEnabled = true;
             button_settings.IsEnabled = true;
             this.ChangeTab(0);
-            _splash.Close();
-            Show();
+            rootStart_Progressbar.Value = 100;
+
+            await Task.Run(() => Thread.Sleep(500));
+
+            rootTabControl.SelectedIndex = 1;
         }
 
         private ulong getUserServer(List<FrameworkApi.ServerModule> modules)

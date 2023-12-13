@@ -88,10 +88,12 @@
             InitializeComponent
             </summary>
         </member>
-        <member name="T:Swirve_Userclient.MainWindow">
+        <member name="T:Swirve_Userclient.ProgressBarExtensions">
             <summary>
             Interaction logic for MainWindow.xaml
             </summary>
+        </member>
+        <member name="T:Swirve_Userclient.MainWindow">
             <summary>
             MainWindow
             </summary>

@@ -284,6 +284,8 @@
     <Resource Include="Resources\icon_terminalsend_dark.png" />
     <Content Include="Resources\icon_terminalsend_dark.svg" />
     <Resource Include="Resources\shield_locked_FILL0_wght200_GRAD0_opsz48.png" />
+    <Resource Include="Resources\icon_load_dark.png" />
+    <Content Include="Resources\icon_load_dark.svg" />
     <Content Include="Resources\shield_locked_FILL0_wght200_GRAD0_opsz48.svg" />
     <Content Include="Resources\icon_admin_dark.svg" />
     <Content Include="Resources\icon_dashboard_dark.svg" />

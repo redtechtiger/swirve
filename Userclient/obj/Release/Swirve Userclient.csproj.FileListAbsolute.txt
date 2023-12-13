@@ -90,3 +90,46 @@ C:\Users\Jacob\source\repos\swirve\Userclient\obj\Release\Swirve Userclient.cspr
 C:\Users\Jacob\source\repos\swirve\Userclient\obj\Release\Swirve Userclient.csproj.CoreCompileInputs.cache
 C:\Users\Jacob\source\repos\swirve\Userclient\obj\Release\Swirve Userclient.csproj.CopyComplete
 C:\Users\Jacob\source\repos\swirve\Userclient\obj\Release\Swirve Userclient_Content.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.exe.config
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.xml
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.exe
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.pdb
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.dll
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.Wpf.dll
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.dll
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.Wpf.dll
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.Wpf.Shared.dll
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.pdb
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.xml
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.Wpf.pdb
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.Wpf.xml
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.xml
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.Wpf.xml
+C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.Wpf.Shared.xml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.csproj.AssemblyReference.cache
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Themes\Dark.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Themes\Light.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\dumpProgress.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\ErrorMessage.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\ModuleSelector.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\initScreen.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\MainWindow.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\ServerCreationWizard.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\App.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient_Content.g.cs
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient_MarkupCompile.cache
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient_MarkupCompile.lref
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\App.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\dumpProgress.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\ErrorMessage.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\ModuleSelector.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\initScreen.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\MainWindow.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\ServerCreationWizard.baml
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.g.resources
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve_Userclient.Properties.Resources.resources
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.csproj.GenerateResource.cache
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.csproj.CoreCompileInputs.cache
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.csproj.CopyComplete
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.exe
+C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.pdb

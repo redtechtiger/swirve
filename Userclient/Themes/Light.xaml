@@ -10,6 +10,7 @@
 
 
     <SolidColorBrush x:Key="Color_Background" Color="#EFEFEF"/>
+    <SolidColorBrush x:Key="Color_Emerge" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Color_Text" Color="#000000"/>
     <SolidColorBrush x:Key="Color_TextInverted" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Color_TextAdditional1" Color="#000000"/>
@@ -147,7 +148,7 @@
     </Style>
 
     <Style x:Key="Content_Tabcontrol" TargetType="TabControl">
-        <Setter Property="Background" Value="{DynamicResource Color_Background}"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Style.Triggers>
             <EventTrigger RoutedEvent="SelectionChanged">
@@ -188,7 +189,7 @@
         <Setter Property="Width" Value="300"/>
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Emerge}"/>
         <Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect BlurRadius="40" Opacity=".25"/>
@@ -218,7 +219,7 @@
 
     <Style x:Key="Dashboard_MiniProgressBar" TargetType="{x:Type ProgressBar}">
         <Setter Property="Foreground" Value="{DynamicResource Color_Text}"/>
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Emerge}"/>
         <Setter Property="BorderBrush" Value="{x:Null}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
