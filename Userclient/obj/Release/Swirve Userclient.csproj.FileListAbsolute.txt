@@ -94,11 +94,6 @@ C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.exe.conf
 C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.xml
 C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.exe
 C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\Swirve Userclient.pdb
-C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.dll
-C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.Wpf.dll
-C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.dll
-C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.Wpf.dll
-C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\OxyPlot.Wpf.Shared.dll
 C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.pdb
 C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.xml
 C:\Users\J\Source\Repos\Swirve\Userclient\bin\Release\LiveCharts.Wpf.pdb
