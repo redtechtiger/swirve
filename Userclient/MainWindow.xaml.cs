@@ -349,105 +349,20 @@ namespace Swirve_Userclient
         }
 
         private async void switch_server(object sender, RoutedEventArgs e)
-        {
-            // Hide window
-            Hide();
-            initScreen _splash = new initScreen();
-            _splash.Show();
-
+        { 
             // Stop refresher
             refreshTimer.Stop();
+
+            rootStart_Progressbar.SetPercent(10);
 
             // Fetch all servers
             List<FrameworkApi.ServerModule> modules = new List<FrameworkApi.ServerModule>();
             await Task.Run(() => { modules = api.GetModules(); });
 
+            rootStart_Progressbar.SetPercent(30);
+
             // User selects server
             ulong selectedModuleID = getUserServer(modules);
-
-            // Assign module
-            await Task.Run(() => { api.SetModule(selectedModuleID); });
-
-            // Fetch all neccesary information
-            await Task.Run(() => { serverArchive = api.GetArchive(selectedModuleID); });
-            await Task.Run(() => { api.GetSwiss(); });
-            await Task.Run(() => refresh(this, new EventArgs()));
-
-            // Set all neccessary information
-            Overview_Servername.Content = serverArchive.Name;
-            Overview_ServerIp.Content = Properties.Settings.Default.ip;
-            Overview_ServerPort.Content = serverArchive.AssignedPort;
-            Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
-            Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
-
-            // Clear graph
-            SeriesCollection[0].Values.Clear();
-            SeriesCollection[1].Values.Clear();
-            SeriesCollection[2].Values.Clear();
-            GraphTimes.Clear();
-
-            // Update config page
-            List<string> credentials = api.GetCredentials();
-            ftp_ip.Content = credentials[0];
-            ftp_port.Content = credentials[1];
-            ftp_username.Content = credentials[2];
-            ftp_password.Content = credentials[3];
-            ftp_id.Content = serverArchive.ID;
-            Configuration_servername.Text = serverArchive.Name;
-            Configuration_serverram.Text = serverArchive.RamAllocated.ToString();
-            Configuration_serverpath.Text = serverArchive.LaunchPath;
-            switch (serverArchive.JavaVersion)
-            {
-                case 8:
-                    java16btn.IsEnabled = true;
-                    java17btn.IsEnabled = true;
-                    java18btn.IsEnabled = true;
-                    java8btn.IsEnabled = false;
-                    user_serverjava = 8;
-                    break;
-
-                case 16:
-                    java16btn.IsEnabled = false;
-                    java17btn.IsEnabled = true;
-                    java18btn.IsEnabled = true;
-                    java8btn.IsEnabled = true;
-                    user_serverjava = 16;
-                    break;
-
-                case 17:
-                    java16btn.IsEnabled = true;
-                    java17btn.IsEnabled = false;
-                    java18btn.IsEnabled = true;
-                    java8btn.IsEnabled = true;
-                    user_serverjava = 17;
-                    break;
-
-                case 18:
-                    java16btn.IsEnabled = true;
-                    java17btn.IsEnabled = true;
-                    java18btn.IsEnabled = false;
-                    java8btn.IsEnabled = true;
-                    user_serverjava = 18;
-                    break;
-            }
-
-            // Start refresher
-            refreshTimer.Start();
-
-            // Show main window
-            await Task.Run(() => Thread.Sleep(200));
-            await Task.Run(() => Thread.Sleep(200));
-            this.mainGrid.Visibility = Visibility.Visible;
-            button_dashboard.IsEnabled = false;
-            button_terminal.IsEnabled = true;
-            button_players.IsEnabled = true;
-            button_performance.IsEnabled = true;
-            button_configuration.IsEnabled = true;
-            button_admin.IsEnabled = true;
-            button_settings.IsEnabled = true;
-            this.ChangeTab(0);
-            _splash.Close();
-            Show();
         }
 
         private void show_dashboard(object sender, RoutedEventArgs e)
@@ -1118,6 +1033,7 @@ namespace Swirve_Userclient
 
         public void UploadModules(List<FrameworkApi.ServerModule> servermodules)
         {
+            modulecache.Clear();
             modulecache = new List<FrameworkApi.ServerModule>(servermodules.ToArray());
         }
 
@@ -1161,13 +1077,13 @@ namespace Swirve_Userclient
 
         private async void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            foreach (ServerVisual visual in rootSelection_serverlist.Items)
-            {
-                ContentPresenter borderCP = (ContentPresenter)rootSelection_serverlist.ItemContainerGenerator.ContainerFromItem(visual);
-                Border border = VisualTreeHelper.GetChild(borderCP, 0) as Border;
-                border.Background = (Brush)FindResource("Color_Palette1");
-            }
-            (sender as Border).Background = (Brush)FindResource("Color_Palette2");
+            // foreach (ServerVisual visual in rootSelection_serverlist.Items)
+            // {
+            //      ContentPresenter borderCP = (ContentPresenter)rootSelection_serverlist.ItemContainerGenerator.ContainerFromItem(visual);
+            //     Border border = VisualTreeHelper.GetChild(borderCP, 0) as Border;
+            //     border.Background = (Brush)FindResource("Color_Palette1");
+            // }
+            // (sender as Border).Background = (Brush)FindResource("Color_Palette2");
             ulong serverid = (ulong)(sender as FrameworkElement).Tag;
             selectedID = serverid;
 

@@ -52,13 +52,13 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border Background="{DynamicResource Color_Emerge}" CornerRadius="10" Height="50" Width="200" Margin="10" MouseDown="Rectangle_MouseDown" Tag="{Binding ServerID}">
+                                <Border Background="{DynamicResource Color_Emerge}" CornerRadius="10" Height="40" Width="180" Margin="10" MouseDown="Rectangle_MouseDown" Tag="{Binding ServerID}">
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="40" Opacity=".25"/>
                                     </Border.Effect>
                                     <Grid>
-                                        <Image Source="{Binding IconPath}" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                        <Label Content="{Binding ServerName}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" FontSize="17" IsHitTestVisible="False" Width="150" Foreground="{DynamicResource Color_Text}" FontFamily="./Fonts/#Montserrat"/>
+                                        <Image Source="{Binding IconPath}" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        <Label Content="{Binding ServerName}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,0,0" FontSize="15" IsHitTestVisible="False" Width="150" Foreground="{DynamicResource Color_Text}" FontFamily="./Fonts/#Montserrat"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
