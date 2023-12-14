@@ -8,11 +8,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_add_dark.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_server_rebooting_dark.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_server_error_dark.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_server_online_dark.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/arrow_back_ios_fill0_wght200_grad0_opsz48.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/arrow_forward_ios_fill0_wght200_grad0_opsz48.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_terminal_dark.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/data_usage_fill0_wght200_grad0_opsz48.svg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/deployed_code_fill0_wght200_grad0_opsz48.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_server_dark.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/done_all_fill0_wght200_grad0_opsz48.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/icon_players_dark.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/library_add_fill0_wght200_grad0_opsz48.svg")]

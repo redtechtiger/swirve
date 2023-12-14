@@ -144,165 +144,17 @@ namespace Swirve_Userclient
             // User selects server
             ulong selectedModuleID = getUserServer(modules);
 
-            // Assign module
-            await Task.Run(() => Thread.Sleep(300));
-            await Task.Run(() => { api.SetModule(selectedModuleID); });
-
-            rootStart_Progressbar.SetPercent(50);
-
-            // Fetch all neccesary information
-            await Task.Run(() => { serverArchive = api.GetArchive(selectedModuleID); });
-            rootStart_Progressbar.SetPercent(60);
-            await Task.Run(() => { api.GetSwiss(); });
-            rootStart_Progressbar.SetPercent(70);
-            await Task.Run(() => api.GetLog());
-            rootStart_Progressbar.SetPercent(80);
-
-            // Set all neccessary information
-            Overview_Servername.Content = serverArchive.Name;
-            Overview_ServerIp.Content = Properties.Settings.Default.ip;
-            Overview_ServerPort.Content = serverArchive.AssignedPort;
-            Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
-            Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
-
-            // Clear graph
-            SeriesCollection[0].Values.Clear();
-            SeriesCollection[1].Values.Clear();
-            SeriesCollection[2].Values.Clear();
-            GraphTimes.Clear();
-
-            // Update config page
-            List<string> credentials = api.GetCredentials();
-            ftp_ip.Content = credentials[0];
-            ftp_port.Content = credentials[1];
-            ftp_username.Content = credentials[2];
-            ftp_password.Content = credentials[3];
-            ftp_id.Content = serverArchive.ID;
-            Configuration_servername.Text = serverArchive.Name;
-            Configuration_serverram.Text = serverArchive.RamAllocated.ToString();
-            Configuration_serverpath.Text = serverArchive.LaunchPath;
-            switch(serverArchive.JavaVersion)
-            {
-                case 8:
-                    java16btn.IsEnabled = true;
-                    java17btn.IsEnabled = true;
-                    java18btn.IsEnabled = true;
-                    java8btn.IsEnabled = false;
-                    user_serverjava = 8;
-                    break;
-
-                case 16:
-                    java16btn.IsEnabled = false;
-                    java17btn.IsEnabled = true;
-                    java18btn.IsEnabled = true;
-                    java8btn.IsEnabled = true;
-                    user_serverjava = 16;
-                    break;
-
-                case 17:
-                    java16btn.IsEnabled = true;
-                    java17btn.IsEnabled = false;
-                    java18btn.IsEnabled = true;
-                    java8btn.IsEnabled = true;
-                    user_serverjava = 17;
-                    break;
-
-                case 18:
-                    java16btn.IsEnabled = true;
-                    java17btn.IsEnabled = true;
-                    java18btn.IsEnabled = false;
-                    java8btn.IsEnabled = true;
-                    user_serverjava = 18;
-                    break;
-            }
-
-            frameworkip.Text = Settings.Default.ip;
-            frameworkport.Text = Settings.Default.port.ToString();
-            pollrate.Text = Settings.Default.pollfrequency.ToString();
-            consolecutoff.Text = Settings.Default.consolecutoff.ToString();
-            terminalcutoff.Text = Settings.Default.terminalcutoff.ToString();
-            switch (Properties.Settings.Default.legacysupport)
-            {
-                case false:
-                    gen2btn.Background = (Brush)FindResource("Color_Highlight1");
-                    legacybtn.Background = (Brush)FindResource("Color_TextInverted");
-                    user_legacyapi = false;
-                    break;
-
-                case true:
-                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
-                    user_legacyapi = true;
-                    break;
-            }
-            switch (Properties.Settings.Default.theme)
-            {
-                case 0:
-                    lightmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    darkmodebtn.Background = (Brush)FindResource("Color_TextInverted");
-                    user_darkmode = false;
-                    break;
-
-                case 1:
-                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
-                    user_darkmode = true;
-                    break;
-
-                default:
-                    break;
-            }
-
-            // Start updating timer
-            refreshTimer.Tick += new EventHandler(refresh);
-            refreshTimer.Interval = new TimeSpan(0, 0, 2);
-            refreshTimer.Start();
-
-            // Show main window
-            this.mainGrid.Visibility = Visibility.Visible;
-            button_dashboard.IsEnabled = false;
-            button_terminal.IsEnabled = true;
-            button_players.IsEnabled = true;
-            button_performance.IsEnabled = true;
-            button_configuration.IsEnabled = true;
-            button_admin.IsEnabled = true;
-            button_settings.IsEnabled = true;
-            this.ChangeTab(0);
-            rootStart_Progressbar.Value = 100;
-
-            await Task.Run(() => Thread.Sleep(500));
-
-            rootTabControl.SelectedIndex = 1;
+            
         }
 
         private ulong getUserServer(List<FrameworkApi.ServerModule> modules)
         {
-            ModuleSelector moduleSelector = new ModuleSelector();
-            moduleSelector.UploadModules(modules);
-            moduleSelector.RenderModules();
+            UploadModules(modules);
+            RenderModules();
 
-            moduleSelector.ShowDialog();
-            ulong selectedModuleID = moduleSelector.selectedID;
-            Console.WriteLine($"ID = {selectedModuleID}");
+            rootTabControl.SelectedIndex = 1;
 
-            if (selectedModuleID == 0) // Create a new server
-            {
-                ServerCreationWizard creationWizard = new ServerCreationWizard();
-                creationWizard.GiveAPI(ref api);
-                creationWizard.ShowDialog();
-                if (creationWizard.serverCreated)
-                {
-                    selectedModuleID = creationWizard.serverId;
-                }
-                else
-                {
-                    if(!Settings.Default.legacysupport) Application.Current.Shutdown();
-                    serverArchive.Name = "LEGACY SERVER";
-                }
-            }
-            TotalModules = modules.Count;
-            OnlineModules = modules.Count(module => module.EPWRState == 2);
-            return selectedModuleID;
+            return 0;
         }
 
         private void stopuserclient()
@@ -1252,5 +1104,230 @@ namespace Swirve_Userclient
                     break;
             }
         }
+
+        public class ServerVisual
+        {
+            public string ServerName { get; set; }
+            public Brush ServerState { get; set; }
+            public ulong ServerID { get; set; }
+            public string IconPath { get; set; }
+        }
+
+        List<FrameworkApi.ServerModule> modulecache = new List<FrameworkApi.ServerModule>();
+        List<ServerVisual> visualcache = new List<ServerVisual>();
+
+        public void UploadModules(List<FrameworkApi.ServerModule> servermodules)
+        {
+            modulecache = new List<FrameworkApi.ServerModule>(servermodules.ToArray());
+        }
+
+        public void RenderModules()
+        {
+            rootSelection_serverlist.Visibility = Visibility.Hidden;
+            visualcache.Clear();
+            rootSelection_serverlist.ItemsSource = visualcache;
+            int index = 0;
+            foreach (FrameworkApi.ServerModule module in modulecache)
+            {
+                String iconPath;
+                if (module.EPWRState == 0) // Offline
+                {
+                    iconPath = "./Resources/icon_server_dark.png";
+                }
+                else if (module.EPWRState == 1 || module.EPWRState == 3 || module.EPWRState == 4 || module.EPWRState == 5) // Starting, stopping, restarting, killing (transition phase)
+                {
+                    iconPath = "./Resources/icon_server_rebooting_dark.png";
+                }
+                else if (module.EPWRState == 2) // Online
+                {
+                    iconPath = "./Resources/icon_server_online_dark.png";
+                }
+                else // Error ?
+                {
+                    iconPath = "./Resources/icon_server_error_dark.png";
+                }
+                visualcache.Add(new ServerVisual() { ServerName = module.Name, ServerID = module.ID, IconPath = iconPath });
+                index++;
+            }
+
+            // Add "new server" button
+            visualcache.Add(new ServerVisual() { ServerName = "New node...", ServerID = 0, IconPath = "./Resources/icon_add_dark.png" });
+
+
+            // Show
+            rootSelection_serverlist.ItemsSource = visualcache;
+            rootSelection_serverlist.Visibility = Visibility.Visible;
+        }
+
+        private async void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            foreach (ServerVisual visual in rootSelection_serverlist.Items)
+            {
+                ContentPresenter borderCP = (ContentPresenter)rootSelection_serverlist.ItemContainerGenerator.ContainerFromItem(visual);
+                Border border = VisualTreeHelper.GetChild(borderCP, 0) as Border;
+                border.Background = (Brush)FindResource("Color_Palette1");
+            }
+            (sender as Border).Background = (Brush)FindResource("Color_Palette2");
+            ulong serverid = (ulong)(sender as FrameworkElement).Tag;
+            selectedID = serverid;
+
+            rootTabControl.SelectedIndex = 0;
+
+            Console.WriteLine($"ID = {selectedID}");
+
+            if (selectedID == 0) // Create a new server
+            {
+                ServerCreationWizard creationWizard = new ServerCreationWizard();
+                creationWizard.GiveAPI(ref api);
+                creationWizard.ShowDialog();
+                if (creationWizard.serverCreated)
+                {
+                    selectedID = creationWizard.serverId;
+                }
+                else
+                {
+                    if (!Settings.Default.legacysupport) Application.Current.Shutdown();
+                    serverArchive.Name = "LEGACY SERVER";
+                }
+            }
+            TotalModules = modulecache.Count;
+            OnlineModules = modulecache.Count(module => module.EPWRState == 2);
+
+
+
+
+            // Assign module
+            await Task.Run(() => Thread.Sleep(300));
+            await Task.Run(() => { api.SetModule(selectedID); });
+
+            rootStart_Progressbar.SetPercent(50);
+
+            // Fetch all neccesary information
+            await Task.Run(() => { serverArchive = api.GetArchive(selectedID); });
+            rootStart_Progressbar.SetPercent(60);
+            await Task.Run(() => { api.GetSwiss(); });
+            rootStart_Progressbar.SetPercent(70);
+            await Task.Run(() => api.GetLog());
+            rootStart_Progressbar.SetPercent(80);
+
+            // Set all neccessary information
+            Overview_Servername.Content = serverArchive.Name;
+            Overview_ServerIp.Content = Properties.Settings.Default.ip;
+            Overview_ServerPort.Content = serverArchive.AssignedPort;
+            Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
+            Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
+
+            // Clear graph
+            SeriesCollection[0].Values.Clear();
+            SeriesCollection[1].Values.Clear();
+            SeriesCollection[2].Values.Clear();
+            GraphTimes.Clear();
+
+            // Update config page
+            List<string> credentials = api.GetCredentials();
+            ftp_ip.Content = credentials[0];
+            ftp_port.Content = credentials[1];
+            ftp_username.Content = credentials[2];
+            ftp_password.Content = credentials[3];
+            ftp_id.Content = serverArchive.ID;
+            Configuration_servername.Text = serverArchive.Name;
+            Configuration_serverram.Text = serverArchive.RamAllocated.ToString();
+            Configuration_serverpath.Text = serverArchive.LaunchPath;
+            switch (serverArchive.JavaVersion)
+            {
+                case 8:
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = false;
+                    user_serverjava = 8;
+                    break;
+
+                case 16:
+                    java16btn.IsEnabled = false;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
+                    user_serverjava = 16;
+                    break;
+
+                case 17:
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = false;
+                    java18btn.IsEnabled = true;
+                    java8btn.IsEnabled = true;
+                    user_serverjava = 17;
+                    break;
+
+                case 18:
+                    java16btn.IsEnabled = true;
+                    java17btn.IsEnabled = true;
+                    java18btn.IsEnabled = false;
+                    java8btn.IsEnabled = true;
+                    user_serverjava = 18;
+                    break;
+            }
+
+            frameworkip.Text = Settings.Default.ip;
+            frameworkport.Text = Settings.Default.port.ToString();
+            pollrate.Text = Settings.Default.pollfrequency.ToString();
+            consolecutoff.Text = Settings.Default.consolecutoff.ToString();
+            terminalcutoff.Text = Settings.Default.terminalcutoff.ToString();
+            switch (Properties.Settings.Default.legacysupport)
+            {
+                case false:
+                    gen2btn.Background = (Brush)FindResource("Color_Highlight1");
+                    legacybtn.Background = (Brush)FindResource("Color_TextInverted");
+                    user_legacyapi = false;
+                    break;
+
+                case true:
+                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
+                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    user_legacyapi = true;
+                    break;
+            }
+            switch (Properties.Settings.Default.theme)
+            {
+                case 0:
+                    lightmodebtn.Background = (Brush)FindResource("Color_Highlight1");
+                    darkmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    user_darkmode = false;
+                    break;
+
+                case 1:
+                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
+                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    user_darkmode = true;
+                    break;
+
+                default:
+                    break;
+            }
+
+            // Start updating timer
+            refreshTimer.Tick += new EventHandler(refresh);
+            refreshTimer.Interval = new TimeSpan(0, 0, 2);
+            refreshTimer.Start();
+
+            // Show main window
+            this.mainGrid.Visibility = Visibility.Visible;
+            button_dashboard.IsEnabled = false;
+            button_terminal.IsEnabled = true;
+            button_players.IsEnabled = true;
+            button_performance.IsEnabled = true;
+            button_configuration.IsEnabled = true;
+            button_admin.IsEnabled = true;
+            button_settings.IsEnabled = true;
+            this.ChangeTab(0);
+            rootStart_Progressbar.Value = 100;
+
+            await Task.Run(() => Thread.Sleep(500));
+
+            rootTabControl.SelectedIndex = 2;
+        }
+
+        public ulong selectedID;
+
     }
 }

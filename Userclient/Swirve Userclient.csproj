@@ -252,12 +252,20 @@
     <Resource Include="output-onlinepngtools.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\icon_add_dark.png" />
+    <Content Include="Resources\icon_add_dark.svg" />
+    <Resource Include="Resources\icon_server_rebooting_dark.png" />
+    <Content Include="Resources\icon_server_rebooting_dark.svg" />
+    <Resource Include="Resources\icon_server_error_dark.png" />
+    <Content Include="Resources\icon_server_error_dark.svg" />
+    <Resource Include="Resources\icon_server_online_dark.png" />
+    <Content Include="Resources\icon_server_online_dark.svg" />
     <Resource Include="Resources\arrow_back_ios_FILL0_wght200_GRAD0_opsz48.png" />
     <Content Include="Resources\arrow_back_ios_FILL0_wght200_GRAD0_opsz48.svg" />
     <Resource Include="Resources\arrow_forward_ios_FILL0_wght200_GRAD0_opsz48.png" />
     <Content Include="Resources\arrow_forward_ios_FILL0_wght200_GRAD0_opsz48.svg" />
     <Resource Include="Resources\data_usage_FILL0_wght200_GRAD0_opsz48.png" />
-    <Resource Include="Resources\deployed_code_FILL0_wght200_GRAD0_opsz48.png" />
+    <Resource Include="Resources\icon_server_dark.png" />
     <Resource Include="Resources\done_all_FILL0_wght200_GRAD0_opsz48.png" />
     <Resource Include="Resources\icon_admin_dark.png" />
     <Resource Include="Resources\icon_configuration_dark.png" />
@@ -270,7 +278,7 @@
     <Resource Include="Resources\icon_terminal_dark.png" />
     <Content Include="Resources\icon_terminal_dark.svg" />
     <Content Include="Resources\data_usage_FILL0_wght200_GRAD0_opsz48.svg" />
-    <Content Include="Resources\deployed_code_FILL0_wght200_GRAD0_opsz48.svg" />
+    <Content Include="Resources\icon_server_dark.svg" />
     <Content Include="Resources\done_all_FILL0_wght200_GRAD0_opsz48.svg" />
     <Content Include="Resources\icon_players_dark.svg" />
     <Resource Include="Resources\library_add_FILL0_wght200_GRAD0_opsz48.png" />

@@ -36,6 +36,36 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+            <TabItem x:Name="rootSelection" Visibility="Collapsed">
+                <Grid Margin="0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, -50, 0, 0" VerticalAlignment="Center">
+                        <Border Background="{DynamicResource Color_Palette3}" Width="50" Height="50" Margin="0,0,-25,0" CornerRadius="25"/>
+                        <Border Background="{DynamicResource Color_Palette2}" Width="50" Height="50" Margin="0,0,-25,0" CornerRadius="25"/>
+                        <Border Background="{DynamicResource Color_Palette1}" Width="50" Height="50" CornerRadius="25"/>
+                        <Label Content="Swirve" VerticalAlignment="Center" FontFamily="Fonts/#Montserrat" Margin="20,0,0,0" FontSize="50"/>
+                    </StackPanel>
+                    <ItemsControl Name="rootSelection_serverlist" HorizontalAlignment="Center" Margin="0,200,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{DynamicResource Color_Emerge}" CornerRadius="10" Height="50" Width="200" Margin="10" MouseDown="Rectangle_MouseDown" Tag="{Binding ServerID}">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="40" Opacity=".25"/>
+                                    </Border.Effect>
+                                    <Grid>
+                                        <Image Source="{Binding IconPath}" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        <Label Content="{Binding ServerName}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="45,0,0,0" FontSize="17" IsHitTestVisible="False" Width="150" Foreground="{DynamicResource Color_Text}" FontFamily="./Fonts/#Montserrat"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </TabItem>
             <TabItem x:Name="rootNode" Margin="0,0" Visibility="Collapsed">
                 <Grid Margin="0">
                     <TabControl x:Name="mainTabControl" Margin="70,20,0,0" Padding="20, 0, 20, 20" Style="{DynamicResource Content_Tabcontrol}">

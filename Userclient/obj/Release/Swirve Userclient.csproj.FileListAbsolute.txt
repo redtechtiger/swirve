@@ -128,3 +128,5 @@ C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.csproj.C
 C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.csproj.CopyComplete
 C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.exe
 C:\Users\J\Source\Repos\Swirve\Userclient\obj\Release\Swirve Userclient.pdb
+C:\Users\J\source\repos\Swirve\Userclient\bin\Release\LiveCharts.dll
+C:\Users\J\source\repos\Swirve\Userclient\bin\Release\LiveCharts.Wpf.dll
