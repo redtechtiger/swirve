@@ -30,6 +30,7 @@ using Swirve_Userclient.Properties;
 using System.Net;
 using System.Windows.Markup.Localizer;
 using static Swirve_Userclient.MainWindow;
+using System.Collections.ObjectModel;
 
 namespace Swirve_Userclient
 {
@@ -1029,7 +1030,7 @@ namespace Swirve_Userclient
         }
 
         List<FrameworkApi.ServerModule> modulecache = new List<FrameworkApi.ServerModule>();
-        List<ServerVisual> visualcache = new List<ServerVisual>();
+        ObservableCollection<ServerVisual> visualcache = new ObservableCollection<ServerVisual>();
 
         public void UploadModules(List<FrameworkApi.ServerModule> servermodules)
         {
@@ -1072,6 +1073,7 @@ namespace Swirve_Userclient
 
             // Show
             rootSelection_serverlist.ItemsSource = visualcache;
+            rootSelection_serverlist.InvalidateVisual();
             rootSelection_serverlist.Visibility = Visibility.Visible;
         }
 
