@@ -70,7 +70,7 @@
                 <Grid Margin="0">
                     <TabControl x:Name="mainTabControl" Margin="70,20,0,0" Padding="20, 0, 20, 20" Style="{DynamicResource Content_Tabcontrol}">
                         <!-- Overview -->
-                        <TabItem x:Name="overview" Visibility="Visible">
+                        <TabItem x:Name="overview" Visibility="Collapsed">
                             <Grid>
                                 <StackPanel>
                                     <!-- Title -->
@@ -139,29 +139,27 @@
                                 </Grid>
                             </Grid>
                         </TabItem>
-                        <TabItem x:Name="console" Visibility="Visible">
+                        <TabItem x:Name="console" Visibility="Collapsed">
                             <StackPanel>
                                 <Label Content="Terminal" Style="{DynamicResource Pagetitle_Label}"/>
-                                <Grid Margin="0,20,0,0">
-                                    <StackPanel>
-                                        <Border x:Name="console_log_border" Margin="0" Height="535" Width="1090" VerticalAlignment="Top" Padding="10" CornerRadius="15" Style="{DynamicResource Dashboard_Group_Border}">
-                                            <TextBox x:Name="logOutput" FontSize="12" Text="Swirve: Ready to boot" TextWrapping="Wrap" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" FontFamily="Consolas" Height="Auto" Width="Auto" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" Foreground="{DynamicResource Color_Text}" KeyDown="logOutput_KeyDown" GotKeyboardFocus="logOutput_GotKeyboardFocus"/>
+                                <StackPanel Margin="0,20,0,0">
+                                    <Border x:Name="console_log_border" Margin="0" Height="535" Width="1090" VerticalAlignment="Top" Padding="10" CornerRadius="15" Style="{DynamicResource Dashboard_Group_Border}">
+                                        <TextBox x:Name="logOutput" FontSize="12" Text="Swirve: Ready to boot" TextWrapping="Wrap" IsReadOnly="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" FontFamily="Consolas" Height="Auto" Width="Auto" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" Foreground="{DynamicResource Color_Text}" KeyDown="logOutput_KeyDown" GotKeyboardFocus="logOutput_GotKeyboardFocus"/>
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0, 17, 0, 0">
+                                        <Button x:Name="dataDumpBtn" Template="{DynamicResource Button_Freefloating0}" FontFamily="Fonts/#Montserrat" VerticalAlignment="Center" Width="90" Height="Auto" Content="Dump log" FontSize="13" Foreground="{DynamicResource Color_Text}" Padding="10" Click="dataDumpBtn_Click"/>
+                                        <Grid>
+                                            <Button Template="{DynamicResource Button_Freefloating0}" x:Name="sendBtn" Margin="15, 0" FontFamily="Fonts/#Montserrat" HorizontalContentAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto" Content="Send" FontSize="13" Foreground="{DynamicResource Color_Text}" Padding="30, 10, 15, 10" Click="sendLogBtn_Click"/>
+                                            <Image Source="/Resources/icon_terminalsend_dark.png" Height="24" Margin="0, 0, 40, 0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        </Grid>
+                                        <Border Padding="15,0" Width="892" Height="38" CornerRadius="15" Background="{DynamicResource Color_WidgetBackground}" Style="{DynamicResource Dashboard_Group_Border}">
+                                            <TextBox x:Name="logInput" Text="Enter command..." FlowDirection="LeftToRight" VerticalContentAlignment="Center" Height="38" Width="862" FontFamily="Fonts/#Montserrat" FontSize="13" KeyDown="logInput_KeyDown" Foreground="{DynamicResource Color_Text}" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" GotKeyboardFocus="logInput_GotKeyboardFocus" LostKeyboardFocus="logInput_LostKeyboardFocus"/>
                                         </Border>
-                                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0, 17, 0, 0">
-                                            <Button x:Name="dataDumpBtn" Template="{DynamicResource Button_Freefloating0}" FontFamily="Fonts/#Montserrat" VerticalAlignment="Center" Width="90" Height="Auto" Content="Dump log" FontSize="13" Foreground="{DynamicResource Color_Text}" Padding="10" Click="dataDumpBtn_Click"/>
-                                            <Grid>
-                                                <Button Template="{DynamicResource Button_Freefloating0}" x:Name="sendBtn" Margin="15, 0" FontFamily="Fonts/#Montserrat" HorizontalContentAlignment="Right" VerticalAlignment="Center" Width="Auto" Height="Auto" Content="Send" FontSize="13" Foreground="{DynamicResource Color_Text}" Padding="30, 10, 15, 10" Click="sendLogBtn_Click"/>
-                                                <Image Source="/Resources/icon_terminalsend_dark.png" Height="24" Margin="0, 0, 40, 0" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                            </Grid>
-                                            <Border Padding="15,0" Width="892" Height="38" CornerRadius="15" Background="{DynamicResource Color_WidgetBackground}" Style="{DynamicResource Dashboard_Group_Border}">
-                                                <TextBox x:Name="logInput" Text="Enter command..." FlowDirection="LeftToRight" VerticalContentAlignment="Center" Height="38" Width="862" FontFamily="Fonts/#Montserrat" FontSize="13" KeyDown="logInput_KeyDown" Foreground="{DynamicResource Color_Text}" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" GotKeyboardFocus="logInput_GotKeyboardFocus" LostKeyboardFocus="logInput_LostKeyboardFocus"/>
-                                            </Border>
-                                        </StackPanel>
                                     </StackPanel>
-                                </Grid>
+                                </StackPanel>
                             </StackPanel>
                         </TabItem>
-                        <TabItem x:Name="players" Visibility="Visible">
+                        <TabItem x:Name="players" Visibility="Collapsed">
                             <StackPanel>
                                 <Label Content="Players" Style="{DynamicResource Pagetitle_Label}"/>
                                 <Grid Margin="0,20,0,0">
@@ -192,7 +190,7 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
-                        <TabItem x:Name="performance" Visibility="Visible">
+                        <TabItem x:Name="performance" Visibility="Collapsed">
                             <StackPanel>
                                 <Label Content="Performance" Style="{DynamicResource Pagetitle_Label}"/>
                                 <Grid Margin="0, 20, 0, 0">
@@ -241,7 +239,7 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
-                        <TabItem x:Name="configuration" Visibility="Visible">
+                        <TabItem x:Name="configuration" Visibility="Collapsed">
                             <StackPanel>
                                 <Label Content="Configuration" Style="{DynamicResource Pagetitle_Label}"/>
                                 <Grid Margin="0, 20, 0, 0">
@@ -284,27 +282,27 @@
                                                 </StackPanel>
                                             </Border>
                                         </StackPanel>
-                                        <Border Style="{DynamicResource Dashboard_Group_Border}" Width="300" Height="150" Margin="50, 0" Background="{DynamicResource Color_Palette2}" VerticalAlignment="Top">
+                                        <Border Style="{DynamicResource Dashboard_Group_Border}" Width="300" Height="150" Margin="50, 0" VerticalAlignment="Top">
                                             <StackPanel Margin="10">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Label Content="FTP IP: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_ip" Content="ip" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
+                                                    <Label Content="FTP IP: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <Label x:Name="ftp_ip" Content="ip" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Label Content="FTP Port: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_port" Content="port" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
+                                                    <Label Content="FTP Port: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <Label x:Name="ftp_port" Content="port" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Label Content="FTP Username: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_username" Content="username" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
+                                                    <Label Content="FTP Username: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <Label x:Name="ftp_username" Content="username" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Label Content="FTP Password: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_password" Content="password" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
+                                                    <Label Content="FTP Password: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <Label x:Name="ftp_password" Content="password" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <Label Content="Directory ID: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_id"  Content="xxxxxxxxxxxxx" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_TextInverted}" Padding="5, 3"/>
+                                                    <Label Content="Directory ID: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <Label x:Name="ftp_id"  Content="xxxxxxxxxxxxx" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
@@ -312,7 +310,7 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
-                        <TabItem x:Name="adminpanel" Visibility="Visible">
+                        <TabItem x:Name="adminpanel" Visibility="Collapsed">
                             <Grid>
                                 <Border Style="{DynamicResource Pagetitle_Border}">
                                     <Label Content="Framework Control Panel" Style="{DynamicResource Pagetitle_Label}"/>
@@ -328,7 +326,7 @@
                                 </StackPanel>
                             </Grid>
                         </TabItem>
-                        <TabItem x:Name="settings" Visibility="Visible">
+                        <TabItem x:Name="settings" Visibility="Collapsed">
                             <Border>
                                 <Grid>
                                     <Border Style="{DynamicResource Pagetitle_Border}">
@@ -405,7 +403,7 @@
                                 </Grid>
                             </Border>
                         </TabItem>
-                        <TabItem x:Name="adminpanel_auth" Visibility="Visible">
+                        <TabItem x:Name="adminpanel_auth" Visibility="Collapsed">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 20">
                                     <Border Style="{DynamicResource Pagetitle_Border}" Margin="0, 0, 10, 0">
@@ -434,7 +432,6 @@
                             </StackPanel>
                         </TabItem>
                     </TabControl>
-                    <Grid x:Name="dragBar" VerticalAlignment="Top" Height="40" MouseDown="dragBar_MouseDown" Background="White" Opacity="0"/>
                     <Grid x:Name="sidePanel" HorizontalAlignment="Left" Height="704" Width="70" Margin="-2, -4, 0, -2">
                         <Border CornerRadius="8" Style="{DynamicResource Sidebar_Border}"/>
                         <StackPanel>
@@ -482,5 +479,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Grid x:Name="dragBar" VerticalAlignment="Top" Height="40" MouseDown="dragBar_MouseDown" Background="White" Opacity="0"/>
     </Grid>
 </Window>
