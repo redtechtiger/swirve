@@ -44,10 +44,10 @@
                         <Border Background="{DynamicResource Color_Palette1}" Width="50" Height="50" CornerRadius="25"/>
                         <Label Content="Swirve" VerticalAlignment="Center" FontFamily="Fonts/#Montserrat" Margin="20,0,0,0" FontSize="50"/>
                     </StackPanel>
-                    <ItemsControl Name="rootSelection_serverlist" HorizontalAlignment="Center" Margin="0,200,0,0">
+                    <ItemsControl Name="rootSelection_serverlist" HorizontalAlignment="Center" Margin="0,400,0,0">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
+                                <WrapPanel Orientation="Horizontal" Width="600"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
