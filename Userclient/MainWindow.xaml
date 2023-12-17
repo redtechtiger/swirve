@@ -66,11 +66,11 @@
                     </ItemsControl>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="rootNode" Margin="0,0" Visibility="Visible">
+            <TabItem x:Name="rootNode" Margin="0,0" Visibility="Collapsed">
                 <Grid Margin="0">
                     <TabControl x:Name="mainTabControl" Margin="70,20,0,0" Padding="20, 0, 20, 20" Style="{DynamicResource Content_Tabcontrol}">
                         <!-- Overview -->
-                        <TabItem x:Name="overview" Visibility="Visible">
+                        <TabItem x:Name="overview" Visibility="Collapsed">
                             <Grid>
                                 <StackPanel>
                                     <!-- Title -->
@@ -239,7 +239,7 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
-                        <TabItem x:Name="configuration" Visibility="Visible">
+                        <TabItem x:Name="configuration" Visibility="Collapsed">
                             <StackPanel>
                                 <Label Content="Configuration" Style="{DynamicResource Pagetitle_Label}"/>
                                 <Grid Margin="0, 20, 0, 0">
@@ -249,21 +249,32 @@
                                                 <StackPanel Margin="15, 15, 0, 0">
                                                     <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 30">
                                                         <StackPanel>
+                                                            
                                                             <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0" Width="250" Height="35">
-                                                                <TextBox x:Name="Configuration_servername" Text="LPQ Modded" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Label Content="Name: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                    <TextBox x:Name="Configuration_servername" Text="LPQ Modded" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                </StackPanel>
+                                                                
                                                             </Border>
                                                             <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                         </StackPanel>
                                                         <StackPanel Margin="30, 0">
-                                                            <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0" Width="60">
-                                                                <TextBox x:Name="Configuration_serverram" Text="24 GB" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                            <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0" Width="140">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Label Content="Memory: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                    <TextBox x:Name="Configuration_serverram" Text="24 GB" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                </StackPanel>
                                                             </Border>
                                                             <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                         </StackPanel>
                                                     </StackPanel>
-                                                    <StackPanel Width="350" HorizontalAlignment="Left">
+                                                    <StackPanel Width="400" HorizontalAlignment="Left">
                                                         <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0">
-                                                            <TextBox x:Name="Configuration_serverpath" Text="run.sh" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <Label Content="Start Script: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                <TextBox x:Name="Configuration_serverpath" Text="run.sh" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                            </StackPanel>
                                                         </Border>
                                                         <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                     </StackPanel>
@@ -312,9 +323,7 @@
                         </TabItem>
                         <TabItem x:Name="adminpanel" Visibility="Collapsed">
                             <Grid>
-                                <Border Style="{DynamicResource Pagetitle_Border}">
-                                    <Label Content="Framework Control Panel" Style="{DynamicResource Pagetitle_Label}"/>
-                                </Border>
+                                <Label Content="Cluster Panel" Style="{DynamicResource Pagetitle_Label}"/>
                                 <StackPanel VerticalAlignment="Center">
                                     <!--<Image Style="{DynamicResource Adminlock_Image}" Height="120" />-->
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="50, 0, 0, 0">
@@ -329,71 +338,73 @@
                         <TabItem x:Name="settings" Visibility="Collapsed">
                             <Border>
                                 <Grid>
-                                    <Border Style="{DynamicResource Pagetitle_Border}">
-                                        <Label Content="Userclient Settings" Style="{DynamicResource Pagetitle_Label}"/>
-                                    </Border>
+                                    <Label Content="Preferences" Style="{DynamicResource Pagetitle_Label}"/>
                                     <Grid Margin="0, 60, 0, 0">
                                         <StackPanel Orientation="Horizontal">
                                             <StackPanel>
-                                                <Border Style="{DynamicResource Dashboard_Group_Border}" Width="684" Height="355" Background="{DynamicResource Color_Palette1}">
+                                                <Border Style="{DynamicResource Dashboard_Group_Border}" Width="750" Height="355">
                                                     <StackPanel Margin="10">
                                                         <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 0">
-                                                            <StackPanel>
-                                                                <Label Content="Framework IP [PSTR]" FontFamily="Fonts/#Roboto" FontStyle="Italic" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                                                <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0" Width="250" Height="35">
-                                                                    <TextBox x:Name="frameworkip" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                                            <StackPanel Width="220" HorizontalAlignment="Left">
+                                                                <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Label Content="Cluster IP: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                        <TextBox x:Name="frameworkip" Text="32.221.107.80" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                    </StackPanel>
                                                                 </Border>
+                                                                <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                             </StackPanel>
-                                                            <StackPanel Margin="30, 0">
-                                                                <Label Content="Port [INT]" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                                                <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0" Width="100">
-                                                                    <TextBox x:Name="frameworkport" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                                            <StackPanel Width="180" HorizontalAlignment="Left" Margin="30,0">
+                                                                <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Label Content="Cluster Port: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                        <TextBox x:Name="frameworkport" Text="12555" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                    </StackPanel>
                                                                 </Border>
+                                                                <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                             </StackPanel>
-                                                            <StackPanel Margin="30, 0">
-                                                                <Label Content="Pollrate [INT]" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                                                <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0" Width="100">
-                                                                    <TextBox  x:Name="pollrate" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                                            <StackPanel Width="120" HorizontalAlignment="Left" Margin="30,0">
+                                                                <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Label Content="Poll Rate: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                        <TextBox x:Name="pollrate" Text="1" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                    </StackPanel>
                                                                 </Border>
+                                                                <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                             </StackPanel>
                                                         </StackPanel>
-                                                        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 0">
-                                                            <StackPanel Margin="0, 0">
-                                                                <Label Content="Console Cutoff [INT]" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                                                <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0" Width="150">
-                                                                    <TextBox x:Name="consolecutoff" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                                        <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 0">
+                                                            <StackPanel Width="200" HorizontalAlignment="Left" Margin="0,0">
+                                                                <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Label Content="Console Limit: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                        <TextBox x:Name="consolecutoff" Text="10000" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                    </StackPanel>
                                                                 </Border>
+                                                                <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                             </StackPanel>
-                                                            <StackPanel Margin="30, 0">
-                                                                <Label Content="Terminal Cutoff [INT]" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
-                                                                <Border Background="{DynamicResource Color_TextInverted}" CornerRadius="15" Padding="5" Margin="5, 0" Width="150">
-                                                                    <TextBox x:Name="terminalcutoff" Background="{DynamicResource Color_TextInverted}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                                            <StackPanel Width="200" HorizontalAlignment="Left" Margin="30,0">
+                                                                <Border Background="{DynamicResource Color_WidgetBackground}" CornerRadius="15" Padding="5" Margin="5, 0">
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <Label Content="Terminal Limit: " VerticalContentAlignment="Center" Padding="0,1,0,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                                        <TextBox x:Name="terminalcutoff" Text="20000" Background="{DynamicResource Color_WidgetBackground}" Height="25" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="0"/>
+                                                                    </StackPanel>
                                                                 </Border>
+                                                                <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                             </StackPanel>
                                                         </StackPanel>
                                                         <Label Content="Theme" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
                                                         <StackPanel Orientation="Horizontal" Margin="5, 0">
-                                                            <Border x:Name="lightmodebtn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" CornerRadius="15, 0, 0, 15" MouseDown="lightmodebtn_MouseDown">
-                                                                <Label Content="Light" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
-                                                            </Border>
-                                                            <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
-                                                            <Border x:Name="darkmodebtn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" MouseDown="darkmodebtn_MouseDown" CornerRadius="0, 15, 15, 0">
-                                                                <Label Content="Dark" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
-                                                            </Border>
+                                                            <Button x:Name="legacybtn" Content="Legacy Protocol" Width="150" Style="{DynamicResource PowerButton}" Height="33" Click="legacybtn_MouseDown"/>
+                                                            <Button x:Name="gen2btn" Content="Gen2 Dynamic" Width="150" Style="{DynamicResource PowerButton}" Height="33" Click="gen2btn_MouseDown"/>
                                                         </StackPanel>
-                                                        <Label Content="FrameworkAPI Syscalls" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
                                                         <StackPanel Orientation="Horizontal" Margin="5, 0">
-                                                            <Border x:Name="legacybtn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" CornerRadius="15, 0, 0, 15" MouseDown="legacybtn_MouseDown">
-                                                                <Label Content="Legacy" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
-                                                            </Border>
-                                                            <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
-                                                            <Border x:Name="gen2btn" Height="33" Background="{DynamicResource Color_TextInverted}" Padding="30, 2" MouseDown="gen2btn_MouseDown" CornerRadius="0, 15, 15, 0">
-                                                                <Label Content="Gen2" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
-                                                            </Border>
+                                                            <Button x:Name="lightmodebtn" Content="Light Mode" Width="130" Style="{DynamicResource PowerButton}" Height="33" Click="lightmodebtn_MouseDown"/>
+                                                            <Button x:Name="darkmodebtn" Content="Dark Mode" Width="130" Style="{DynamicResource PowerButton}" Height="33" Click="darkmodebtn_MouseDown"/>
                                                         </StackPanel>
-                                                        <StackPanel Orientation="Horizontal" Margin="5, 40, 0, 0">
-                                                            <Button Style="{DynamicResource PowerButton}" Content="Save" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="SaveSettingsButton_Click"/>
-                                                            <Button Style="{DynamicResource PowerButton}" Content="Discard" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="RestoreSettingsButton_Click"/>
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5, 00, 0, 0">
+                                                            <Button Style="{DynamicResource PowerButton}" Content="Save" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" Click="SaveSettingsButton_Click"/>
+                                                            <Button Style="{DynamicResource PowerButton}" Content="Discard" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" Click="RestoreSettingsButton_Click"/>
                                                         </StackPanel>
                                                     </StackPanel>
                                                 </Border>

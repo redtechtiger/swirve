@@ -901,44 +901,32 @@ namespace Swirve_Userclient
             ApplicationWide_EndLoad();
         }
 
-        private void lightmodebtn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void lightmodebtn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                lightmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                darkmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                lightmodebtn.IsEnabled = false;
+                darkmodebtn.IsEnabled = true;
                 user_darkmode = false;
-            }
         }
 
-        private void darkmodebtn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void darkmodebtn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                darkmodebtn.IsEnabled = false;
+                lightmodebtn.IsEnabled = true;
                 user_darkmode = true;
-            }
         }
 
-        private void legacybtn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void legacybtn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                legacybtn.Background = (Brush)FindResource("Color_Highlight1");
-                gen2btn.Background = (Brush)FindResource("Color_TextInverted");
+                legacybtn.IsEnabled = false;
+                gen2btn.IsEnabled = true;
                 user_legacyapi = true;
-            }
         }
 
-        private void gen2btn_MouseDown(object sender, MouseButtonEventArgs e)
+        private void gen2btn_MouseDown(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                gen2btn.Background = (Brush)FindResource("Color_Highlight1");
-                legacybtn.Background = (Brush)FindResource("Color_TextInverted");
+                gen2btn.IsEnabled = false;
+                legacybtn.IsEnabled = true;
                 user_legacyapi = false;
-            }
         }
 
         private async void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
@@ -988,28 +976,28 @@ namespace Swirve_Userclient
             switch(Properties.Settings.Default.legacysupport)
             {
                 case false:
-                    gen2btn.Background = (Brush)FindResource("Color_Highlight1");
-                    legacybtn.Background = (Brush)FindResource("Color_TextInverted");
+                    gen2btn.IsEnabled = false;
+                    legacybtn.IsEnabled = true;
                     user_legacyapi = false;
                     break;
 
                 case true:
-                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    gen2btn.IsEnabled = true;
+                    legacybtn.IsEnabled = false;
                     user_legacyapi = true;
                     break;
             }
             switch(Properties.Settings.Default.theme)
             {
                 case 0:
-                    lightmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    darkmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    lightmodebtn.IsEnabled = false;
+                    darkmodebtn.IsEnabled = true;
                     user_darkmode = false;
                     break;
 
                 case 1:
-                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    lightmodebtn.IsEnabled = false;
+                    darkmodebtn.IsEnabled = true;
                     user_darkmode = true;
                     break;
 
@@ -1191,28 +1179,28 @@ namespace Swirve_Userclient
             switch (Properties.Settings.Default.legacysupport)
             {
                 case false:
-                    gen2btn.Background = (Brush)FindResource("Color_Highlight1");
-                    legacybtn.Background = (Brush)FindResource("Color_TextInverted");
+                    gen2btn.IsEnabled = false;
+                    legacybtn.IsEnabled = true;
                     user_legacyapi = false;
                     break;
 
                 case true:
-                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    gen2btn.IsEnabled = true;
+                    legacybtn.IsEnabled = false;
                     user_legacyapi = true;
                     break;
             }
             switch (Properties.Settings.Default.theme)
             {
                 case 0:
-                    lightmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    darkmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    lightmodebtn.IsEnabled = false;
+                    darkmodebtn.IsEnabled = true;
                     user_darkmode = false;
                     break;
 
                 case 1:
-                    darkmodebtn.Background = (Brush)FindResource("Color_Highlight1");
-                    lightmodebtn.Background = (Brush)FindResource("Color_TextInverted");
+                    lightmodebtn.IsEnabled = false;
+                    darkmodebtn.IsEnabled = true;
                     user_darkmode = true;
                     break;
 
