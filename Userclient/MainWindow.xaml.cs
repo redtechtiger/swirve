@@ -123,9 +123,9 @@ namespace Swirve_Userclient
             {
 
                 // If failed, show this error
-                errMsg.errorDescription.Content = "Connection Error";
-                errMsg.errorContext.Text = "Failed to connect to Framework.";
-                errMsg.errorAction.Content = "Shut Down";
+                errMsg.errorDescription.Content = "Cluster Error";
+                errMsg.errorContext.Text = "Couldn't connect to Framework";
+                errMsg.errorAction.Content = "Exit";
                 errMsg.ShowDialog();
 
                 // Shut down Userclient
@@ -164,13 +164,10 @@ namespace Swirve_Userclient
             {
                 refreshTimer.Stop();
                 ErrorMessage errMsg = new ErrorMessage();
-                errMsg.errorDescription.Content = "Disconnected";
-                errMsg.errorContext.Text = "Framework remotely shut down the connection";
-                errMsg.errorAction.Content = "Power Down";
+                errMsg.errorDescription.Content = "Cluster Timeout";
+                errMsg.errorContext.Text = "Framework stopped responding";
+                errMsg.errorAction.Content = "Exit";
                 errMsg.ShowDialog();
-                Hide();
-                initScreen loadingscreen = new initScreen();
-                loadingscreen.Show();
                 api.Disconnect();
                 Application.Current.Shutdown();
             }
@@ -659,13 +656,13 @@ namespace Swirve_Userclient
         {
             // Update config page
             List<string> credentials = api.GetCredentials();
-            ftp_ip.Content = credentials[0];
-            ftp_port.Content = credentials[1];
-            ftp_username.Content = credentials[2];
-            ftp_password.Content = credentials[3];
-            ftp_id.Content = serverArchive.ID;
+            ftp_ip.Text = credentials[0];
+            ftp_port.Text = credentials[1];
+            ftp_username.Text = credentials[2];
+            ftp_password.Text = credentials[3];
+            ftp_id.Text = serverArchive.ID.ToString();
             Configuration_servername.Text = serverArchive.Name;
-            Configuration_serverram.Text = serverArchive.RamAllocated.ToString();
+            Configuration_serverram.Text = serverArchive.RamAllocated.ToString() + "GB";
             Configuration_serverpath.Text = serverArchive.LaunchPath;
             switch (serverArchive.JavaVersion)
             {
@@ -708,7 +705,7 @@ namespace Swirve_Userclient
             // Try to parse data
             int ram;
             try {
-                ram = int.Parse(Configuration_serverram.Text);
+                ram = int.Parse(Configuration_serverram.Text.Replace("GB",""));
             } catch
             {
                 ErrorMessage error = new ErrorMessage();
@@ -755,7 +752,7 @@ namespace Swirve_Userclient
             ApplicationWide_StartLoad("Refreshing...");
             await Task.Run(() => { serverArchive = api.GetArchive(serverArchive.ID); });
             Overview_Servername.Content = serverArchive.Name;
-            Overview_ServerPort.Content = serverArchive.AssignedPort;
+            Overview_ServerPort.Text = serverArchive.AssignedPort.ToString();
             Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
             Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
             await Task.Run(() => Thread.Sleep(1000));
@@ -1130,8 +1127,8 @@ namespace Swirve_Userclient
 
             // Set all neccessary information
             Overview_Servername.Content = serverArchive.Name;
-            Overview_ServerIp.Content = Properties.Settings.Default.ip;
-            Overview_ServerPort.Content = serverArchive.AssignedPort;
+            Overview_ServerIp.Text = Properties.Settings.Default.ip;
+            Overview_ServerPort.Text = serverArchive.AssignedPort.ToString();
             Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
             Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
 
@@ -1143,13 +1140,13 @@ namespace Swirve_Userclient
 
             // Update config page
             List<string> credentials = api.GetCredentials();
-            ftp_ip.Content = credentials[0];
-            ftp_port.Content = credentials[1];
-            ftp_username.Content = credentials[2];
-            ftp_password.Content = credentials[3];
-            ftp_id.Content = serverArchive.ID;
+            ftp_ip.Text = credentials[0];
+            ftp_port.Text = credentials[1];
+            ftp_username.Text = credentials[2];
+            ftp_password.Text = credentials[3];
+            ftp_id.Text = serverArchive.ID.ToString();
             Configuration_servername.Text = serverArchive.Name;
-            Configuration_serverram.Text = serverArchive.RamAllocated.ToString();
+            Configuration_serverram.Text = serverArchive.RamAllocated.ToString() + "GB";
             Configuration_serverpath.Text = serverArchive.LaunchPath;
             switch (serverArchive.JavaVersion)
             {

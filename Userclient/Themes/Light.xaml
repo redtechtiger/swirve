@@ -419,6 +419,15 @@
     </Style>
 
 
+    <Style x:Key="Copyable_TextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Text" Value="{Binding Text, Mode=OneWay}"/>
+    </Style>
+
+
     <!-- Splash -->
 
     <Style x:Key="Splash_Title" TargetType="{x:Type Label}">

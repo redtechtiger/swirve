@@ -66,11 +66,11 @@
                     </ItemsControl>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="rootNode" Margin="0,0" Visibility="Collapsed">
+            <TabItem x:Name="rootNode" Margin="0,0" Visibility="Visible">
                 <Grid Margin="0">
                     <TabControl x:Name="mainTabControl" Margin="70,20,0,0" Padding="20, 0, 20, 20" Style="{DynamicResource Content_Tabcontrol}">
                         <!-- Overview -->
-                        <TabItem x:Name="overview" Visibility="Collapsed">
+                        <TabItem x:Name="overview" Visibility="Visible">
                             <Grid>
                                 <StackPanel>
                                     <!-- Title -->
@@ -81,8 +81,8 @@
                                             <StackPanel>
                                                 <Label Content="LPQ Modded" x:Name="Overview_Servername" FontSize="30" Margin="15, 15, 0, 0" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Montserrat" FontWeight="Bold"/>
                                                 <StackPanel Orientation="Horizontal"  Margin="15, -15, 0, 0">
-                                                    <Label Content="98.168.213.31" x:Name="Overview_ServerIp" FontSize="22" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Montserrat" FontWeight="Light"/>
-                                                    <Label Content="25565" x:Name="Overview_ServerPort" VerticalContentAlignment="Center" Margin="0,-10" FontSize="22" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_TextInverted}" FontWeight="Light"/>
+                                                    <TextBox Style="{DynamicResource Copyable_TextBox}" Text="98.168.213.31" x:Name="Overview_ServerIp" Margin="5" FontSize="22" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Montserrat" FontWeight="Light"/>
+                                                    <TextBox Style="{DynamicResource Copyable_TextBox}" Text="25565" x:Name="Overview_ServerPort" Margin="5" FontSize="22" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_TextInverted}" FontWeight="Light"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="15, 20">
                                                     <Label Content="💾 8GB" x:Name="Overview_ServerRamTotal" VerticalContentAlignment="Center" Margin="0,-10" FontSize="20" Foreground="{DynamicResource Color_TextInverted}" FontFamily="Fonts/#Montserrat"/>
@@ -239,7 +239,7 @@
                                 </Grid>
                             </StackPanel>
                         </TabItem>
-                        <TabItem x:Name="configuration" Visibility="Collapsed">
+                        <TabItem x:Name="configuration" Visibility="Visible">
                             <StackPanel>
                                 <Label Content="Configuration" Style="{DynamicResource Pagetitle_Label}"/>
                                 <Grid Margin="0, 20, 0, 0">
@@ -282,27 +282,27 @@
                                                 </StackPanel>
                                             </Border>
                                         </StackPanel>
-                                        <Border Style="{DynamicResource Dashboard_Group_Border}" Width="300" Height="150" Margin="50, 0" VerticalAlignment="Top">
+                                        <Border Style="{DynamicResource Dashboard_Group_Border}" Width="320" Height="150" Margin="50,0,0,0" VerticalAlignment="Top">
                                             <StackPanel Margin="10">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                     <Label Content="FTP IP: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_ip" Content="ip" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <TextBox Style="{DynamicResource Copyable_TextBox}" x:Name="ftp_ip" Text="ip" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                     <Label Content="FTP Port: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_port" Content="port" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <TextBox Style="{DynamicResource Copyable_TextBox}" x:Name="ftp_port" Text="port" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                     <Label Content="FTP Username: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_username" Content="username" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <TextBox Style="{DynamicResource Copyable_TextBox}" x:Name="ftp_username" Text="username" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                     <Label Content="FTP Password: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_password" Content="password" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <TextBox Style="{DynamicResource Copyable_TextBox}" x:Name="ftp_password" Text="password" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                     <Label Content="Directory ID: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                                    <Label x:Name="ftp_id"  Content="xxxxxxxxxxxxx" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                                    <TextBox Style="{DynamicResource Copyable_TextBox}" x:Name="ftp_id"  Text="xxxxxxxxxxxxx" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
