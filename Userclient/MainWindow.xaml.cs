@@ -85,18 +85,18 @@ namespace Swirve_Userclient
             {
                 new LineSeries
                 {
-                    Title = "CPU",
+                    Title = "Utilization",
                     Values = new ChartValues<double> { }
                 },
                 new LineSeries
                 {
-                    Title = "VmSize",
+                    Title = "Allocated",
                     Values = new ChartValues<double> { }
                 }
                 ,
                 new LineSeries
                 {
-                    Title = "VmRSS",
+                    Title = "Memory",
                     Values = new ChartValues<double> { }
                 }
             };
@@ -1209,6 +1209,7 @@ namespace Swirve_Userclient
             }
 
             // Start updating timer
+            refreshTimer.Tick -= new EventHandler(refresh);
             refreshTimer.Tick += new EventHandler(refresh);
             refreshTimer.Interval = new TimeSpan(0, 0, 2);
             refreshTimer.Start();

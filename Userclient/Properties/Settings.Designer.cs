@@ -25,7 +25,7 @@ namespace Swirve_Userclient.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("32.221.107.80")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.4.88")]
         public string ip {
             get {
                 return ((string)(this["ip"]));
