@@ -1,0 +1,17 @@
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\bin\Debug\Delta-V Userclient.exe.config
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\bin\Debug\Delta-V Userclient.exe
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\bin\Debug\Delta-V Userclient.pdb
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient.csproj.AssemblyReference.cache
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\initScreen.g.cs
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\MainWindow.g.cs
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\App.g.cs
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient_MarkupCompile.cache
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient_MarkupCompile.lref
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\initScreen.baml
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\MainWindow.baml
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient.g.resources
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta_V_Userclient.Properties.Resources.resources
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient.csproj.GenerateResource.cache
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient.csproj.CoreCompileInputs.cache
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient.exe
+C:\Users\Jacob\Desktop\Github\Delta-V Userclient\Delta-V Userclient\obj\Debug\Delta-V Userclient.pdb
