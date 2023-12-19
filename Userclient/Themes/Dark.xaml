@@ -3,27 +3,29 @@
 
     <!-- Global -->
 
-    <SolidColorBrush x:Key="Color_Palette0" Color="#434d59"/>
-    <SolidColorBrush x:Key="Color_Palette1" Color="#353d47"/>
-    <SolidColorBrush x:Key="Color_Palette2" Color="#272e36"/>
-    <SolidColorBrush x:Key="Color_Palette3" Color="#353d47"/>
+    <SolidColorBrush x:Key="Color_Palette0" Color="#0077B6"/>
+    <SolidColorBrush x:Key="Color_Palette1" Color="#00B4D8"/>
+    <SolidColorBrush x:Key="Color_Palette2" Color="#48CAE4"/>
+    <SolidColorBrush x:Key="Color_Palette3" Color="#90E0EF"/>
 
 
-    <SolidColorBrush x:Key="Color_Background" Color="#1a1f25"/>
-    <SolidColorBrush x:Key="Color_Text" Color="#000000"/>
+    <SolidColorBrush x:Key="Color_Background" Color="#111111"/>
+    <SolidColorBrush x:Key="Color_Emerge" Color="#232323"/>
+    <SolidColorBrush x:Key="Color_Text" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Color_TextInverted" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Color_TextAdditional1" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="Color_TextAdditional2" Color="#FFFFFF"/>
 
-    <SolidColorBrush x:Key="Color_Highlight0" Color="#CCCCCC"/>
-    <SolidColorBrush x:Key="Color_Highlight1" Color="#AAAAAA"/>
-    <SolidColorBrush x:Key="Color_Highlight2" Color="#888888"/>
+    <SolidColorBrush x:Key="Color_Highlight0" Color="#111111"/>
+    <SolidColorBrush x:Key="Color_Highlight1" Color="#222222"/>
+    <SolidColorBrush x:Key="Color_Highlight2" Color="#333333"/>
     <SolidColorBrush x:Key="Color_Highlight4" Color="#444444"/>
     <SolidColorBrush x:Key="Color_Contrast" Color="#000000"/>
 
     <SolidColorBrush x:Key="Color_SidebarHighlight0" Color="#4C5353"/>
     <SolidColorBrush x:Key="Color_SidebarHighlight1" Color="#6C7373"/>
 
+    <SolidColorBrush x:Key="Color_WidgetBackground" Color="#FFFFFF"/>
 
 
 
@@ -32,28 +34,41 @@
     <ControlTemplate x:Key="Sidebar_Button_CONTROL" TargetType="{x:Type ButtonBase}">
         <Border CornerRadius="10" x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Opacity=".5"/>
+            </Border.Effect>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="Button.IsDefaulted" Value="true">
                 <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
             </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette1}"/>
+                <!--<Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette1}"/>-->
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="20" Opacity=".6"/>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
+                <!--<Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>-->
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="15" Opacity=".8"/>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>-->
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style x:Key="Sidebar_Button" TargetType="{x:Type Button}">
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Margin" Value="5, 5, 5, 0"/>
-        <Setter Property="Height" Value="60"/>
-        <Setter Property="Width" Value="60"/>
+        <Setter Property="Margin" Value="5, 15, 5, 0"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Width" Value="50"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Padding" Value="12"/>
@@ -64,76 +79,76 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_switch.png"/>
+        <Setter Property="Source" Value="/Resources/icon_switch_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Dashboard" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_dashboard.png"/>
+        <Setter Property="Source" Value="/Resources/icon_dashboard_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Terminal" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_terminal.png"/>
+        <Setter Property="Source" Value="/Resources/icon_terminal_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Players" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_players.png"/>
+        <Setter Property="Source" Value="/Resources/icon_players_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Performance" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_performance.png"/>
+        <Setter Property="Source" Value="/Resources/icon_performance_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Configuration" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_configuration.png"/>
+        <Setter Property="Source" Value="/Resources/icon_configuration_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Admin" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_admin.png"/>
+        <Setter Property="Source" Value="/Resources/icon_admin_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Settings" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_settings.png"/>
+        <Setter Property="Source" Value="/Resources/icon_settings_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Logout" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_logout.png"/>
+        <Setter Property="Source" Value="/Resources/icon_logout_dark.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Border" TargetType="{x:Type Border}">
-        <Setter Property="Background" Value="{DynamicResource Color_Palette0}"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Emerge}"/>
         <Setter Property="Effect">
             <Setter.Value>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="20" Opacity=".25"/>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style x:Key="Content_Tabcontrol" TargetType="TabControl">
-        <Setter Property="Background" Value="{DynamicResource Color_Background}"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Style.Triggers>
             <EventTrigger RoutedEvent="SelectionChanged">
@@ -163,10 +178,10 @@
     </Style>
 
     <Style x:Key="Pagetitle_Label" TargetType="Label">
-        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="FontSize" Value="28"/>
         <Setter Property="FontFamily" Value="/Fonts/#Montserrat"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="{DynamicResource Color_TextInverted}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Text}"/>
     </Style>
 
     <Style x:Key="Dashboard_Group_Border" TargetType="{x:Type Border}">
@@ -174,7 +189,12 @@
         <Setter Property="Width" Value="300"/>
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Background" Value="{DynamicResource Color_Palette2}"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Emerge}"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="40" Opacity=".25"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="Dashboard_GroupPronounced_Border" TargetType="{x:Type Border}">
@@ -182,6 +202,11 @@
         <Setter Property="Width" Value="300"/>
         <Setter Property="CornerRadius" Value="15"/>
         <Setter Property="Background" Value="{DynamicResource Color_Palette1}"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="40" Opacity=".25"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="Dashboard_Group_Title" TargetType="{x:Type Label}">
@@ -189,14 +214,14 @@
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontFamily" Value="/Fonts/#Roboto"/>
         <Setter Property="FontStyle" Value="Italic"/>
-        <Setter Property="Foreground" Value="{DynamicResource Color_TextInverted}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Text}"/>
     </Style>
 
     <Style x:Key="Dashboard_MiniProgressBar" TargetType="{x:Type ProgressBar}">
-        <Setter Property="Foreground" Value="{DynamicResource Color_TextInverted}"/>
-        <Setter Property="Background" Value="{DynamicResource Color_Highlight0}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Text}"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Emerge}"/>
         <Setter Property="BorderBrush" Value="{x:Null}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ProgressBar}">
@@ -220,11 +245,11 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
-                        <Rectangle RadiusX="5" RadiusY="5" x:Name="PART_Track"/>
+                        <Border CornerRadius="1.5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+                        <Rectangle RadiusX="1.5" RadiusY="1.5" x:Name="PART_Track"/>
                         <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
-                            <Rectangle RadiusX="5" RadiusY="5" x:Name="Indicator" Fill="{TemplateBinding Foreground}"/>
-                            <Rectangle RadiusX="5" RadiusY="5" x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5">
+                            <Rectangle RadiusX="1.5" RadiusY="1.5" x:Name="Indicator" Fill="{TemplateBinding Foreground}"/>
+                            <Rectangle RadiusX="1.5" RadiusY="1.5" x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5">
                                 <Rectangle.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -265,12 +290,12 @@
     </ControlTemplate>
 
     <Style x:Key="PowerButton" TargetType="{x:Type Button}">
-        <Setter Property="FontFamily" Value="/Fonts/#Roboto"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Margin" Value="0, 0, 10, 0"/>
+        <Setter Property="FontFamily" Value="/Fonts/#Montserrat"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Margin" Value="5, 20, 5, 20"/>
         <Setter Property="Width" Value="100"/>
         <Setter Property="Height" Value="30"/>
-        <Setter Property="Background" Value="{DynamicResource Color_TextInverted}"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Highlight0}"/>
         <Setter Property="Foreground" Value="{DynamicResource Color_Text}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -279,15 +304,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                    <Border x:Name="border" CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="40" Opacity=".25"/>
+                        </Border.Effect>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight1}"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="60" Opacity=".10"/>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight0}"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight0}"/>
@@ -300,56 +332,30 @@
     </Style>
 
     <ControlTemplate x:Key="Button_Freefloating0" TargetType="{x:Type ButtonBase}">
-        <Border CornerRadius="5" x:Name="border" Background="{DynamicResource Color_Palette0}" BorderThickness="0" SnapsToDevicePixels="true">
+        <Border CornerRadius="15" x:Name="border" Background="{DynamicResource Color_WidgetBackground}" BorderThickness="0" SnapsToDevicePixels="true">
             <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="40" Opacity=".25"/>
+            </Border.Effect>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette1}"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="60" Opacity=".10"/>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette1}"/>-->
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
+                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
+                <!--<Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>-->
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-
-    <ControlTemplate x:Key="Button_Freefloating1" TargetType="{x:Type ButtonBase}">
-        <Border CornerRadius="5" x:Name="border" Background="{DynamicResource Color_Palette1}" BorderThickness="0" SnapsToDevicePixels="true">
-            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette3}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="Button_Freefloating2" TargetType="{x:Type ButtonBase}">
-        <Border CornerRadius="5" x:Name="border" Background="{DynamicResource Color_Palette2}" BorderThickness="0" SnapsToDevicePixels="true">
-            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette3}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Highlight2}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
 
     <Style x:Key="Spinner" TargetType="{x:Type Image}">
         <Setter Property="Source" Value="../Resources/busy.png"/>
@@ -374,7 +380,7 @@
     </Style>
 
     <Style x:Key="SpinnerLoad" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="../Resources/busy.png"/>
+        <Setter Property="Source" Value="../Resources/busy_dark.png"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
@@ -412,9 +418,13 @@
         <Setter Property="Foreground" Value="{DynamicResource Color_TextInverted}"/>
     </Style>
 
-    <Style x:Key="Adminlock_Image" TargetType="Image">
-        <Setter Property="Source" Value="../Resources/icon_lock.png"/>
-        <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality"/>
+
+    <Style x:Key="Copyable_TextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Text" Value="{Binding Text, Mode=OneWay}"/>
     </Style>
 
 
@@ -426,8 +436,9 @@
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Foreground" Value="{DynamicResource Color_TextInverted}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color_Palette3}"/>
 
 
     </Style>
+
 </ResourceDictionary>
