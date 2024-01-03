@@ -13,10 +13,8 @@
                 <DropShadowEffect BlurRadius="10" Opacity="0.5"/>
             </Border.Effect>
         </Border>
-        <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" Style="{DynamicResource Pagetitle_Border}">
-            <Label x:Name="errorDescription" Content="Unknown Error" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="20" FontFamily="/Fonts/#Roboto Thin" IsHitTestVisible="False"/>
-        </Border>
-        <TextBlock x:Name="errorContext" Text="Swirve Userclient ran into an unexpected error." IsHitTestVisible="False" Foreground="{DynamicResource Color_TextAdditional1}" Margin="40, 65, 40, 60" TextWrapping="Wrap" TextAlignment="Center" FontSize="14" FontFamily="/Fonts/#Roboto"/>
-        <Button x:Name="errorAction" Content="Continue" Margin="0, 30" Height="25" Width="120" Foreground="{DynamicResource Color_TextInverted}" HorizontalAlignment="Center" VerticalAlignment="Bottom"  FontSize="15" Click="Button_Click" Template="{DynamicResource Button_Freefloating1}" FontFamily="/Fonts/#Roboto"/>
+        <Label VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,20,0,0" x:Name="errorDescription" Content="Unknown Error" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="{DynamicResource Color_Text}" FontSize="20" FontFamily="/Fonts/#Montserrat" IsHitTestVisible="False"/>
+        <TextBlock x:Name="errorContext" Text="Swirve Userclient ran into an unexpected error." IsHitTestVisible="False" Foreground="{DynamicResource Color_Text}" Margin="40, 65, 40, 60" TextWrapping="Wrap" TextAlignment="Center" FontSize="14" FontFamily="/Fonts/#Montserrat"/>
+        <Button x:Name="errorAction" Content="Continue" Margin="0, 30" Height="25" Width="120" Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center" VerticalAlignment="Bottom"  FontSize="15" Click="Button_Click" Template="{DynamicResource Button_Freefloating0}" FontFamily="/Fonts/#Roboto"/>
     </Grid>
 </Window>
