@@ -393,7 +393,7 @@
                                                                 <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                             </StackPanel>
                                                         </StackPanel>
-                                                        <Label Content="Theme" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
+                                                        <Label Content="Theme" Margin="0, 0, 0, 0" FontStyle="Italic" Visibility="Hidden" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_TextInverted}"/>
                                                         <StackPanel Orientation="Horizontal" Margin="5, 0">
                                                             <Button x:Name="legacybtn" Content="Legacy Protocol" Width="150" Style="{DynamicResource PowerButton}" Height="33" Click="legacybtn_MouseDown"/>
                                                             <Button x:Name="gen2btn" Content="Gen2 Dynamic" Width="150" Style="{DynamicResource PowerButton}" Height="33" Click="gen2btn_MouseDown"/>

@@ -25,7 +25,7 @@
     <SolidColorBrush x:Key="Color_SidebarHighlight0" Color="#4C5353"/>
     <SolidColorBrush x:Key="Color_SidebarHighlight1" Color="#6C7373"/>
 
-    <SolidColorBrush x:Key="Color_WidgetBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="Color_WidgetBackground" Color="#232323"/>
 
 
 
