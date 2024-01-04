@@ -147,6 +147,28 @@
         </Setter>
     </Style>
 
+    <Style x:Key="Menu_Tabcontrol" TargetType="TabControl">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="SelectionChanged">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation
+                        Storyboard.TargetProperty="Opacity"
+                        From="0.0"
+                        To="1.0"
+                        Duration="0:0:0.5">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="Content_Tabcontrol" TargetType="TabControl">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -158,7 +180,7 @@
                             Storyboard.TargetProperty="Opacity"
                             From="0.0"
                             To="1.0"
-                            Duration="0:0:0.1">
+                            Duration="0:0:0.5">
                             <DoubleAnimation.EasingFunction>
                                 <CubicEase EasingMode="EaseOut"/>
                             </DoubleAnimation.EasingFunction>

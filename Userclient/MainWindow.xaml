@@ -22,7 +22,7 @@
             </Border.Effect>
         </Border>
 
-        <TabControl x:Name="rootTabControl" Background="Transparent" BorderThickness="0" Margin="-10" Padding="10">
+        <TabControl x:Name="rootTabControl" Style="{DynamicResource Menu_Tabcontrol}" Background="Transparent" BorderThickness="0" Margin="-10" Padding="10">
             <TabItem x:Name="rootStart" Visibility="Collapsed">
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, -50, 0, 0" VerticalAlignment="Center">

@@ -40,7 +40,7 @@ namespace Swirve_Userclient
      
     public static class ProgressBarExtensions
     {
-        private static TimeSpan duration = TimeSpan.FromSeconds(.2);
+        private static TimeSpan duration = TimeSpan.FromSeconds(.5);
 
         public static void SetPercent(this ProgressBar progressBar, double percentage)
         {
@@ -1223,11 +1223,11 @@ namespace Swirve_Userclient
             button_configuration.IsEnabled = true;
             button_admin.IsEnabled = true;
             button_settings.IsEnabled = true;
-            this.ChangeTab(0);
+
             rootStart_Progressbar.Value = 100;
+            await Task.Run(() => Thread.Sleep(1500));
 
-            await Task.Run(() => Thread.Sleep(500));
-
+            this.ChangeTab(0);
             rootTabControl.SelectedIndex = 2;
         }
 
