@@ -1,5 +1,5 @@
 #define FRAMEWORK_VERSION "DEV1.2/1.2-feature-sysinfo"
-#define FRAMEWORK_NAME "Titanium"
+#define FRAMEWORK_NAME "Carbon"
 #define API_VERSION_MAJOR 2
 #define API_VERSION_MINOR 1
 
