@@ -111,41 +111,47 @@ namespace Swirve_Userclient
         {
             rootTabControl.SelectedIndex = 0;
             rootStart_Progressbar.Value = 0;
-            ErrorMessage errMsg = new ErrorMessage(); // Windows to be used
 
             // Fetch connection prerequisites
             string ip = Properties.Settings.Default.ip;
             int port = Properties.Settings.Default.port;
 
             // Connect
-            await Task.Run(() => api.Connect(ip, port));
-            if (!api.connected)
+            try {
+                await Task.Run(() => api.Connect(ip, port));
+                if (!api.connected)
+                {
+
+                    // If failed, show this error
+                    fatal_stop("Connection to Cluster Failed", "FrameworkAPI failed to connect to the designated server cluster. Please check your firewall rules, network connection and server status. If the problem persists, please contact your system administrator.", "Shut down");
+                    return;
+                }
+            } catch
             {
-
-                // If failed, show this error
-                errMsg.errorDescription.Content = "Cluster Error";
-                errMsg.errorContext.Text = "Couldn't connect to Framework";
-                errMsg.errorAction.Content = "Exit";
-                errMsg.ShowDialog();
-
-                // Shut down Userclient
-                Close();
-                Application.Current.Shutdown();
+                fatal_stop("Connection to Cluster Failed", "FrameworkAPI failed to connect to the designated server cluster. Please check your firewall rules, network connection and server status. If the problem persists, please contact your system administrator.", "Shut down");
                 return;
             }
+            
 
             rootStart_Progressbar.SetPercent(10);
 
             // Fetch all servers
             List<FrameworkApi.ServerModule> modules = new List<FrameworkApi.ServerModule>();
-            await Task.Run(() => { modules = api.GetModules(); });
+            try
+            {
+                await Task.Run(() => { modules = api.GetModules(); });
+            } catch
+            {
+                fatal_stop("Failed parsing Cluster request", "FrameworkAPI crashed while trying to parse module data from the designated cluster. Please contact your system administrator.", "Shut down");
+            }
+            
 
             rootStart_Progressbar.SetPercent(30);
 
             // User selects server
             ulong selectedModuleID = getUserServer(modules);
 
-            
+
         }
 
         private ulong getUserServer(List<FrameworkApi.ServerModule> modules)
@@ -160,14 +166,8 @@ namespace Swirve_Userclient
 
         private void stopuserclient()
         {
-            lock(powerdownlock)
+            lock (powerdownlock)
             {
-                refreshTimer.Stop();
-                ErrorMessage errMsg = new ErrorMessage();
-                errMsg.errorDescription.Content = "Cluster Timeout";
-                errMsg.errorContext.Text = "Framework stopped responding";
-                errMsg.errorAction.Content = "Exit";
-                errMsg.ShowDialog();
                 api.Disconnect();
                 Application.Current.Shutdown();
             }
@@ -175,7 +175,7 @@ namespace Swirve_Userclient
 
         private async void refresh(object sender, EventArgs e)
         {
-            if(!await refreshsf.WaitAsync(TimeSpan.FromSeconds(2)))
+            if (!await refreshsf.WaitAsync(TimeSpan.FromSeconds(2)))
             {
                 return;
             } else
@@ -205,6 +205,7 @@ namespace Swirve_Userclient
                     if (!api.connected)
                     {
                         // Shut down userclient
+                        refreshTimer.Stop();
                         stopuserclient();
 
                         // If the timer ticks again, simply return
@@ -328,12 +329,12 @@ namespace Swirve_Userclient
                 {
                     refreshsf.Release();
                 }
-            }            
+            }
         }
 
         private void dragBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(e.ChangedButton==MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left)
             {
                 DragMove();
             }
@@ -347,7 +348,7 @@ namespace Swirve_Userclient
         }
 
         private async void switch_server(object sender, RoutedEventArgs e)
-        { 
+        {
             // Stop refresher
             refreshTimer.Stop();
 
@@ -474,10 +475,10 @@ namespace Swirve_Userclient
 
         private void logInput_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 sendLogBtn_Click(sender, e);
-            } else if (e.Key==Key.Escape)
+            } else if (e.Key == Key.Escape)
             {
                 Keyboard.ClearFocus();
             }
@@ -490,7 +491,7 @@ namespace Swirve_Userclient
 
         private void logInput_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            if(logInput.Text == "Enter command...") {
+            if (logInput.Text == "Enter command...") {
                 logInput.Text = "";
             }
         }
@@ -524,7 +525,7 @@ namespace Swirve_Userclient
 
         private void logInput_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            if(logInput.Text == "") {
+            if (logInput.Text == "") {
                 logInput.Text = "Enter command...";
             }
         }
@@ -544,9 +545,9 @@ namespace Swirve_Userclient
         private void buildPlayerList(List<string> players) {
             playerVisualsCache.Clear();
             player_list.ItemsSource = null;
-            foreach(string player in players)
+            foreach (string player in players)
             {
-                if(player == selectedPlayer)
+                if (player == selectedPlayer)
                 {
                     PlayerVisual playerVisual = new PlayerVisual()
                     {
@@ -565,7 +566,7 @@ namespace Swirve_Userclient
                     };
                     playerVisualsCache.Add(playerVisual);
                 }
-                
+
             }
             player_list.ItemsSource = playerVisualsCache;
             player_list.UpdateLayout();
@@ -573,7 +574,7 @@ namespace Swirve_Userclient
 
         private void logOutput_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Escape)
+            if (e.Key == Key.Escape)
             {
                 console_log_border.BorderThickness = new Thickness(0);
                 mainGrid.Focus();
@@ -601,7 +602,7 @@ namespace Swirve_Userclient
 
         private async void ChangeTab(int index)
         {
-            if(index == mainTabControl.SelectedIndex) { return; }
+            if (index == mainTabControl.SelectedIndex) { return; }
             DoubleAnimation animation = new DoubleAnimation();
             animation.Duration = (Duration)new DurationConverter().ConvertFrom("0:0:0.1");
             animation.From = 1.0;
@@ -613,6 +614,7 @@ namespace Swirve_Userclient
 
         private void Border_Unloaded(object sender, RoutedEventArgs e)
         {
+            refreshTimer.Stop();
             stopuserclient();
         }
 
@@ -705,34 +707,16 @@ namespace Swirve_Userclient
             // Try to parse data
             int ram;
             try {
-                ram = int.Parse(Configuration_serverram.Text.Replace("GB",""));
+                ram = int.Parse(Configuration_serverram.Text.Replace("GB", ""));
             } catch
             {
-                ErrorMessage error = new ErrorMessage();
-                error.errorDescription.Content = "Invalid Field";
-                error.errorContext.Text = "Field ServerRAM is invalid. Please verify.";
-                error.errorAction.Content = "OK";
-                error.Show();
-                return;
-            }
-
-            if(Configuration_servername.Text=="")
-            {
-                ErrorMessage error = new ErrorMessage();
-                error.errorDescription.Content = "Invalid Field";
-                error.errorContext.Text = "Field ServerNAME is invalid. Please verify.";
-                error.errorAction.Content = "OK";
-                error.Show();
+                show_warning("Failed parsing field", "An exception occurred while parsing field `ServerRam`. Please verify your values and try again.", "Return");
                 return;
             }
 
             if (Configuration_servername.Text == "")
             {
-                ErrorMessage error = new ErrorMessage();
-                error.errorDescription.Content = "Invalid Field";
-                error.errorContext.Text = "Field ServerNAME is invalid. Please verify.";
-                error.errorAction.Content = "OK";
-                error.Show();
+                show_warning("Failed parsing field", "An exception occurred while parsing field `ServerName`. Please verify your values and try again.", "Return");
                 return;
             }
 
@@ -740,22 +724,28 @@ namespace Swirve_Userclient
             ApplicationWide_StartLoad("Saving...");
 
             // Overwrite!
-            Console.WriteLine("Overwriting new server JAVA with " + user_serverjava);
-            ulong id = serverArchive.ID;
-            string name = Configuration_servername.Text;
-            string launch = Configuration_serverpath.Text;
+            try
+            {
+                Console.WriteLine("Overwriting new server JAVA with " + user_serverjava);
+                ulong id = serverArchive.ID;
+                string name = Configuration_servername.Text;
+                string launch = Configuration_serverpath.Text;
 
-            Console.WriteLine();
-            await Task.Run(() => api.OverwriteServer(id, name, ram, launch, user_serverjava));
-            await Task.Run(() => Thread.Sleep(1000));
+                Console.WriteLine();
+                await Task.Run(() => api.OverwriteServer(id, name, ram, launch, user_serverjava));
+                await Task.Run(() => Thread.Sleep(1000));
 
-            ApplicationWide_StartLoad("Refreshing...");
-            await Task.Run(() => { serverArchive = api.GetArchive(serverArchive.ID); });
-            Overview_Servername.Content = serverArchive.Name;
-            Overview_ServerPort.Text = serverArchive.AssignedPort.ToString();
-            Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
-            Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
-            await Task.Run(() => Thread.Sleep(1000));
+                ApplicationWide_StartLoad("Refreshing...");
+                await Task.Run(() => { serverArchive = api.GetArchive(serverArchive.ID); });
+                Overview_Servername.Content = serverArchive.Name;
+                Overview_ServerPort.Text = serverArchive.AssignedPort.ToString();
+                Overview_ServerRamTotal.Content = "💾 " + serverArchive.RamAllocated + "GB";
+                Overview_ServerJava.Content = "⚙ Java " + serverArchive.JavaVersion;
+                await Task.Run(() => Thread.Sleep(1000));
+            } catch
+            {
+                show_warning("Failed to overwrite Node", "Framework Cluster did not authorize modifying the node. Please verify your values and try again, and if the problem persists, please contact your system administrator.", "Return");
+            }
 
             // Hide loading wheel
             ApplicationWide_EndLoad();
@@ -820,22 +810,18 @@ namespace Swirve_Userclient
 
             ApplicationWide_EndLoad();
 
-            if(authenticated)
+            if (authenticated)
             {
                 ChangeTab(7);
             } else
             {
-                ErrorMessage errmsg = new ErrorMessage();
-                errmsg.errorDescription.Content = "Authenticate Failure";
-                errmsg.errorContext.Text = "Framework denied authentication request.";
-                errmsg.errorAction.Content = "Cancel";
-                errmsg.ShowDialog();
+                show_warning("Authentication Failure", "Framework denied authentication request. Please make sure your trusted key is correct, and if the problem persists, please contact your system administrator.", "Return");
             }
         }
 
         private async void KickButton_Click(object sender, RoutedEventArgs e)
         {
-            await Task.Run(() => api.SetLog("kick "+selectedPlayer));
+            await Task.Run(() => api.SetLog("kick " + selectedPlayer));
             selectedPlayer = "";
         }
 
@@ -903,30 +889,30 @@ namespace Swirve_Userclient
 
         private void lightmodebtn_MouseDown(object sender, RoutedEventArgs e)
         {
-                lightmodebtn.IsEnabled = false;
-                darkmodebtn.IsEnabled = true;
-                user_darkmode = false;
+            lightmodebtn.IsEnabled = false;
+            darkmodebtn.IsEnabled = true;
+            user_darkmode = false;
         }
 
         private void darkmodebtn_MouseDown(object sender, RoutedEventArgs e)
         {
-                darkmodebtn.IsEnabled = false;
-                lightmodebtn.IsEnabled = true;
-                user_darkmode = true;
+            darkmodebtn.IsEnabled = false;
+            lightmodebtn.IsEnabled = true;
+            user_darkmode = true;
         }
 
         private void legacybtn_MouseDown(object sender, RoutedEventArgs e)
         {
-                legacybtn.IsEnabled = false;
-                gen2btn.IsEnabled = true;
-                user_legacyapi = true;
+            legacybtn.IsEnabled = false;
+            gen2btn.IsEnabled = true;
+            user_legacyapi = true;
         }
 
         private void gen2btn_MouseDown(object sender, RoutedEventArgs e)
         {
-                gen2btn.IsEnabled = false;
-                legacybtn.IsEnabled = true;
-                user_legacyapi = false;
+            gen2btn.IsEnabled = false;
+            legacybtn.IsEnabled = true;
+            user_legacyapi = false;
         }
 
         private async void SaveSettingsButton_Click(object sender, RoutedEventArgs e)
@@ -946,23 +932,19 @@ namespace Swirve_Userclient
                 Properties.Settings.Default.Save();
             } catch {
                 await Task.Run(() => Thread.Sleep(500));
-                ErrorMessage errnotif = new ErrorMessage();
-                errnotif.errorDescription.Content = "Parse Error";
-                errnotif.errorContext.Text = "Failed to parse new settings. Please verify all values.";
-                errnotif.errorAction.Content = "Cancel";
-                errnotif.ShowDialog();
+                show_warning("Parsing Failed", "Failed to parse and save new settings. Please verify all fields and try again, and if the problem persists, contact your system administrator.", "Return");
                 ApplicationWide_EndLoad();
                 return;
             }
 
             await Task.Run(() => Thread.Sleep(500));
-            
+
             ApplicationWide_EndLoad();
-            ErrorMessage notif = new ErrorMessage();
-            notif.errorDescription.Content = "Saved";
-            notif.errorContext.Text = "Swirve may need to be restarted for some changes to take effect.";
-            notif.errorAction.Content = "OK";
-            notif.ShowDialog();
+            //  notif = new ErrorMessage();
+            // notif.errorDescription.Content = "Saved";
+            // notif.errorContext.Text = "Swirve may need to be restarted for some changes to take effect.";
+            // notif.errorAction.Content = "OK";
+            // notif.ShowDialog();
 
         }
 
@@ -973,7 +955,7 @@ namespace Swirve_Userclient
             pollrate.Text = Settings.Default.pollfrequency.ToString();
             consolecutoff.Text = Settings.Default.consolecutoff.ToString();
             terminalcutoff.Text = Settings.Default.terminalcutoff.ToString();
-            switch(Properties.Settings.Default.legacysupport)
+            switch (Properties.Settings.Default.legacysupport)
             {
                 case false:
                     gen2btn.IsEnabled = false;
@@ -987,7 +969,7 @@ namespace Swirve_Userclient
                     user_legacyapi = true;
                     break;
             }
-            switch(Properties.Settings.Default.theme)
+            switch (Properties.Settings.Default.theme)
             {
                 case 0:
                     lightmodebtn.IsEnabled = false;
@@ -1101,17 +1083,32 @@ namespace Swirve_Userclient
 
             // Assign module
             await Task.Run(() => Thread.Sleep(300));
-            await Task.Run(() => { api.SetModule(selectedID); });
+            try
+            {
+                await Task.Run(() => { api.SetModule(selectedID); });
+            } catch
+            {
+
+            }
+
 
             rootStart_Progressbar.SetPercent(50);
 
             // Fetch all neccesary information
-            await Task.Run(() => { serverArchive = api.GetArchive(selectedID); });
-            rootStart_Progressbar.SetPercent(60);
-            await Task.Run(() => { api.GetSwiss(); });
-            rootStart_Progressbar.SetPercent(70);
-            await Task.Run(() => api.GetLog());
-            rootStart_Progressbar.SetPercent(80);
+            try
+            {
+                await Task.Run(() => { serverArchive = api.GetArchive(selectedID); });
+                rootStart_Progressbar.SetPercent(60);
+                await Task.Run(() => { api.GetSwiss(); });
+                rootStart_Progressbar.SetPercent(70);
+                await Task.Run(() => api.GetLog());
+                rootStart_Progressbar.SetPercent(80);
+            } catch
+            {
+                fatal_stop("Failed parsing Cluster request", "FrameworkAPI crashed while trying to parse node data from the designated cluster. Please contact your system administrator.", "Shut down");
+                refreshTimer.Stop();
+                return;
+            }
 
             // Set all neccessary information
             Overview_Servername.Content = serverArchive.Name;
@@ -1232,6 +1229,45 @@ namespace Swirve_Userclient
         }
 
         public ulong selectedID;
+        int root_index = 0;
+        bool stop_soon = false;
 
+        void show_warning(string title, string message, string button)
+        {
+            root_index = rootTabControl.SelectedIndex;
+            error_title.Content = title;
+            error_message.Text = message;
+            error_button.Content = button;
+            rootTabControl.SelectedIndex = 3;
+        }
+
+        void fatal_stop(string title, string message, string button)
+        {
+            stop_soon = true;
+            error_title.Content = title;
+            error_message.Text = message;
+            error_button.Content = button;
+            rootTabControl.SelectedIndex = 3;
+        }
+
+        void default_stop()
+        {
+            stop_soon = true;
+            error_title.Content = "Unknown Critical Exception";
+            error_message.Text = "An internal exception occurred in FrameworkAPI that forced the Swirve interface to exit unexpectedly. This behaviour is not intended and should be reported to the Swirve development team or your system administrator.";
+            error_button.Content = "Shut down";
+            rootTabControl.SelectedIndex = 3;
+        }
+
+        private void error_button_Click(object sender, RoutedEventArgs e)
+        {
+            if (stop_soon)
+            {
+                stopuserclient();
+            } else
+            {
+                rootTabControl.SelectedIndex = root_index;
+            }
+        }
     }
 }

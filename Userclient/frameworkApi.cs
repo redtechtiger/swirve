@@ -18,6 +18,12 @@ namespace Swirve_Userclient
 {
     public class FrameworkApi
     {
+        [Serializable]
+        public class FrameworkException : Exception { }
+        public class ConnectionException : Exception { }
+        public class APIException : Exception { }
+
+
         public struct ServerArchive
         {
             public ulong ID;
@@ -49,16 +55,6 @@ namespace Swirve_Userclient
             public int SystemCPU;
         }
 
-        public struct DataResponse_CPU
-        {
-
-        }
-
-        public struct DataResponse_MEM
-        {
-
-        }
-
         private TcpClient tcpClient;
         private Stream TcpClientStream;
         private string logCache;
@@ -76,14 +72,13 @@ namespace Swirve_Userclient
             Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] API: Connect: Initializing TCPClient...");
             tcpClient = new TcpClient();
             Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] API: Connect: Connecting to TCPClient...");
-            try
+            if (!tcpClient.ConnectAsync(ip, port).Wait(1000))
             {
-                tcpClient.Connect(ip, port);
-                connected = true;
+                throw new ConnectionException();
             }
-            catch { return; };
-            tcpClient.SendTimeout = 5000;
-            tcpClient.ReceiveTimeout = 5000;
+            connected = true;
+            tcpClient.SendTimeout = 2000;
+            tcpClient.ReceiveTimeout = 2000;
             TcpClientStream = tcpClient.GetStream();
             Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] API: Connect: Connected");
         }
@@ -108,7 +103,7 @@ namespace Swirve_Userclient
                 {
                     Thread.Sleep(1000);
                     connected = false;
-                    return "-1";
+                    throw new FrameworkException();
                 }
                 byte[] bytesReturn = new byte[4000];
                 Array.Clear(bytesReturn, 0, bytesReturn.Length);
@@ -122,7 +117,7 @@ namespace Swirve_Userclient
                 {
                     Thread.Sleep(1000);
                     connected = false;
-                    return "-1";
+                    throw new FrameworkException();
                 }
                 totalRead += bytesRead;
                 stringOut.Append(getStrFromChar(bytesReturn));
@@ -137,7 +132,7 @@ namespace Swirve_Userclient
                     {
                         Thread.Sleep(1000);
                         connected = false;
-                        return "-1";
+                        throw new FrameworkException();
                     }
                     totalRead += bytesRead;
                     stringOut.Append(getStrFromChar(bytesReturn));
@@ -149,20 +144,30 @@ namespace Swirve_Userclient
 
         public void StartServer()
         {
-            Console.WriteLine("FrameworkAPI: Starting remote server");
-            Request("setval|pwr|0");
+            try
+            {
+                Console.WriteLine("FrameworkAPI: Starting remote server");
+                Request("setval|pwr|0");
+            } catch { throw; }
+            
         }
 
         public void StopServer()
         {
-            Console.WriteLine("FrameworkAPI: Stopping remote server");
+            try
+            {
+                Console.WriteLine("FrameworkAPI: Stopping remote server");
             Request("setval|pwr|1");
+            } catch { throw; }
         }
 
         public void RestartServer()
         {
-            Console.WriteLine("FrameworkAPI: Restarting remote server");
+            try
+            {
+                Console.WriteLine("FrameworkAPI: Restarting remote server");
             Request("setval|pwr|3");
+            } catch { throw; }
         }
 
         public void KillServer()
@@ -173,27 +178,33 @@ namespace Swirve_Userclient
 
         public string GetLog()
         {
-            Console.WriteLine("FrameworkAPI: Fetching log of remote server");
-            logCache = Request("getval|log|0");
-            return logCache;
+            try
+            {
+                Console.WriteLine("FrameworkAPI: Fetching log of remote server");
+                logCache = Request("getval|log|0");
+                return logCache;
+            }
+            catch { throw; }
         }
 
         public int GetPower()
         {
             Console.WriteLine("FrameworkAPI: Fetching status of remote server");
-            string outs = Request("getval|pwr|0");
             try {
+                string outs = Request("getval|pwr|0");
                 return int.Parse(outs);
             } catch
             {
-                Console.WriteLine("WARNING!!!! RETURNING FAULTY POWERSTATE (RETURN="+outs+")");
-                return -1;
+                throw new FrameworkException();
             }
         }
         public void SetLog(string data)
         {
-            Console.WriteLine("FrameworkAPI: Writing to input of remote server");
-            Request("setval|log|" + data);
+            try
+            {
+                Console.WriteLine("FrameworkAPI: Writing to input of remote server");
+                Request("setval|log|" + data);
+            } catch { throw; }
         }
 
         public List<ServerModule> GetModules()
@@ -218,7 +229,7 @@ namespace Swirve_Userclient
                 return modules;
             } catch
             {
-                return new List<ServerModule> { };
+                throw new FrameworkException();
             }
         }
 
@@ -233,7 +244,7 @@ namespace Swirve_Userclient
                 return int.Parse(buffer.Split('|')[0]);
             } catch
             {
-                return -2;
+                throw new FrameworkException();
             }
         }
 
@@ -254,29 +265,37 @@ namespace Swirve_Userclient
                 };
             } catch
             {
-                return new ServerArchive() { ID = 0 };
+                throw new FrameworkException();
             }
         }
 
         public int GetCachedPlayerCount()
         {
-            return Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) joined the game").Count - Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) left the game").Count;
+            try
+            {
+                return Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) joined the game").Count - Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) left the game").Count;
+            } catch { throw new APIException(); }
+            
         }
 
         public List<String> GetCachedPlayers()
         {
-            List<string> players = new List<string>();
-            MatchCollection joinmatches = Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) joined the game");
-            MatchCollection leavematches = Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) left the game");
-            foreach (Match match in joinmatches)
+            try
             {
-                players.Add(match.Groups[1].ToString());
+                List<string> players = new List<string>();
+                MatchCollection joinmatches = Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) joined the game");
+                MatchCollection leavematches = Regex.Matches(logCache, @"\[Server thread/INFO\] \[minecraft/DedicatedServer\]: (.*) left the game");
+                foreach (Match match in joinmatches)
+                {
+                    players.Add(match.Groups[1].ToString());
+                }
+                foreach (Match match in leavematches)
+                {
+                    players.Remove(match.Groups[1].ToString());
+                }
+                return players;
             }
-            foreach (Match match in leavematches)
-            {
-                players.Remove(match.Groups[1].ToString());
-            }
-            return players;
+            catch { throw new APIException(); }
         }
 
         public ulong CreateServer(string name, int ram, string launchpath = "placeholder", int javaversion = 8)
@@ -284,66 +303,106 @@ namespace Swirve_Userclient
             try
             {
                 return ulong.Parse(Request("dynamicmod|add|" + name + "|" + ram + "|" + launchpath + "|" + javaversion).Split('|')[0]);
-            } catch { return 0; }
+            } catch { throw; }
         }
 
         public List<string> GetCredentials()
         {
+            try
+            {
                 return Request("getval|cred|0").Split('|').ToList();
+            }
+            catch { throw; }
         }
 
         public bool OverwriteServer(ulong id, string name, int ram, string launchpath, int javaversion)
         {
-            string buffer = Request("dynamicmod|overwrite|"+id+"|"+name+"|"+ram+"|"+launchpath+"|"+javaversion);
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("dynamicmod|overwrite|"+id+"|"+name+"|"+ram+"|"+launchpath+"|"+javaversion);
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool PortPrepare()
         {
-            string buffer = Request("dynamicmod|portprep|0");
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("dynamicmod|portprep|0");
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool DeleteServer(ulong id)
         {
-            string buffer = Request("dynamicmod|del|"+id);
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("dynamicmod|del|"+id);
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool Authenticate(string key)
         {
-            string buffer = Request("elevatereq|authorise|"+key);
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("elevatereq|authorise|"+key);
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool RestartFramework()
         {
-            string buffer = Request("elevatereq|frameworkrestart|");
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("elevatereq|frameworkrestart|");
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool ShutdownFramework()
         {
-            string buffer = Request("elevatereq|frameworkshutdown|");
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("elevatereq|frameworkshutdown|");
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool PowerdownSystem()
         {
-            string buffer = Request("elevatereq|frameworkpowerdown|");
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("elevatereq|frameworkpowerdown|");
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool RebootSystem()
         {
-            string buffer = Request("elevatereq|frameworkreboot|");
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("elevatereq|frameworkreboot|");
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public bool KillAllConnections()
         {
-            string buffer = Request("elevatereq|frameworkkillall|");
-            return buffer.Split('|')[0] == "0";
+            try
+            {
+                string buffer = Request("elevatereq|frameworkkillall|");
+                return buffer.Split('|')[0] == "0";
+            }
+            catch { throw; }
         }
 
         public FrameworkApi.DataResponse_Swiss GetSwiss()
@@ -379,20 +438,7 @@ namespace Swirve_Userclient
             }
             catch
             {
-                FrameworkApi.DataResponse_Swiss dataresponse = new DataResponse_Swiss()
-                {
-                    ServerPower = 6,
-                    SystemTotalCores = 0,
-                    SystemCPU =  0,
-                    ServerCPU = 0,
-                    SystemTotalMemory = 0,
-                    SystemMemory = 0,
-                    ServerVmSize = 0,
-                    ServerVmRSS = 0,
-                    ServerLog = "Internal FrameworkAPI Error",
-                };
-
-                return dataresponse;
+                throw new FrameworkException();
             }
         }
     }

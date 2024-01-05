@@ -489,6 +489,18 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            <TabItem x:Name="rootError" Visibility="Collapsed">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, -150, 0, 0" VerticalAlignment="Center">
+                        <Label Content="⚠️" Foreground="{DynamicResource Color_Text}" VerticalAlignment="Center" Margin="0,-10,0,0" FontFamily="Fonts/#Montserrat" FontSize="80"/>
+                        <Label x:Name="error_title" Content="Unknown Critical Exception" Foreground="{DynamicResource Color_Text}" VerticalAlignment="Center" FontFamily="Fonts/#Montserrat" Margin="20,0,0,0" FontSize="50"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,350,0,0">
+                        <TextBlock x:Name="error_message" Text="An internal exception occurred in FrameworkAPI that forced the Swirve interface to exit unexpectedly. This behaviour is not intended and should be reported to the Swirve development team or your system administrator." TextWrapping="Wrap" TextAlignment="Center" Width="600" FontSize="16" FontFamily="Fonts/#Montserrat"/>
+                        <Button x:Name="error_button" Content="Shut down" Style="{DynamicResource PowerButton}" Margin="0,100,0,0" VerticalAlignment="Top" Click="error_button_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
         </TabControl>
         <Grid x:Name="dragBar" VerticalAlignment="Top" Height="40" MouseDown="dragBar_MouseDown" Background="White" Opacity="0"/>
     </Grid>
