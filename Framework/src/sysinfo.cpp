@@ -45,6 +45,5 @@ std::string SysInfo::GetFrameworkAPI() {
 }
 
 std::string SysInfo::GetDeployOrganization() {
-
     return DEPLOY_ORGANIZATION;
 }

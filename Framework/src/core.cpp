@@ -227,9 +227,6 @@ int core_entry(vector<string> args) {
     }
 
 
-    // Core goes into sleep as not needed anymore
-    shell(&netcom, &parser, &modules);
-
     l.warn("Core", "Framework going down!");
 
     // Code never gets here as Framework is stuck in above while(true) loop.
