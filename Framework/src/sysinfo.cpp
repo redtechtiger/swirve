@@ -10,6 +10,14 @@
 // Information
 #include "stats.h"
 
+std::string trim_end(std::string input) {
+    if (input.length() > 0 && input[input.length()-1] == '\n') {
+        return input.erase(input.length() - 1);
+    } else {
+        return input;
+    }
+}
+
 std::string SysInfo::GetKernelName() {
      
     FILE* file_ptr = popen("uname -r","r");
@@ -19,7 +27,7 @@ std::string SysInfo::GetKernelName() {
     char buf[MAX_KERNEL_SIZE] = {0};
     fgets(buf, sizeof(buf)-1, file_ptr);
 
-    return std::string(buf);
+    return trim_end(std::string(buf));
 }
 
 std::string SysInfo::GetKernelUptime() {
@@ -31,7 +39,7 @@ std::string SysInfo::GetKernelUptime() {
     char buf[MAX_UPTIME_SIZE] = {0};
     fgets(buf, sizeof(buf)-1, file_ptr);
 
-    return std::string(buf);
+    return trim_end(std::string(buf));
 }
 
 std::string SysInfo::GetFrameworkName() {
@@ -47,3 +55,4 @@ std::string SysInfo::GetFrameworkAPI() {
 std::string SysInfo::GetDeployOrganization() {
     return DEPLOY_ORGANIZATION;
 }
+

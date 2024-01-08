@@ -2,7 +2,8 @@
 #include "parser.hpp"
 #include "sysutils.hpp"
 #include "authenticator.hpp"
-#include "netcom.hpp" // For constructor / NETCOM functions
+#include "netcom.hpp" // For constructor / NETCOM Functions
+#include "sysinfo.hpp"
 
 // Defines
 #define ENDOFTRANSMIT "\\\\_!end_!\\\\"
@@ -57,6 +58,7 @@ ActiveParser::ActiveParser(NetworkCommunicator* netcom, map<unsigned long, share
     parsehelper["frameworkpowerdown"] = FRAMEWORKPOWERDOWN;
     parsehelper["frameworkreboot"] = FRAMEWORKREBOOT;
     parsehelper["frameworkkillall"] = KILLALL;
+    parsehelper["sysinfo"] = SYSINFO;
 
     sysutil.StartAsyncCPUSys(SystemCPU);
     sysutil.StartAsyncMemSys(SystemMEM);
@@ -241,6 +243,17 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                         buf = buf + to_string(i.second->ID) + DELIMITER + i.second->Name + DELIMITER + to_string(i.second->State()) + DELIMITER + DELIMITER;
                     }
                     netcomRef->WriteIncomingConnection(connection->sockfd, buf);
+                    break;
+                }
+                case SYSINFO: {
+                    string kernel_name = SysInfo::GetKernelName();
+                    string kernel_uptime = SysInfo::GetKernelUptime();
+                    string framework_name = SysInfo::GetFrameworkName();
+                    string framework_api = SysInfo::GetFrameworkAPI();
+                    string deploy_organization = SysInfo::GetDeployOrganization();
+                    stringstream buf = stringstream();
+                    buf << kernel_name << DELIMITER << kernel_uptime << DELIMITER << framework_name << DELIMITER << framework_api << DELIMITER << deploy_organization;
+                    netcomRef->WriteIncomingConnection(connection->sockfd, buf.str());
                     break;
                 }
                 default: { // Invalid API request
