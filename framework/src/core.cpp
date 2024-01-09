@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 #include "handler.hpp"
+#include "sysinfo.hpp"
 #include "module.hpp"
 #include "archive.hpp"
 #include "netcom.hpp"
@@ -59,6 +60,7 @@ int core_entry(vector<string> args) {
         if(arg=="--ignorefatal") FLAGS.IGNOREFATAL = true;
     }
     Logger l(FLAGS);
+
     l.info("Core", "Booting Swirve Framework...");
 
 
