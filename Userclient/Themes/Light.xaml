@@ -380,7 +380,7 @@
     </ControlTemplate>
 
     <Style x:Key="Spinner" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="../Resources/busy.png"/>
+        <Setter Property="Source" Value="../Resources/icon_load_dark.png"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
@@ -402,7 +402,7 @@
     </Style>
 
     <Style x:Key="SpinnerLoad" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="../Resources/busy_dark.png"/>
+        <Setter Property="Source" Value="../Resources/icon_load_dark.png"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>

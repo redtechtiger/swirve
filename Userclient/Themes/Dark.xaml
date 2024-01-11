@@ -79,63 +79,63 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_switch_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_switch_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Dashboard" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_dashboard_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_dashboard_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Terminal" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_terminal_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_terminal_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Players" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_players_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_players_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Performance" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_performance_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_performance_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Configuration" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_configuration_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_configuration_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Admin" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_admin_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_admin_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Settings" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_settings_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_settings_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Logout" TargetType="{x:Type Image}">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Source" Value="/Resources/icon_logout_dark.png"/>
+        <Setter Property="Source" Value="/Resources/icon_logout_light.png"/>
     </Style>
 
     <Style x:Key="Sidebar_Border" TargetType="{x:Type Border}">
@@ -358,7 +358,7 @@
     </ControlTemplate>
 
     <Style x:Key="Spinner" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="../Resources/busy.png"/>
+        <Setter Property="Source" Value="../Resources/icon_load.png"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
@@ -380,7 +380,7 @@
     </Style>
 
     <Style x:Key="SpinnerLoad" TargetType="{x:Type Image}">
-        <Setter Property="Source" Value="../Resources/busy_dark.png"/>
+        <Setter Property="Source" Value="../Resources/icon_load_light.png"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
