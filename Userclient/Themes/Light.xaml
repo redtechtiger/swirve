@@ -139,7 +139,7 @@
     </Style>
 
     <Style x:Key="Sidebar_Border" TargetType="{x:Type Border}">
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="{DynamicResource Color_Emerge}"/>
         <Setter Property="Effect">
             <Setter.Value>
                 <DropShadowEffect ShadowDepth="1" BlurRadius="20" Opacity=".25"/>
