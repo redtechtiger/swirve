@@ -166,7 +166,11 @@ int core_entry(vector<string> args) {
     l.info("Core", " -- Framework Online --");
 
     while(true) {
-        sleep(60);
+        sleep(5);
+	// Clear server log pipes
+	for(auto& module : modules) {
+	    module.second->GetLog();
+	}
         if(parser->ParserException()==-1) {
             l.fatal("Core","Detected exception in ActiveParser!");
             l.warn("Core","Rebooting network services...");
