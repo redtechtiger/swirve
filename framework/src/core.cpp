@@ -169,7 +169,8 @@ int core_entry(vector<string> args) {
         sleep(5);
 	// Clear server log pipes
 	for(auto& module : modules) {
-	    module.second->GetLog();
+        std::string _temp = std::string();
+	    module.second->GetLog(_temp);
 	}
         if(parser->ParserException()==-1) {
             l.fatal("Core","Detected exception in ActiveParser!");
