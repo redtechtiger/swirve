@@ -96,7 +96,7 @@
                                                     <Label Content="Node stopping... ✋" x:Name="Overview_ServerPower" FontSize="26" Margin="15, 0" Foreground="{DynamicResource Color_Text}" FontWeight="Normal" FontFamily="Fonts/#Montserrat"/>
                                                     <Image Visibility="Hidden" x:Name="UpdatePowerSpinner" Style="{DynamicResource Spinner}" Height="30"/>
                                                 </StackPanel>
-                                                <StackPanel Orientation="Horizontal" Margin="15,0">
+                                                <StackPanel Orientation="Horizontal" Margin="15,0,0,0">
                                                     <Grid>
                                                         <Button x:Name="Overview_StartServer" Style="{DynamicResource PowerButton}" Click="StartRemoteServer" Content="Start"/>
                                                     </Grid>
@@ -245,8 +245,8 @@
                                 <Grid Margin="0, 20, 0, 0">
                                     <StackPanel Orientation="Horizontal">
                                         <StackPanel>
-                                            <Border Style="{DynamicResource Dashboard_Group_Border}" Width="684" Height="355">
-                                                <StackPanel Margin="15, 15, 0, 0">
+                                            <Border Style="{DynamicResource Dashboard_Group_Border}" Padding="15,15" Width="695" Height="365">
+                                                <StackPanel>
                                                     <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 30">
                                                         <StackPanel>
                                                             
@@ -278,13 +278,22 @@
                                                         </Border>
                                                         <Border Height="1" Margin="10, -2, 0, 0" Background="{DynamicResource Color_Text}"/>
                                                     </StackPanel>
-                                                    <StackPanel Orientation="Horizontal" Margin="5, 50, 0, 0">
+                                                    <StackPanel Orientation="Horizontal" Margin="5, 10, 0, 0">
                                                         <Button x:Name="java8btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 8"  Click="java8btn_MouseDown" IsEnabled="False"/>
                                                         <Button x:Name="java16btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 16" Click="java16btn_MouseDown"/>
                                                         <Button x:Name="java17btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 17" Click="java17btn_MouseDown"/>
                                                         <Button x:Name="java18btn" Height="33" Style="{DynamicResource PowerButton}" Content="Java 18" Click="java18btn_MouseDown"/>
                                                     </StackPanel>
-                                                    <StackPanel Orientation="Horizontal" Margin="5, 45, 0, 0">
+                                                    <Label Content="NodeAgent Settings:" Margin="5,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                    <StackPanel Orientation="Horizontal" Margin="5,0">
+                                                        <Label Content="    Refresh server log" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                        <CheckBox VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="    Restart on outage" Margin="5,0" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                                        <CheckBox VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" Margin="5, -10, 0, 0">
                                                         <Button Style="{DynamicResource PowerButton}" Content="Save" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="SaveButton_Click"/>
                                                         <Button Style="{DynamicResource PowerButton}" Content="Discard" Height="40" Width="80" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="DiscardButton_Click"/>
                                                         <Button Style="{DynamicResource PowerButton}" Content="Rebuild Cache" Margin="245, 0, 10, 0"  Height="40" Width="130" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" Click="RebuildButton_Click"/>
@@ -293,7 +302,7 @@
                                                 </StackPanel>
                                             </Border>
                                         </StackPanel>
-                                        <Border Style="{DynamicResource Dashboard_Group_Border}" Width="320" Height="150" Margin="50,0,0,0" VerticalAlignment="Top">
+                                        <Border Style="{DynamicResource Dashboard_Group_Border}" Width="335" Height="150" Margin="40,0,0,0" VerticalAlignment="Top">
                                             <StackPanel Margin="10">
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                                     <Label Content="FTP IP: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>

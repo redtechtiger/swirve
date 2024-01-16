@@ -329,7 +329,7 @@
                     <Border x:Name="border" CornerRadius="8" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <Border.Effect>
-                            <DropShadowEffect BlurRadius="40" Opacity=".25"/>
+                            <DropShadowEffect BlurRadius="20" Opacity=".15"/>
                         </Border.Effect>
                     </Border>
                     <ControlTemplate.Triggers>
