@@ -45,7 +45,6 @@ ActiveParser::ActiveParser(NetworkCommunicator* netcom, map<unsigned long, share
     parsehelper["dynamicmod"] = DYNAMICMOD;
     parsehelper["elevatereq"] = ELEVATEREQ;
     parsehelper["pwr"] = PWR; // -> Primary Argument
-                              //
     parsehelper["log"] = LOG;
     parsehelper["cpu"] = CPU;
     parsehelper["mem"] = MEM;
@@ -278,7 +277,7 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     int ram = 0;
                     int java = 0;
                     vector<string> tokens = tokenize(demand.DataArgument, DELIMITER);
-                    if(tokens.size()!=4) {
+                    if(tokens.size()!=6) {
                         stringstream errorstream;
                         errorstream << to_string(-1) << DELIMITER << "Invalid Token Count";
                         netcomRef->WriteIncomingConnection(connection->sockfd, errorstream.str());
@@ -428,7 +427,7 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                             netcomRef->WriteIncomingConnection(connection->sockfd, errorstream.str());
                             break;
                         }
-                        buffer << archive.Name << DELIMITER << archive.Ram << DELIMITER << archive.Port << DELIMITER << archive.LaunchPath << DELIMITER << archive.Java;
+                        buffer << archive.Name << DELIMITER << archive.Ram << DELIMITER << archive.Port << DELIMITER << archive.LaunchPath << DELIMITER << archive.Java << DELIMITER << archive.NOA_AutoReboot <<  DELIMITER << archive.NOA_LogReading;
                         netcomRef->WriteIncomingConnection(connection->sockfd, buffer.str());
                         break;
                     } catch (...) {}
@@ -445,7 +444,7 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     int java = 0;
                     unsigned long id = 0;
                     vector<string> tokens = tokenize(demand.DataArgument, DELIMITER);
-                    if(tokens.size()!=5) {
+                    if(tokens.size()!=7) {
                         stringstream errorstream;
                         errorstream << to_string(-1) << DELIMITER << "Invalid Token Count";
                         netcomRef->WriteIncomingConnection(connection->sockfd, errorstream.str());
