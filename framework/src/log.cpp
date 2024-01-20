@@ -26,17 +26,17 @@ Logger::Logger() {
 }
 
 void Logger::info(const string pre, const string msg) {
-    cout << ASCIICYAN << pre << ASCIIRESET << "->" << msg << endl;
+    cout << ASCIICYAN << pre << ASCIIRESET << "-> " << msg << endl;
     fflush(stdout);
 }
 
 void Logger::warn(const string pre, const string msg) {
-    cout << ASCIIYELLOW << pre << ASCIIRESET << "->" << msg << endl;
+    cout << ASCIIYELLOW << pre << ASCIIRESET << "-> " << msg << endl;
     fflush(stdout);
 }
 
 void Logger::fatal(const string pre, const string msg) {
-    cout << ASCIIRED << pre << "[FATAL]" << ASCIIRESET << "->" << msg << endl;
+    cout << ASCIIRED << pre << "[FATAL]" << ASCIIRESET << "-> " << msg << endl;
     fflush(stdout);
 }
 

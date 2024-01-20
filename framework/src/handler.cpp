@@ -176,7 +176,7 @@ int MinecraftHandler::changePowerState(EPowerAction action) {
                 int returncode = startserver();
     		        if(returncode!=0) {
                     state = FAULT;
-                    l.warn("Handler","Bad return value from AsyncLoader; Couldn't start server");
+                    l.warn("Handler","Bad return value from AsyncLoader; couldn't start server");
                     return returncode;
                 }
     		        return returncode;

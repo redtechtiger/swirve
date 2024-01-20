@@ -133,6 +133,14 @@ int Archiver::LoadArchive(unsigned long _id, Archive &_archive) {
 					_archive.Java = stoi(i.substr(1));
 					break;
 				}
+				case 6: {
+					_archive.NOA_AutoReboot = (bool)stoi(i.substr(1));
+					break;
+				}
+				case 7: {
+					_archive.NOA_LogReading = (bool)stoi(i.substr(1));
+					break;
+				}
 				default: {
 					cout << "Error: Invalid data detected in file" << endl;
 					return -1;
@@ -162,6 +170,8 @@ int Archiver::SaveArchive(unsigned long _id, Archive &_archive) {
 	}
 	archiveStream << "4" << _archive.Port << '[';
 	archiveStream << "5" << _archive.Java << '[';
+	archiveStream << "6" << (int)_archive.NOA_AutoReboot << '[';
+	archiveStream << "7" << (int)_archive.NOA_LogReading << '[';
 
 	archiveStream.close();
 	return 0;
