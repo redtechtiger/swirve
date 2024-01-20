@@ -276,6 +276,8 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     Archive archive;
                     int ram = 0;
                     int java = 0;
+                    bool autoreboot = false;
+                    bool autolog = false;
                     vector<string> tokens = tokenize(demand.DataArgument, DELIMITER);
                     if(tokens.size()!=6) {
                         stringstream errorstream;
@@ -286,6 +288,8 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     try {
                         ram = stoi(tokens[1]);
                         java = stoi(tokens[3]);
+                        autoreboot = (bool)stoi(tokens[4]);
+                        autolog = (bool)stoi(tokens[5]);
                     } catch (...) {
                         stringstream errorstream;
                         errorstream << to_string(-1) << DELIMITER << "Invalid Allocated RAM or JAVA version";
@@ -299,6 +303,8 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     Archiver::GetNewHash(id);
                     archive.ID = id;
                     archive.Java = java;
+                    archive.NOA_AutoReboot = autoreboot;
+                    archive.NOA_LogReading = autolog;
                     archive.Port = Archiver::GetNextPort();
                     if(archive.Port==-1) {
                         stringstream errorstream;
