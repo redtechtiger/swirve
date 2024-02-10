@@ -1,0 +1,20 @@
+﻿<Window x:Class="Swirve_Userclient.dumpProgress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Swirve_Userclient"
+        mc:Ignorable="d"
+        Title="Swirve - Dumping Log" Height="130.667" Width="350" WindowStyle="None" WindowStartupLocation="CenterScreen" Topmost="True" AllowsTransparency="True" Background="{x:Null}">
+    <Grid>
+        <Border CornerRadius="15" Background="{DynamicResource Color_Emerge}" Margin="10" MouseDown="Border_MouseDown" >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Opacity="0.5"/>
+            </Border.Effect>
+        </Border>
+        <Label Content="Dumping Log..." Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center" Margin="74,35,74,0" Width="Auto" VerticalAlignment="Top" FontSize="20" FontFamily="Fonts/#Montserrat"/>
+        <Border Height="5" Margin="0,90,0,0" VerticalAlignment="Top" CornerRadius="7" ClipToBounds="True">
+            <ProgressBar Width="200" x:Name="progressDone" Style="{DynamicResource Dashboard_MiniProgressBar}" Foreground="{DynamicResource Color_Text}"/>
+        </Border>
+    </Grid>
+</Window>

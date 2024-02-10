@@ -1,8 +1,13 @@
-Swirve Framework/env/config/
-Swirve Framework/env/defaultconfigs/
-Swirve Framework/env/libraries/
-Swirve Framework/env/logs/
-Swirve Framework/env/mods/
-Swirve Framework/env/world/
-Swirve Framework/env/logs/
-Swirve Framework/build
+Framework/env/config/
+Framework/env/defaultconfigs/
+Framework/env/libraries/
+Framework/env/logs/
+Framework/env/mods/
+Framework/env/world/
+Framework/env/logs/
+Userclient/.vs
+Userclient/.vs/
+Userclient/bin
+Userclient/bin/
+Userclient/obj
+Userclient/obj/
