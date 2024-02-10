@@ -1,0 +1,112 @@
+﻿<Window x:Class="Swirve_Userclient.ModuleSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Swirve_Userclient"
+        mc:Ignorable="d"
+        Title="Swirve - Select Server" Height="300" Width="800" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
+    <Window.Resources>
+        <Style x:Key="controlBtn" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{DynamicResource Color_Palette1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette1}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{DynamicResource Color_Palette2}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="listFade" TargetType="{x:Type FrameworkElement}">
+            <Style.Triggers>
+                <Trigger Property="IsVisible" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="maingrid">
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.1"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
+        <Grid.Resources>
+            <Storyboard x:Key="fadeOut">
+                <DoubleAnimation Storyboard.TargetProperty="Visibility" From="1.0" To="0.0" Duration="0:0:1"/>
+            </Storyboard>
+        </Grid.Resources>
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="10" Opacity="0.5"/>
+        </Grid.Effect>
+        <Border CornerRadius="15" Background="{DynamicResource Color_Background}" Margin="10" MouseDown="Border_MouseDown">
+            <Grid>
+                <StackPanel>
+                    <Border Width="300" Height="40" Margin="0, 10" HorizontalAlignment="Center" CornerRadius="10" IsHitTestVisible="False" Style="{DynamicResource Menutitle_Border}">
+                        <Label Content="Connect to Server" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" FontFamily="/Fonts/#Roboto" IsHitTestVisible="False"/>
+                    </Border>
+                    <ItemsControl Name="ServerList" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Style="{DynamicResource listFade}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{DynamicResource Color_Palette1}" CornerRadius="20" Height="140" Width="140" Margin="10" MouseDown="Rectangle_MouseDown" Tag="{Binding ServerID}">
+                                    <Grid>
+                                        <Image Source="{Binding IconPath}" Height="55" VerticalAlignment="Top" Margin="0, 25" IsHitTestVisible="False" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                        <Label Content="{Binding ServerName}" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" Width="150" IsHitTestVisible="False" HorizontalContentAlignment="Center" Foreground="White" FontFamily="/Fonts/#Roboto" Margin="0, 10"/>
+                                        <Rectangle HorizontalAlignment="Right" Margin="0, 0, 0, 0" VerticalAlignment="Top" Height="20" Width="20" RadiusX="10" RadiusY="10" Fill="{Binding ServerState}" IsHitTestVisible="False"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Grid>
+                            <Button Style="{DynamicResource controlBtn}" BorderThickness="0"  Height="40" Width="40" Margin="5" Click="Button_Click_1"/>
+                            <Image Source="Resources/icon_back_page.png" Height="20" Width="20" IsHitTestVisible="False"/>
+                        </Grid>
+                        <Border Height="40" Width="40" Background="{DynamicResource Color_Palette1}" CornerRadius="10">
+                            <Label x:Name="selector_page_number" Content="N/A" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="White" FontFamily="Fonts/#Roboto"/>
+                        </Border>
+                        <Grid>
+                            <Button Style="{DynamicResource controlBtn}" BorderThickness="0"  Height="40" Width="40" Margin="5" Click="Button_Click_2"/>
+                            <Image Source="Resources/icon_forward_page.png" Height="20" Width="20" IsHitTestVisible="False"/>
+                        </Grid>
+                        <Button Style="{DynamicResource controlBtn}" x:Name="connect_btn" BorderThickness="0" Height="40" Content="Connect" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="20" Padding="10, 0" Margin="20, 0" Click="Button_Click" IsEnabled="False"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
