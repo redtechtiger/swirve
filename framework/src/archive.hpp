@@ -23,6 +23,8 @@ struct Archive {
     int Ram;
 	int Port;
 	int Java;
+	bool NOA_AutoReboot;
+	bool NOA_LogReading;
     std::vector<unsigned long> AccessIDs;
 };
 

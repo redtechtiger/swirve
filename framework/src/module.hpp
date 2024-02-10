@@ -21,6 +21,8 @@ class ServerModule : public MinecraftHandler {
 		int AssignedPort;
 		int RamAllocated;
 		int JavaVersion;
+		bool AutoRebootOnOutage;
+		bool AutoPipeClearing;
 		std::vector<unsigned long> AccessIDs;
 
 };	

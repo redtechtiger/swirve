@@ -16,6 +16,8 @@ ServerModule::ServerModule(Archive _archive) {
 		AccessIDs.push_back(i);
 
 	JavaVersion = _archive.Java;
+	AutoRebootOnOutage = _archive.NOA_AutoReboot;
+	AutoPipeClearing = _archive.NOA_LogReading;
 
 	char path[PATH_MAX];
 	if(getcwd(path, sizeof(path))!=NULL) {
@@ -37,6 +39,8 @@ void ServerModule::Configure(Archive _archive) {
 		AccessIDs.push_back(i);
 
 	JavaVersion = _archive.Java;
+	AutoRebootOnOutage = _archive.NOA_AutoReboot;
+	AutoPipeClearing = _archive.NOA_LogReading;
 
 	char path[PATH_MAX];
 	if(getcwd(path, sizeof(path))!=NULL) {

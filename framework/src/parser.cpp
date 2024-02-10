@@ -45,7 +45,6 @@ ActiveParser::ActiveParser(NetworkCommunicator* netcom, map<unsigned long, share
     parsehelper["dynamicmod"] = DYNAMICMOD;
     parsehelper["elevatereq"] = ELEVATEREQ;
     parsehelper["pwr"] = PWR; // -> Primary Argument
-                              //
     parsehelper["log"] = LOG;
     parsehelper["cpu"] = CPU;
     parsehelper["mem"] = MEM;
@@ -277,8 +276,10 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     Archive archive;
                     int ram = 0;
                     int java = 0;
+                    bool autoreboot = false;
+                    bool autolog = false;
                     vector<string> tokens = tokenize(demand.DataArgument, DELIMITER);
-                    if(tokens.size()!=4) {
+                    if(tokens.size()!=6) {
                         stringstream errorstream;
                         errorstream << to_string(-1) << DELIMITER << "Invalid Token Count";
                         netcomRef->WriteIncomingConnection(connection->sockfd, errorstream.str());
@@ -287,6 +288,8 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     try {
                         ram = stoi(tokens[1]);
                         java = stoi(tokens[3]);
+                        autoreboot = (bool)stoi(tokens[4]);
+                        autolog = (bool)stoi(tokens[5]);
                     } catch (...) {
                         stringstream errorstream;
                         errorstream << to_string(-1) << DELIMITER << "Invalid Allocated RAM or JAVA version";
@@ -300,6 +303,8 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     Archiver::GetNewHash(id);
                     archive.ID = id;
                     archive.Java = java;
+                    archive.NOA_AutoReboot = autoreboot;
+                    archive.NOA_LogReading = autolog;
                     archive.Port = Archiver::GetNextPort();
                     if(archive.Port==-1) {
                         stringstream errorstream;
@@ -428,7 +433,7 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                             netcomRef->WriteIncomingConnection(connection->sockfd, errorstream.str());
                             break;
                         }
-                        buffer << archive.Name << DELIMITER << archive.Ram << DELIMITER << archive.Port << DELIMITER << archive.LaunchPath << DELIMITER << archive.Java;
+                        buffer << archive.Name << DELIMITER << archive.Ram << DELIMITER << archive.Port << DELIMITER << archive.LaunchPath << DELIMITER << archive.Java << DELIMITER << archive.NOA_AutoReboot <<  DELIMITER << archive.NOA_LogReading;
                         netcomRef->WriteIncomingConnection(connection->sockfd, buffer.str());
                         break;
                     } catch (...) {}
@@ -445,7 +450,7 @@ int ActiveParser::executeDemand(const Demand demand, shared_ptr<ServerModule> se
                     int java = 0;
                     unsigned long id = 0;
                     vector<string> tokens = tokenize(demand.DataArgument, DELIMITER);
-                    if(tokens.size()!=5) {
+                    if(tokens.size()!=7) {
                         stringstream errorstream;
                         errorstream << to_string(-1) << DELIMITER << "Invalid Token Count";
                         netcomRef->WriteIncomingConnection(connection->sockfd, errorstream.str());

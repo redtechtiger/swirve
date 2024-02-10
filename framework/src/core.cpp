@@ -160,13 +160,36 @@ int core_entry(vector<string> args) {
         return -1;
     }
 
+    // Start all required nodes after outage
+    l.infofuncstart("Core", "Rebooting all required nodes...");
+    int failed_starts = 0;
+    for(auto& _module : modules) {
+        if(0>_module.second->Start()) {
+            returnvalue += 1;
+        }
+    }
+    l.infofuncreturn(failed_starts);
+    if(0<failed_starts && !FLAGS.IGNOREWARN) {
+        l.warn("Core",to_string(failed_starts)+" required nodes failed to start!");
+    }
+
 
     // Bootup finished
     l.info("Core","");
     l.info("Core", " -- Framework Online --");
 
     while(true) {
-        sleep(60);
+        sleep(5);
+	    // Clear server log pipes
+	    for(auto& _module : modules) {
+            if(_module.second->AutoPipeClearing) { // Simulate console read to clear pipe and load to ram
+                std::string _temp = std::string();
+	            _module.second->GetLog(_temp);
+            }
+            if(_module.second->AutoRebootOnOutage && _module.second->State()==FAULT) { // If server goes offline, reboot immediately
+                _module.second->Start();
+            }
+	    }
         if(parser->ParserException()==-1) {
             l.fatal("Core","Detected exception in ActiveParser!");
             l.warn("Core","Rebooting network services...");
