@@ -114,29 +114,29 @@
                 </EventTrigger>
             </Border.Triggers>
             <Grid>
-                <TabControl Style="{DynamicResource tabcontrol_fade}"  Margin="10, 70, 10, 10" Background="{x:Null}" BorderThickness="0" x:Name="main_tabcontrol" SelectedIndex="1">
+                <TabControl Style="{DynamicResource tabcontrol_fade}" Padding="10,0,10,10" Margin="0, 70, 0, 0" Background="{x:Null}" BorderThickness="0" x:Name="main_tabcontrol" SelectedIndex="1">
                     <TabItem Visibility="Collapsed">
                         <Grid>
                             <StackPanel>
                                 <Border Background="{DynamicResource Color_Highlight0}" CornerRadius="15" Padding="10" Height="250" Margin="15, 0">
                                     <StackPanel Width="400" VerticalAlignment="Center">
-                                        <TextBlock Margin="0, 0, 0, 0" Text="Please fill in the following information. The specified server RAM is in gigabytes." FontFamily="Fonts/#Roboto" Padding="5" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
-                                        <Label Content="Server Name" FontFamily="Fonts/#Roboto" FontStyle="Italic" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                        <TextBlock Margin="0, 0, 0, 0" Text="Please fill in the following information. The specified server RAM is in gigabytes." FontFamily="Fonts/#Montserrat" Padding="5" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
+                                        <Label Content="Server Name" FontFamily="Fonts/#Montserrat" FontStyle="Italic" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
                                         <Border Background="{DynamicResource Color_Highlight1}" CornerRadius="15" Padding="5">
-                                            <TextBox x:Name="init_servername" Background="{DynamicResource Color_Highlight1}" Height="30" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                            <TextBox x:Name="init_servername" Background="{DynamicResource Color_Highlight1}" Height="30" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
                                         </Border>
-                                        <Label Content="Server RAM" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                        <Label Content="Server RAM" Margin="0, 0, 0, 0" FontStyle="Italic"  FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
                                         <Border Background="{DynamicResource Color_Highlight1}" CornerRadius="15" Padding="5">
-                                            <TextBox Style="{DynamicResource roundedTextbox}" x:Name="init_serverram" Background="{DynamicResource Color_Highlight1}" Height="30" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
+                                            <TextBox Style="{DynamicResource roundedTextbox}" x:Name="init_serverram" Background="{DynamicResource Color_Highlight1}" Height="30" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="4"/>
                                         </Border>
                                     </StackPanel>
                                 </Border>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
-                                    <Button Template="{DynamicResource Button_Freefloating1}" x:Name="init_quit" Margin="0, 0, 20, 0" Content="Quit" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="init_quit_Click"/>
-                                    <Button Template="{DynamicResource Button_Freefloating1}" x:Name="init_continue"  Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="init_continue_Click"/>
+                                    <Button Template="{DynamicResource Button_Freefloating1}" x:Name="init_quit" Margin="0, 0, 20, 0" Content="Quit" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Montserrat" FontSize="16" Click="init_quit_Click"/>
+                                    <Button Template="{DynamicResource Button_Freefloating1}" x:Name="init_continue"  Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Montserrat" FontSize="16" Click="init_continue_Click"/>
                                 </StackPanel>
                             </StackPanel>
-                            <Label Content="" Foreground="Red" FontFamily="Fonts/#Roboto" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0,35" FontSize="16" x:Name="Error_Verify"/>
+                            <Label Content="" Foreground="Red" FontFamily="Fonts/#Montserrat" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0,35" FontSize="16" x:Name="Error_Verify"/>
                         </Grid>
                     </TabItem>
                     <TabItem Visibility="Collapsed">
@@ -157,7 +157,7 @@
                                         </EventTrigger>
                                     </Image.Triggers>
                                 </Image>
-                                <Label Content="Please Wait" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Roboto" FontSize="30"/>
+                                <Label Content="Please Wait" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Montserrat" FontSize="30"/>
                             </StackPanel>
                         </Border>
                     </TabItem>
@@ -165,31 +165,31 @@
                         <StackPanel>
                             <Border Background="{DynamicResource Color_Highlight0}" CornerRadius="15" Padding="10" Height="250" Margin="15, 0">
                                 <StackPanel Width="400" VerticalAlignment="Center">
-                                    <TextBlock Padding="5" Margin="0, 10" Text="Please upload your server files into the directory specified below. Make sure that ALL the files are uploaded correctly or the configuration may fail." FontFamily="Fonts/#Roboto" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
+                                    <TextBlock Padding="5" Margin="0, 10" Text="Please upload your server files into the directory specified below. Make sure that ALL the files are uploaded correctly or the configuration may fail." FontFamily="Fonts/#Montserrat" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <Label Content="FTP IP: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                        <Label x:Name="ftp_ip" Content="ip" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                        <Label Content="FTP IP: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_ip" Content="ip" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <Label Content="FTP Port: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                        <Label x:Name="ftp_port" Content="port" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                        <Label Content="FTP Port: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_port" Content="port" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <Label Content="FTP Username: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                        <Label x:Name="ftp_username" Content="username" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                        <Label Content="FTP Username: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_username" Content="username" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <Label Content="FTP Password: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                        <Label x:Name="ftp_password" Content="password" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                        <Label Content="FTP Password: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_password" Content="password" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <Label Content="Directory ID: " FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
-                                        <Label x:Name="ftp_id"  Content="xxxxxxxxxxxxx" FontFamily="Fonts/#Roboto Bold" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
+                                        <Label Content="Directory ID: " FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" Padding="5, 3"/>
+                                        <Label x:Name="ftp_id"  Content="xxxxxxxxxxxxx" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Palette1}" Padding="5, 3"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
-                                <Button Template="{DynamicResource Button_Freefloating1}" x:Name="ftp_continue" Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="ftp_continue_Click"/>
+                                <Button Template="{DynamicResource Button_Freefloating1}" x:Name="ftp_continue" Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Montserrat" FontSize="16" Click="ftp_continue_Click"/>
                             </StackPanel>
                         </StackPanel>
                     </TabItem>
@@ -197,56 +197,41 @@
                         <StackPanel>
                             <Border Background="{DynamicResource Color_Highlight0}" CornerRadius="15" Padding="10" Height="250" Margin="15, 0">
                                 <StackPanel Width="400" VerticalAlignment="Center">
-                                    <TextBlock Margin="0, 10" Text="Please fill in the following information. Make sure that the path is relative to the server root directory." FontFamily="Fonts/#Roboto" Padding="5" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
-                                    <Label Content="Startup File" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
+                                    <TextBlock Margin="0, 10" Text="Please fill in the following information. Make sure that the path is relative to the server root directory." FontFamily="Fonts/#Montserrat" Padding="5" FontSize="16" Width="400" TextWrapping="Wrap"  Foreground="{DynamicResource Color_Text}" HorizontalAlignment="Center"/>
+                                    <Label Content="Startup File" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}"/>
                                     <Border Background="{DynamicResource Color_Highlight1}" CornerRadius="15" Padding="5">
-                                        <TextBox x:Name="launch_path" Background="{DynamicResource Color_Highlight1}" Height="35" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Roboto" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="8"/>
+                                        <TextBox x:Name="launch_path" Background="{DynamicResource Color_Highlight1}" Height="35" BorderThickness="0" FontSize="16" FontFamily="Fonts/#Montserrat" Foreground="{DynamicResource Color_Text}" VerticalContentAlignment="Center" Padding="8"/>
                                     </Border>
-                                    <Label Content="Java Version" FontFamily="Fonts/#Roboto" FontSize="16" Margin="0, 10, 0, 0" Foreground="{DynamicResource Color_Text}"/>
+                                    <Label Content="Java Version" FontFamily="Fonts/#Montserrat" FontSize="16" Margin="0, 10, 0, 0" Foreground="{DynamicResource Color_Text}"/>
                                     <StackPanel Orientation="Horizontal">
                                         <Border x:Name="java8btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" CornerRadius="10, 0, 0, 10" MouseDown="java8btn_MouseDown">
-                                            <Label Content="8" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                            <Label Content="8" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
                                         </Border>
                                         <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
                                         <Border x:Name="java16btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" MouseDown="java16btn_MouseDown">
-                                            <Label Content="16" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                            <Label Content="16" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
                                         </Border>
                                         <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
                                         <Border x:Name="java17btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" MouseDown="java17btn_MouseDown">
-                                            <Label Content="17" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                            <Label Content="17" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
                                         </Border>
                                         <Rectangle Width="1" Height="33" Fill="{DynamicResource Color_Highlight2}"/>
                                         <Border x:Name="java18btn" Height="33" Background="{DynamicResource Color_Highlight1}" Padding="30, 2" CornerRadius="0, 10, 10, 0" MouseDown="java18btn_MouseDown">
-                                            <Label Content="18" FontFamily="Fonts/#Roboto" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
+                                            <Label Content="18" FontFamily="Fonts/#Montserrat" FontSize="16" Foreground="{DynamicResource Color_Text}" IsHitTestVisible="False"/>
                                         </Border>
-                                        <Label VerticalAlignment="Center" Content="?" FontSize="35" Padding="0" Foreground="{DynamicResource Color_Highlight2}" FontFamily="Fonts/#Roboto" Margin="10, 0"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
-                                <Button Style="{DynamicResource controlBtn}" x:Name="launch_continue" Content="Continue" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="launch_continue_Click" ToolTip="Minecraft Versions 1.16.5 and under uses Java 8, Versions 1.17 and newer uses Java 16, and Versions 1.18+ uses Java 18. Certain modpacks may require Java 17."/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 20">
+                                <Button Template="{DynamicResource Button_Freefloating0}" x:Name="launch_continue" Content="Continue" Width="100" Height="35" FontFamily="Fonts/#Montserrat" FontSize="16" Click="launch_continue_Click" ToolTip="Minecraft Versions 1.16.5 and under uses Java 8, Versions 1.17 and newer uses Java 16, and Versions 1.18+ uses Java 18. Certain modpacks may require Java 17."/>
                             </StackPanel>
                         </StackPanel>
                     </TabItem>
                     <TabItem Visibility="Collapsed">
                         <Border Background="{DynamicResource Color_Highlight0}" Height="80" Width="300" CornerRadius="10" Margin="75" VerticalAlignment="Top">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Image Source="Resources/busy_dark.png" Height="40" Margin="10, 0" VerticalAlignment="Center" RenderTransformOrigin="0.5, 0.5" RenderOptions.BitmapScalingMode="HighQuality">
-                                    <Image.RenderTransform>
-                                        <RotateTransform Angle="0">
-                                        </RotateTransform>
-                                    </Image.RenderTransform>
-                                    <Image.Triggers>
-                                        <EventTrigger RoutedEvent="Loaded">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)" From="0" To="360" Duration="0:0:1" RepeatBehavior="Forever"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Image.Triggers>
-                                </Image>
-                                <Label Content="Please Wait" Foreground="{DynamicResource Color_Text}" FontFamily="Fonts/#Roboto" FontSize="30"/>
+                                <Image Style="{DynamicResource SpinnerLoad}" Height="30"/>
+                                <Label Content="Please Wait" Foreground="{DynamicResource Color_Text}" Margin="20,0,0,0" FontFamily="Fonts/#Montserrat" FontSize="30"/>
                             </StackPanel>
                         </Border>
                     </TabItem>
@@ -255,18 +240,16 @@
                             <Border Background="{DynamicResource Color_Highlight0}" Height="80" Width="300" CornerRadius="10" Margin="75" VerticalAlignment="Top">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                     <Image Source="Resources/icon_success_dark.png" Height="40" Margin="10, 0" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
-                                    <Label Content="Server Created" Foreground="{DynamicResource Color_Text}"  FontFamily="Fonts/#Roboto" FontSize="30"/>
+                                    <Label Content="Server Created" Foreground="{DynamicResource Color_Text}"  FontFamily="Fonts/#Montserrat" FontSize="30"/>
                                 </StackPanel>
                             </Border>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 30">
-                                <Button Template="{DynamicResource Button_Freefloating1}" x:Name="connect" Content="Connect" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Roboto" FontSize="16" Click="connect_Click"/>
+                                <Button Template="{DynamicResource Button_Freefloating1}" x:Name="connect" Content="Connect" Width="100" Height="35" BorderThickness="0" Foreground="White" FontFamily="Fonts/#Montserrat" FontSize="16" Click="connect_Click"/>
                             </StackPanel>
                         </StackPanel>
                     </TabItem>
                 </TabControl>
-                <Border Style="{DynamicResource Pagetitle_Border}" HorizontalAlignment="Center" Margin="0, 10" Background="{DynamicResource Color_Palette2}">
-                    <Label Content="Server Creation Wizard" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Pagetitle_Label}"/>
-                </Border>
+                <Label Content="Create new Node" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Style="{DynamicResource Pagetitle_Label}"/>
             </Grid>
         </Border>
     </Grid>
